@@ -49,7 +49,7 @@ Zwei Gründe, das nicht einfach aufzuspielen:
   es ein Versionswechsel, kein Patch.
 * Ohne Tabelle bei `0x08039400` zeigt der RAL-Bildschirm nichts an.
 
-Der bessere Weg ist das [Werkzeug auf der Projektseite](https://hallko1234.github.io/cr4501-ral/)
+Der bessere Weg ist das [Werkzeug auf der Projektseite](https://hallko1234.github.io/cr4501-ral-hack/)
 oder `werkzeug/firmware_bauen.py` — beide bauen aus **deiner** Sicherung.
 
 Nützlich ist die Datei zum Disassemblieren:
