@@ -114,8 +114,11 @@ dass es jemand merkt. Das Werkzeug verweigert dort jeden Schreibzugriff.
 216 RAL-Classic-Töne, jede Farbe dreimal gemessen. Wiederholstreuung im Schnitt
 0,08 ΔE, im schlechtesten Fall 0,50.
 
-Gemessen wurde mit einem **originalen RAL® K5 in seidenmatt**. Das ist kein
-Detail: **Nachbau-Farbkarten aus dem Zubehörhandel weichen oft spürbar ab**,
+Gemessen wurde mit einem **originalen RAL® K5 in seidenmatt**. Der hat deutlich
+größere Farbflächen als ein Fächer — die 8-mm-Messöffnung sitzt damit sicher
+mitten in der Fläche und erwischt keine Ränder mit.
+
+Das ist kein Detail: **Nachbau-Farbkarten aus dem Zubehörhandel weichen oft spürbar ab**,
 teils um mehrere ΔE, und untereinander sind sie auch nicht einheitlich. Wenn
 deine Messung gegen so eine Karte nicht passt, liegt es meist an der Karte.
 
