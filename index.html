@@ -407,11 +407,11 @@ function treiberseite(){
     <div class="kasten achtung"><p><b>Unbedingt WinUSB wählen</b> — nicht libusbK und nicht
     libusb-win32. Die funktionieren mit dfu-util, aber der Browser sieht das Gerät damit
     nicht. Das ist der häufigste Fehler an dieser Stelle.</p></div>
-    <div class="kasten"><p><b>Zum Schluss: diese Seite neu laden.</b> Drück einfach
-    <kbd>F5</kbd>. Der Browser merkt sich beim Öffnen, welche USB-Geräte er ansprechen
-    darf — wechselt zwischendurch der Treiber, bekommt die offene Seite das nicht mit
-    und findet das Gerät weiterhin nicht. Nach dem Neuladen bist du wieder hier und
-    gehst auf Weiter.</p></div>`;
+    <div class="kasten"><p><b>Zum Schluss: diese Seite neu laden.</b> Der Browser merkt
+    sich beim Öffnen, welche USB-Geräte er ansprechen darf — wechselt zwischendurch der
+    Treiber, bekommt die offene Seite das nicht mit und findet das Gerät weiterhin nicht.
+    Nach dem Neuladen landest du automatisch wieder hier.</p>
+    <div class="knopfreihe"><button id="btnNeuLaden">Seite neu laden</button></div></div>`;
   }else if(SYS.os==='linux'){
     t.textContent='Zugriffsregel anlegen';
     i.innerHTML=`
@@ -668,8 +668,18 @@ if('usb' in navigator) navigator.usb.addEventListener('disconnect',ev=>{
 streifenZeichnen();
 browserPruefen();
 treiberseite();
-zeigeSeite(1);
+const knopfNeu=$('#btnNeuLaden');
+if(knopfNeu) knopfNeu.onclick=()=>{
+  try{ sessionStorage.setItem('cr4501_seite','2'); }catch(e){}
+  location.reload();
+};
+let startseite=1;
+try{
+  if(sessionStorage.getItem('cr4501_seite')==='2'){ startseite=2; sessionStorage.removeItem('cr4501_seite'); }
+}catch(e){}
+zeigeSeite(startseite);
 sag('Bereit.');
+if(startseite===2) sag('Seite neu geladen — der Browser sieht jetzt den aktuellen Treiber.','ok');
 </script>
 </body>
 </html>
