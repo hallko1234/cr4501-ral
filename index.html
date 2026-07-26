@@ -188,6 +188,11 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   <div class="knopfreihe"><button id="btnVerbinden">1 · Gerät suchen</button></div>
   <div id="geraeteinfo"></div>
 
+  <figure class="bild"><img src="bilder/browser-auswahl.png" alt="Auswahlfenster des Browsers mit dem Gerät"
+    onerror="this.closest('figure').remove()">
+    <figcaption><b>Wichtig:</b> Die Zeile mit dem Gerät zuerst <b>anklicken</b>. Erst
+    dann wird der Knopf <b>Verbinden</b> aktiv — vorher bleibt er ausgegraut.</figcaption></figure>
+
   <div class="knopfreihe"><button id="btnSichern" disabled>2 · Auslesen und sichern</button></div>
   <div class="balken"><i id="fortSichern"></i></div>
   <div class="stand" id="standSichern"></div>
@@ -552,6 +557,7 @@ $('#btnVerbinden').onclick=async()=>{
   }catch(e){
     if(e&&e.name==='NotFoundError'){
       sag('Kein Gerät ausgewählt.','no');
+      tipp('Stand das Gerät in der Liste? Dann musst du die Zeile erst anklicken, dann Verbinden.');
       tipp('War die Liste leer? Der Kasten unten geht die Ursachen durch.');
       $('#hilfeFinden').open=true;
     }else{ sag('Verbinden hat nicht geklappt: '+((e&&e.message)||e),'no'); fehlerhilfe(e); }
