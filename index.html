@@ -321,16 +321,25 @@ async function warten(){
 }
 async function abbrechen(){ await raus(ABORT, 0, new Uint8Array()); await status(); }
 
+async function zurueckAufLeerlauf(){
+  // Nach jedem Sonderbefehl steht das Gerät in dfuDNLOAD-IDLE. Von dort sind
+  // weder Lese- noch neue Schreibbefehle gültig — erst ABORT bringt es zurück.
+  await raus(ABORT, 0, new Uint8Array());
+  const s = await status();
+  if(s.zustand !== 2) throw new Error('Gerät bleibt in Zustand ' + s.zustand + ' statt Leerlauf');
+}
 async function zeigerSetzen(adresse){
   const b = new Uint8Array(5); b[0] = 0x21;
   new DataView(b.buffer).setUint32(1, adresse, true);
   await raus(DNLOAD, 0, b); await warten();
+  await zurueckAufLeerlauf();
 }
 async function seiteLoeschen(adresse){
   if(adresse >= GRENZE) throw new Error('Sperre: ' + hex(adresse) + ' liegt im geschützten Bereich');
   const b = new Uint8Array(5); b[0] = 0x41;
   new DataView(b.buffer).setUint32(1, adresse, true);
   await raus(DNLOAD, 0, b); await warten();
+  await zurueckAufLeerlauf();
 }
 
 async function lesen(adresse, laenge, melde){
@@ -398,7 +407,8 @@ $('#btnSichern').onclick = async () => {
     sag('Heb die Datei gut auf — sie ist dein Rückweg.');
     schritt('#s2','fertig'); schritt('#s3','aktiv');
     $('#btnSchreiben').disabled = false;
-  }catch(e){ sag('Sicherung fehlgeschlagen: ' + e.message, 'no'); $('#btnSichern').disabled = false; }
+  }catch(e){ sag('Auslesen hat nicht geklappt: ' + e.message, 'no');
+           sag('Gerät einmal aus- und wieder in den Aktualisierungsmodus bringen, dann nochmal.'); $('#btnSichern').disabled = false; }
 };
 
 $('#btnSchreiben').onclick = async () => {
