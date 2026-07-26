@@ -120,6 +120,28 @@ details .inhalt b{color:var(--schrift)}
 ul.legende{list-style:none;padding:0;margin:0 0 16px}
 ul.legende li{display:grid;grid-template-columns:14px 1fr;gap:12px;margin:0 0 12px;align-items:start}
 ul.legende i{width:14px;height:14px;border-radius:3px;margin-top:5px;display:block}
+.anno{display:grid;grid-template-columns:1fr minmax(0,270px) 1fr;margin:0 0 20px}
+.anno img{width:100%;display:block;border-radius:4px}
+.anno .sp{position:relative}
+.anno .sp span{position:absolute;transform:translateY(-50%);font-size:13px;line-height:1.35;
+  color:var(--gedaempft);display:block;width:100%}
+.anno .sp span b{color:var(--schrift);display:block;font-weight:600}
+.anno .li span{right:14px;text-align:right;padding-left:4px}
+.anno .re span{left:14px;text-align:left;padding-right:4px}
+.anno .sp span::after{content:'';position:absolute;top:50%;width:8px;height:2px;border-radius:1px;
+  background:currentColor}
+.anno .li span::after{right:-11px}
+.anno .re span::after{left:-11px}
+.anno .sp span.o{color:#fe7e27} .anno .sp span.g{color:#f5d90a}
+.anno .sp span.r{color:#df2228} .anno .sp span.b{color:#6a78e0} .anno .sp span.n{color:#20b04e}
+@media(max-width:760px){
+  .anno{display:block}
+  .anno .sp{margin:10px 0 0}
+  .anno .sp span{position:static;transform:none;text-align:left!important;width:auto;
+    padding:0 0 0 18px;margin:0 0 10px}
+  .anno .sp span::after{left:0;top:8px;width:10px}
+  .anno img{max-width:270px;margin:0 auto}
+}
 footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   color:var(--gedaempft);font-size:13.5px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -240,24 +262,22 @@ de:{
    Koppeln, keine App. Und die Tasten links, rechts und Eingabe, die das Gerät auf den
    Messansichten sperrt, funktionieren wieder.</p>
    <h3>Was auf dem Display steht</h3>
-   <figure class="bild"><img src="bilder/anzeige-erklaert.jpg" alt=""
-     onerror="this.closest('figure').remove()"><figcaption>Fünf Angaben auf einen
-     Blick.</figcaption></figure>
-   <ul class="legende">
-     <li><i style="background:#e03131"></i><b>RAL-Nummer</b> — der am besten passende Ton
-       aus 216 eingemessenen RAL-Classic-Farben. Der Hintergrund zeigt die Farbe.</li>
-     <li><i style="background:#f08c00"></i><b>Übereinstimmung in Prozent</b> — grob
-       gerechnet aus dem Farbabstand. Über 95 % heißt: der Ton ist es mit hoher
-       Sicherheit.</li>
-     <li><i style="background:#4263eb"></i><b>dE</b> — der eigentliche Farbabstand.
-       Unter 1,0 sieht das Auge keinen Unterschied mehr, ab etwa 2 wird es sichtbar,
-       über 5 ist es klar ein anderer Ton.</li>
-     <li><i style="background:#2f9e44"></i><b>Farbname</b> — die deutsche Bezeichnung,
-       also Gruengrau statt nur 7009. Ohne Umlaute, das Gerät kann sie nicht darstellen.</li>
-     <li><i style="background:#fab005"></i><b>Zweitbester Treffer</b> — die nächste
-       Möglichkeit mit ihrer Prozentzahl. Liegen beide dicht beieinander, lohnt der Blick
-       in den Fächer.</li>
-   </ul>
+   <div class="anno">
+     <div class="sp li">
+       <span class="o" style="top:30.8%"><b>Übereinstimmung</b>über 95 % heißt: der ist es</span>
+       <span class="g" style="top:40.9%"><b>Zweitbester Treffer</b>mit seiner Prozentzahl</span>
+     </div>
+     <img src="bilder/anzeige-erklaert.jpg" alt="Display mit beschrifteten Werten">
+     <div class="sp re">
+       <span class="r" style="top:21.4%"><b>RAL-Nummer</b>Hintergrund zeigt die Farbe</span>
+       <span class="b" style="top:32.1%"><b>dE · Farbabstand</b>unter 1 sieht man nichts</span>
+       <span class="n" style="top:45.0%"><b>Farbname</b>deutsch, ohne Umlaute</span>
+     </div>
+   </div>
+   <p>Zum <b>dE</b>: unter 1,0 sieht das Auge keinen Unterschied mehr, ab etwa 2 wird er
+   sichtbar, über 5 ist es klar ein anderer Ton. Und wenn erster und zweiter Treffer dicht
+   beieinander liegen, lohnt sich der Blick in den Fächer — dann sind sich die beiden Töne
+   tatsächlich ähnlich.</p>
    <figure class="bild"><img src="bilder/beispiel-6004.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>RAL 6004 Blaugruen, 98 %,
      dE 0,7 — eindeutig.</figcaption></figure>
@@ -524,23 +544,21 @@ en:{
    And the left, right and enter buttons — locked out by the factory firmware on the
    measurement screens — work again.</p>
    <h3>What the display shows</h3>
-   <figure class="bild"><img src="bilder/anzeige-erklaert.jpg" alt=""
-     onerror="this.closest('figure').remove()"><figcaption>Five things at a
-     glance.</figcaption></figure>
-   <ul class="legende">
-     <li><i style="background:#e03131"></i><b>RAL number</b> — the closest match out of 216
-       measured RAL Classic tones. The background shows the colour.</li>
-     <li><i style="background:#f08c00"></i><b>Match in percent</b> — roughly derived from
-       the colour distance. Above 95 % means it is almost certainly that tone.</li>
-     <li><i style="background:#4263eb"></i><b>dE</b> — the actual colour distance. Below
-       1.0 the eye sees no difference, from about 2 it becomes visible, above 5 it is
-       clearly a different tone.</li>
-     <li><i style="background:#2f9e44"></i><b>Colour name</b> — the German name, so
-       Gruengrau rather than just 7009. Without umlauts, the device cannot render
-       them.</li>
-     <li><i style="background:#fab005"></i><b>Runner-up</b> — the next candidate with its
-       percentage. If both are close together, it is worth checking the fan deck.</li>
-   </ul>
+   <div class="anno">
+     <div class="sp li">
+       <span class="o" style="top:30.8%"><b>Match</b>above 95 % means it's that one</span>
+       <span class="g" style="top:40.9%"><b>Runner-up</b>with its own percentage</span>
+     </div>
+     <img src="bilder/anzeige-erklaert.jpg" alt="Display with the values labelled">
+     <div class="sp re">
+       <span class="r" style="top:21.4%"><b>RAL number</b>background shows the colour</span>
+       <span class="b" style="top:32.1%"><b>dE · colour distance</b>below 1 you see nothing</span>
+       <span class="n" style="top:45.0%"><b>Colour name</b>German, without umlauts</span>
+     </div>
+   </div>
+   <p>About <b>dE</b>: below 1.0 the eye sees no difference, from about 2 it becomes
+   visible, above 5 it is clearly a different tone. And when the first and second match sit
+   close together, check the fan deck — those two tones really are similar.</p>
    <figure class="bild"><img src="bilder/beispiel-6004.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>RAL 6004 Blaugruen, 98 %,
      dE 0.7 — unambiguous.</figcaption></figure>
