@@ -95,29 +95,53 @@ footer{padding-top:34px;color:var(--gedaempft);font-size:14px}
 footer a{color:var(--signal)}
 #unmoeglich{display:none;background:var(--warn);color:#fff;padding:14px 20px;
   font-weight:600;text-align:center}
+
+.weg{display:grid;grid-template-columns:26px 1fr;gap:12px;margin:0 0 12px;align-items:start}
+.weg span{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  color:#101215;background:var(--signal);border-radius:3px;text-align:center;
+  line-height:20px;height:20px;margin-top:3px}
+.weg p{margin:0}
+.abschnitt{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+  font-size:20px;margin:34px 0 8px;font-weight:600;letter-spacing:.02em}
+.klein{color:var(--gedaempft);font-size:14.5px;margin:0 0 12px}
+.klein b{color:var(--schrift)}
+.klein code{font-family:'JetBrains Mono',monospace;font-size:13px}
+.hinweis a{color:var(--signal)}
 </style>
 </head>
 <body>
 
 <div id="streifen" aria-hidden="true"></div>
-<div id="unmoeglich">Dieser Browser kann nicht mit USB-Geräten sprechen. Chrome oder Edge verwenden.</div>
+<div id="unmoeglich">Dieser Browser kann nicht mit USB-Geräten sprechen. Nimm Chrome oder Edge.</div>
 
 <div class="huelle">
 <header>
   <p class="geraet">3nh CR4501 · Color Reader</p>
-  <h1>RAL-Nummer<br><em>direkt am Gerät</em></h1>
-  <p class="unterzeile">Spielt eine Erweiterung in die Gerätefirmware ein: Nach jeder Messung
-  steht die nächstgelegene RAL-Classic-Farbe mit Namen und Übereinstimmung auf dem Display.
-  Zusätzlich werden die gesperrten Tasten freigegeben. Alles läuft in diesem Browser —
-  es wird nichts hochgeladen.</p>
+  <h1>Welches RAL<br><em>ist das?</em></h1>
+  <p class="unterzeile">Das CR4501 misst Farben sehr genau — nur sagt es einem nicht,
+  welcher RAL-Ton dabei herauskommt. Dafür braucht es sonst Handy, App und Geduld.
+  Diese Erweiterung legt die Antwort direkt aufs Display: Nach jeder Messung steht da
+  die nächstliegende RAL-Classic-Farbe mit Namen und wie gut sie passt. Messen, ablesen,
+  weiter.</p>
 </header>
 
 <div class="schritt" id="s1">
   <div class="nr">01</div>
   <div>
-    <h2>Gerät verbinden</h2>
-    <p>Gerät ausschalten, Messtaste gedrückt halten und einschalten, bis der Bildschirm dunkel bleibt.
-       Dann per USB anstecken.</p>
+    <h2>Gerät in den Aktualisierungsmodus</h2>
+    <p>Es gibt zwei Wege. Beide brauchen vorher <b style="color:var(--schrift)">fünf Sekunden
+    Ruhe</b> — in der Zeit keine Taste anfassen. Wenn der Ring um die Messtaste
+    <b style="color:var(--schrift)">rot blinkt</b>, hat es geklappt: dann sofort loslassen.</p>
+    <div class="weg">
+      <span>A</span>
+      <p>Messtaste gedrückt halten, bis der Ring rot zu blinken beginnt. Sofort loslassen.</p>
+    </div>
+    <div class="weg">
+      <span>B</span>
+      <p>Messtaste und Eingabetaste zusammen — die Wippe dafür in der Mitte hineindrücken.
+      Das rote Blinken kommt sofort, gleich wieder loslassen.</p>
+    </div>
+    <p>Dann per USB anstecken und hier weiter.</p>
     <button id="btnVerbinden">Gerät suchen</button>
   </div>
 </div>
@@ -125,9 +149,10 @@ footer a{color:var(--signal)}
 <div class="schritt" id="s2">
   <div class="nr">02</div>
   <div>
-    <h2>Original sichern</h2>
-    <p>Liest die vorhandene Firmware aus und legt sie als Datei ab. Ohne diese Sicherung
-       geht es nicht weiter — sie ist der Rückweg.</p>
+    <h2>Erst sichern</h2>
+    <p>Bevor irgendetwas geschrieben wird, holt sich das Werkzeug die Firmware vom Gerät
+    und legt sie dir als Datei hin. Heb sie auf. Solange du die hast, ist nichts
+    endgültig — Schritt 4 spielt sie jederzeit wieder zurück.</p>
     <button id="btnSichern" disabled>Auslesen und sichern</button>
     <div class="balken"><i id="fortSichern"></i></div>
   </div>
@@ -137,8 +162,9 @@ footer a{color:var(--signal)}
   <div class="nr">03</div>
   <div>
     <h2>Erweiterung einspielen</h2>
-    <p>Prüft jede Änderungsstelle gegen den erwarteten Originalinhalt, schreibt
-       und liest zur Kontrolle zurück.</p>
+    <p>Jetzt wird geschrieben. Vorher schaut das Werkzeug an jeder einzelnen Stelle nach,
+    ob dort auch wirklich steht, was es erwartet — und bricht lieber ab, als auf gut Glück
+    loszulegen. Danach liest es alles zurück und vergleicht Byte für Byte.</p>
     <button id="btnSchreiben" disabled>Einspielen</button>
     <div class="balken"><i id="fortSchreiben"></i></div>
   </div>
@@ -147,8 +173,9 @@ footer a{color:var(--signal)}
 <div class="schritt" id="s4">
   <div class="nr">04</div>
   <div>
-    <h2>Zurück zum Original</h2>
-    <p>Spielt eine zuvor gesicherte Datei wieder ein.</p>
+    <h2>Doch lieber zurück</h2>
+    <p>Gefällt es dir nicht, oder ist etwas schiefgelaufen: gesicherte Datei auswählen,
+    und das Gerät ist wieder wie vorher.</p>
     <input type="file" id="dateiOriginal" accept=".bin" style="display:none">
     <button id="btnZurueck" class="leise" disabled>Sicherung wählen und einspielen</button>
     <div class="balken"><i id="fortZurueck"></i></div>
@@ -158,22 +185,40 @@ footer a{color:var(--signal)}
 <div id="protokoll">Bereit.</div>
 
 <div class="hinweis">
-  <b>Unter Windows</b> muss dem DFU-Gerät einmalig der WinUSB-Treiber zugewiesen werden,
-  sonst findet der Browser es nicht. Dafür gibt es Zadig — die Anleitung liegt im Repository.
+  <b>Wenn der Browser das Gerät nicht findet:</b> Unter Windows fehlt ihm meist nur der
+  passende Treiber. Das Programm <a href="https://zadig.akeo.ie">Zadig</a> weist ihn in
+  einer Minute zu — <i>Options → List All Devices</i>, in der Liste
+  <b>STM32 BOOTLOADER</b> suchen, rechts <b>WinUSB</b> einstellen, <i>Replace Driver</i>.
+  Das ist einmalig, danach nie wieder.
 </div>
 
 <section>
-  <h2 style="font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;font-size:20px;margin:34px 0 4px">Was genau geändert wird</h2>
+  <h2 class="abschnitt">Was am Gerät verändert wird</h2>
   <table class="karte" id="karte"></table>
-  <p style="color:var(--gedaempft);font-size:14px">
-  Der Bereich ab <code style="font-family:'JetBrains Mono',monospace">0x08030000</code> — Startbild,
-  Einstellungen und <b style="color:var(--schrift)">Werkskalibrierung</b> — wird nicht angefasst.
-  Das Werkzeug verweigert jeden Schreibzugriff darüber.</p>
+  <p class="klein">
+  Sieben Stellen, zusammen gut fünf Kilobyte, alle im Programmbereich des Geräts.
+  Was <b>nicht</b> angefasst wird: alles ab
+  <code>0x08030000</code> — Startbild, Einstellungen und vor allem die
+  <b>Werkskalibrierung deines Geräts</b>. Die ist bei jedem Gerät anders, und eine fremde
+  hineinzuschreiben würde es dauerhaft falsch messen lassen. Das Werkzeug verweigert dort
+  jeden Schreibzugriff, unabhängig davon, was man ihm sagt.</p>
+</section>
+
+<section>
+  <h2 class="abschnitt">Woher die Farben kommen</h2>
+  <p class="klein">216 RAL-Classic-Töne, mit einem Fächer eingemessen, jede Farbe dreimal.
+  Die Wiederholstreuung lag im Schnitt bei 0,08 ΔE, im schlechtesten Fall bei 0,50 — für
+  die Erkennung im Alltag also reichlich genau.</p>
+  <p class="klein">Ehrlich dazugesagt: Die Werte stammen von <i>einem</i> Fächer und
+  <i>einem</i> Gerät. Fächer altern, vergilben, und jedes Messgerät hat seine eigene
+  Kalibrierung. Für „welches RAL ist das ungefähr" ist das genau richtig. Für eine
+  Abnahme oder einen Reklamationsfall nimmt man weiterhin den Fächer in die Hand.</p>
 </section>
 
 <footer>
-  Firmware-Erweiterung für den 3nh CR4501 · Kein Produkt von 3nh ·
-  Benutzung auf eigene Gefahr, aber mit Rückweg.
+  Ein Feierabendprojekt, kein Produkt von 3nh. Benutzung auf eigene Gefahr — aber
+  mit Rückweg, und die Kalibrierung deines Geräts bleibt in jedem Fall unberührt.
+  <br><a href="https://github.com/hallko1234/cr4501-ral">Quelltext und Dokumentation auf GitHub</a>
 </footer>
 </div>
 
@@ -326,7 +371,8 @@ $('#btnVerbinden').onclick = async () => {
         '  ·  Seriennummer ' + (geraet.serialNumber || 'unbekannt'), 'ok');
     schritt('#s1','fertig'); schritt('#s2','aktiv');
     $('#btnSichern').disabled = false; $('#btnZurueck').disabled = false;
-  }catch(e){ sag('Verbinden fehlgeschlagen: ' + e.message, 'no'); }
+  }catch(e){ sag('Verbinden hat nicht geklappt: ' + e.message, 'no');
+           sag('Steckt das Gerät im Aktualisierungsmodus? Der Ring muss vorher rot geblinkt haben.'); }
 };
 
 $('#btnSichern').onclick = async () => {
@@ -340,7 +386,7 @@ $('#btnSichern').onclick = async () => {
     a.href = URL.createObjectURL(new Blob([original], {type:'application/octet-stream'}));
     a.download = name; a.click();
     sag('Gesichert als ' + name, 'ok');
-    sag('Bewahre diese Datei auf. Sie ist der einzige Rückweg.');
+    sag('Heb die Datei gut auf — sie ist dein Rückweg.');
     schritt('#s2','fertig'); schritt('#s3','aktiv');
     $('#btnSchreiben').disabled = false;
   }catch(e){ sag('Sicherung fehlgeschlagen: ' + e.message, 'no'); $('#btnSichern').disabled = false; }
@@ -360,15 +406,15 @@ $('#btnSchreiben').onclick = async () => {
       if(!soll.every((v,i) => v === ist[i]))
         throw new Error('Bei ' + hex(p.addr) + ' steht ' +
           [...ist].map(b=>b.toString(16).padStart(2,'0')).join('') +
-          ' statt ' + p.alt + '. Diese Firmware kenne ich nicht — bitte melden.');
+          ' statt ' + p.alt + '. Diese Firmware-Version kenne ich nicht. Bitte melde dich, dann schaue ich sie mir an.');
     }
     for(const b of DATEN.blobs){
       const roh = Uint8Array.from(atob(b.b64), c => c.charCodeAt(0));
       const off = b.addr - APP_START;
       if(!neu.subarray(off, off + roh.length).every(v => v === 0xff))
-        throw new Error('Der Bereich ab ' + hex(b.addr) + ' ist belegt. Läuft schon eine Erweiterung?');
+        throw new Error('Bei ' + hex(b.addr) + ' liegt schon etwas. Vermutlich ist die Erweiterung bereits drauf.');
     }
-    sag('Alle Stellen stimmen mit dem Original überein.', 'ok');
+    sag('Alles wie erwartet. Es kann losgehen.', 'ok');
 
     for(const p of DATEN.patches) neu.set(bytes(p.neu), p.addr - APP_START);
     for(const b of DATEN.blobs)
@@ -381,12 +427,12 @@ $('#btnSchreiben').onclick = async () => {
     for(let i = 0; i < neu.length; i++) if(probe[i] !== neu[i]){ abweichung = i; break; }
     if(abweichung >= 0) throw new Error('Rücklesen weicht ab bei ' + hex(APP_START + abweichung));
     fort('#fortSchreiben', 1);
-    sag('Kontrolle bestanden. Gerät neu starten und messen.', 'ok');
-    sag('Mit der Eingabetaste zwischen den Ansichten wechseln.');
+    sag('Passt. Gerät neu starten und eine Messung machen.', 'ok');
+    sag('Mit der Eingabetaste wechselst du zwischen den Ansichten.');
     schritt('#s3','fertig');
   }catch(e){
     sag('Abgebrochen: ' + e.message, 'no');
-    sag('Am Gerät wurde nichts verändert, solange oben kein "Lösche …" steht.');
+    sag('Solange oben kein "Lösche …" steht, ist am Gerät nichts passiert.');
     $('#btnSchreiben').disabled = false;
   }
 };
@@ -401,8 +447,8 @@ $('#dateiOriginal').onchange = async ev => {
     sag('Spiele ' + datei.name + ' ein …');
     await schreiben(APP_START, daten, a => fort('#fortZurueck', a));
     fort('#fortZurueck', 1);
-    sag('Original wieder eingespielt.', 'ok');
-  }catch(e){ sag('Wiederherstellen fehlgeschlagen: ' + e.message, 'no'); }
+    sag('Original ist wieder drauf.', 'ok');
+  }catch(e){ sag('Wiederherstellen hat nicht geklappt: ' + e.message, 'no'); }
   ev.target.value = '';
 };
 
@@ -410,12 +456,12 @@ $('#dateiOriginal').onchange = async ev => {
 const anzahl = streifenZeichnen();
 karteFuellen();
 document.querySelector('.unterzeile').insertAdjacentHTML('beforeend',
-  ` <b style="color:var(--schrift)">${anzahl} RAL-Classic-Töne</b> sind eingemessen enthalten.`);
+  ` <b style="color:var(--schrift)">${anzahl} RAL-Classic-Töne</b> sind eingemessen dabei.`);
 schritt('#s1','aktiv');
 if(!('usb' in navigator)){
   $('#unmoeglich').style.display = 'block';
   $('#btnVerbinden').disabled = true;
-  sag('Kein WebUSB in diesem Browser.', 'no');
+  sag('Dieser Browser kann kein WebUSB. Mit Chrome oder Edge klappt es.', 'no');
 }
 </script>
 </body>
