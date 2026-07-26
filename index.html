@@ -143,9 +143,13 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   <div class="weg"><span>B</span><p>Messtaste und Eingabetaste zusammen — die Wippe dafür
     in der Mitte hineindrücken. Das rote Blinken kommt sofort, gleich loslassen.</p></div>
 
-  <figure class="bild"><img src="bilder/dfu-modus.jpg" alt="Rot blinkender Ring um die Messtaste"
+  <figure class="bild"><img src="bilder/dfu-druecken.jpg" alt="Finger hält die Messtaste, der Ring leuchtet rot"
     onerror="this.closest('figure').remove()">
-    <figcaption>Blinkt der Ring rot, ist das Gerät bereit.</figcaption></figure>
+    <figcaption>Weg A: Messtaste halten — sobald der Ring rot wird, sofort loslassen.</figcaption></figure>
+
+  <figure class="bild"><img src="bilder/dfu-modus.jpg" alt="Gerät mit rot leuchtendem Ring um die Messtaste"
+    onerror="this.closest('figure').remove()">
+    <figcaption>So sieht es aus, wenn es geklappt hat. Der Ring blinkt rot, der Bildschirm bleibt dunkel.</figcaption></figure>
 
   <div class="kasten">
     <p><b>Der Bildschirm bleibt dunkel.</b> Das ist richtig so — im Aktualisierungsmodus
@@ -153,6 +157,11 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   </div>
 
   <p>Jetzt per USB an den Rechner anstecken.</p>
+
+  <figure class="bild"><img src="bilder/usb-anstecken.jpg" alt="USB-C-Stecker vor der Buchse des Geräts"
+    onerror="this.closest('figure').remove()">
+    <figcaption>Ein Kabel nehmen, mit dem schon einmal Daten übertragen wurden — reine
+    Ladekabel funktionieren nicht.</figcaption></figure>
 
   <div class="navi">
     <span></span>
@@ -363,20 +372,33 @@ function treiberseite(){
     in der Liste auftaucht.</p></div>
     <p><a href="https://zadig.akeo.ie" target="_blank" rel="noopener">zadig.akeo.ie
     öffnen und herunterladen</a></p>
-    <figure class="bild"><img src="bilder/zadig-1.png" alt="Zadig, Options-Menü"
+    <figure class="bild"><img src="bilder/geraetemanager-fehlt.png" alt="Geräte-Manager, Gerät unter Andere Geräte"
       onerror="this.closest('figure').remove()">
-      <figcaption>Im Menü <b>Options → List All Devices</b> anhaken.</figcaption></figure>
+      <figcaption>So sieht es <b>ohne</b> Treiber aus: Das Gerät steht im Geräte-Manager
+      unter „Andere Geräte" mit einem Warnzeichen.</figcaption></figure>
+    <figure class="bild"><img src="bilder/zadig-download.png" alt="Die Downloadseite von Zadig"
+      onerror="this.closest('figure').remove()">
+      <figcaption>Auf zadig.akeo.ie unter <b>Download</b> die aktuelle Version laden.
+      Eine einzelne Datei, keine Installation.</figcaption></figure>
     <ol>
       <li>Gerät im Aktualisierungsmodus anstecken — der Ring muss rot blinken</li>
       <li>Zadig starten, <b>Options → List All Devices</b> anhaken</li>
-      <li>In der oberen Liste <b>STM32 BOOTLOADER</b> auswählen. Zur Kontrolle steht
-        darunter <code>USB ID 0483 DF11</code></li>
+      <li>In der oberen Liste <b>STM32 DownLoad Firmware Update</b> auswählen —
+        zur Kontrolle steht darunter <code>USB ID 0483 DF11</code></li>
       <li>Rechts daneben <b>WinUSB</b> einstellen</li>
-      <li><b>Replace Driver</b> klicken und kurz warten</li>
+      <li><b>Install Driver</b> klicken und warten, bis es durchgelaufen ist</li>
     </ol>
-    <figure class="bild"><img src="bilder/zadig-2.png" alt="Zadig, WinUSB auswählen"
+    <figure class="bild"><img src="bilder/zadig-winusb.png" alt="Zadig mit STM32 DownLoad Firmware Update und WinUSB"
       onerror="this.closest('figure').remove()">
-      <figcaption>STM32 BOOTLOADER links, <b>WinUSB</b> rechts, dann Replace Driver.</figcaption></figure>
+      <figcaption>Oben <b>STM32 DownLoad Firmware Update</b>, darunter zur Kontrolle
+      <b>0483 DF11</b>, rechts <b>WinUSB</b>. Dann Install Driver.</figcaption></figure>
+    <figure class="bild"><img src="bilder/zadig-installiert.png" alt="Zadig installiert den Treiber"
+      onerror="this.closest('figure').remove()">
+      <figcaption>Dauert ein paar Sekunden. Nicht abbrechen.</figcaption></figure>
+    <figure class="bild"><img src="bilder/geraetemanager-gut.png" alt="Geräte-Manager, Gerät unter USB-Geräte"
+      onerror="this.closest('figure').remove()">
+      <figcaption>Danach steht das Gerät unter <b>USB-Geräte</b> statt unter „Andere
+      Geräte". So gehört es sich.</figcaption></figure>
     <div class="kasten achtung"><p><b>Unbedingt WinUSB wählen</b> — nicht libusbK und nicht
     libusb-win32. Die funktionieren mit dfu-util, aber der Browser sieht das Gerät damit
     nicht. Das ist der häufigste Fehler an dieser Stelle.</p></div>
