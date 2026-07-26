@@ -65,6 +65,7 @@ li{margin:7px 0} li b{color:var(--schrift)}
 
 .paar{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 18px;align-items:start}
 .paar figure.bild{margin:0}
+figure.bild.schmal{max-width:330px}
 @media(max-width:620px){.paar{grid-template-columns:1fr}}
 figure.bild{margin:0 0 18px;border:1px solid var(--linie);border-radius:var(--rand);
   overflow:hidden;background:var(--grafit-hell)}
@@ -450,7 +451,15 @@ de:{
  s3:`<h2>Sichern und einspielen</h2>
    <p>Drei Knöpfe, einer nach dem anderen. Gesichert wird <b>zuerst</b> — erst danach
    wird überhaupt etwas geschrieben. Falls unterwegs etwas schiefgeht, hast du deine
-   Firmware also schon in der Hand.</p>`,
+   Firmware also schon in der Hand.</p>
+   <div class="kasten achtung">
+     <p><b>Das Gerät muss dafür noch im Aktualisierungsmodus stecken:</b> Ring blinkt rot,
+     Bildschirm bleibt dunkel. Hast du es zwischendurch neu gestartet oder abgesteckt,
+     bring es nochmal hinein — zurück auf Schritt 2.</p>
+   </div>
+   <figure class="bild schmal"><img src="bilder/dfu-modus.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>So muss es aussehen, bevor du
+     unten auf Gerät suchen klickst.</figcaption></figure>`,
  s3bild:`<figure class="bild"><img src="bilder/browser-auswahl.png" alt=""
    onerror="this.closest('figure').remove()"><figcaption><b>So muss es aussehen:</b> Die
    Zeile mit dem Gerät ist angeklickt und blau hinterlegt, dann ist <b>Verbinden</b>
@@ -754,7 +763,15 @@ en:{
    the next step, USB access permissions are missing.</p>`,
  s3:`<h2>Back up and flash</h2>
    <p>Three buttons, one after another. The backup comes <b>first</b> — nothing is written
-   before that. So if anything goes sideways later, your firmware is already in hand.</p>`,
+   before that. So if anything goes sideways later, your firmware is already in hand.</p>
+   <div class="kasten achtung">
+     <p><b>The device still has to be in update mode for this:</b> ring flashing red,
+     screen dark. If you restarted or unplugged it in the meantime, put it back in —
+     go to step 2.</p>
+   </div>
+   <figure class="bild schmal"><img src="bilder/dfu-modus.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>This is how it must look before
+     you click Find device below.</figcaption></figure>`,
  s3bild:`<figure class="bild"><img src="bilder/browser-auswahl.png" alt=""
    onerror="this.closest('figure').remove()"><figcaption><b>This is how it should look:</b>
    the device row is clicked and highlighted, which makes <b>Connect</b> active. Without
