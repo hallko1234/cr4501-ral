@@ -6,8 +6,14 @@ Mittel 0,08 ΔE, im schlechtesten Fall 0,50.
 
 ## Die Vorlage
 
-Gemessen wurde mit einem **originalen RAL® K5 in seidenmatt** — dem
-Standardfächer für RAL Classic.
+Gemessen wurde mit einem **originalen RAL® K5 in seidenmatt**.
+
+Bewusst der K5 und kein Fächer: Seine Farbflächen sind deutlich größer. Bei
+einer Messöffnung von 8 mm heißt das, dass die Blende sicher mitten in der
+Fläche sitzt, ohne Rand, Beschriftung oder Nachbarfeld mit zu erwischen. Auf
+den schmalen Streifen eines Fächers ist das fummelig und erzeugt Ausreißer,
+die das Programm dann als Streuung verwirft — man misst also länger für
+schlechtere Werte.
 
 Das ist kein Detail. **Nachbau-Farbkarten aus dem Zubehörhandel weichen oft
 spürbar ab**, teils um mehrere ΔE, und untereinander sind sie auch nicht
@@ -96,10 +102,10 @@ Deshalb steht auf dem Display `Gruengrau` und nicht `Grüngrau`.
 
 ## Grenzen der Daten
 
-Ein Fächer, ein Gerät, drei Messungen je Farbe. Fächer altern und vergilben,
+Eine Karte, ein Gerät, drei Messungen je Farbe. Karten altern und vergilben,
 jedes Messgerät hat seine eigene Kalibrierung. Für die Frage „welcher RAL-Ton
 ist das ungefähr" reicht das gut. Für eine Abnahme oder einen
-Reklamationsfall nicht — dafür bleibt der Fächer maßgeblich.
+Reklamationsfall nicht — dafür bleibt die Originalkarte maßgeblich.
 
 ## Das Programm im Detail
 
