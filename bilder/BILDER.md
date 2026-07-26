@@ -1,14 +1,18 @@
-# Bilder für die Werkzeugseite
+# Bilder der Werkzeugseite
 
-Diese Dateien werden von `index.html` eingebunden. Fehlt eine, blendet die Seite
-den Platz automatisch aus — man kann sie also jederzeit nachliefern.
+Fehlt eine Datei, entfernt die Seite den Platz automatisch — sie lässt sich also
+jederzeit nachreichen.
 
-| Datei | Was drauf sein soll |
-|---|---|
-| `dfu-modus.jpg` | Das Gerät mit **rot blinkendem Ring** um die Messtaste |
-| `zadig-1.png` | Zadig mit geöffnetem Menü *Options → List All Devices* |
-| `zadig-2.png` | Zadig mit ausgewähltem **STM32 BOOTLOADER** und **WinUSB** rechts |
-| `ral-anzeige.jpg` | Das Display mit der fertigen RAL-Anzeige |
+| Datei | Wo | Was drauf ist |
+|---|---|---|
+| `dfu-druecken.jpg` | Seite 1 | Finger auf der Messtaste, Ring leuchtet rot |
+| `dfu-modus.jpg` | Seite 1 | Gerät im Aktualisierungsmodus, roter Ring |
+| `usb-anstecken.jpg` | Seite 1 | USB-C-Stecker vor der Buchse |
+| `geraetemanager-fehlt.png` | Seite 2 | Geräte-Manager, Gerät unter „Andere Geräte" |
+| `zadig-download.png` | Seite 2 | Downloadbereich auf zadig.akeo.ie |
+| `zadig-winusb.png` | Seite 2 | Zadig mit 0483 DF11 und WinUSB |
+| `zadig-installiert.png` | Seite 2 | Zadig beim Installieren |
+| `geraetemanager-gut.png` | Seite 2 | Geräte-Manager, Gerät unter „USB-Geräte" |
+| `ral-anzeige.jpg` | Seite 4 | **fehlt noch** — Display mit der RAL-Anzeige |
 
-Breite ab etwa 900 Pixel reicht, die Seite skaliert selbst. JPEG für Fotos,
-PNG für Bildschirmfotos.
+Breite ab etwa 900 Pixel reicht, die Seite skaliert selbst.
