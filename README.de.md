@@ -13,11 +13,19 @@ passt. Messen, ablesen, weiter.
 
 <div align="center">
 
-### [▶  Werkzeug öffnen und loslegen](https://hallko1234.github.io/cr4501-ral-hack/)
+<table>
+<tr><td align="center">
 
-[![Werkzeug öffnen](https://img.shields.io/badge/hallko1234.github.io%2Fcr4501--ral-Werkzeug%20öffnen-f7d117?style=for-the-badge&labelColor=16181c)](https://hallko1234.github.io/cr4501-ral-hack/)
+# 🔴 &nbsp; [WERKZEUG STARTEN](https://hallko1234.github.io/cr4501-ral-hack/) &nbsp; 🔴
 
-**Läuft im Browser · Chrome oder Edge · fünf Minuten · jederzeit rückgängig**
+### Alles läuft im Browser — nichts wird hochgeladen
+
+[![Werkzeug starten](https://img.shields.io/badge/▶%20WERKZEUG%20STARTEN-hallko1234.github.io-f7d117?style=for-the-badge&labelColor=e8622a)](https://hallko1234.github.io/cr4501-ral-hack/)
+
+**Chrome oder Edge · fünf Minuten · jederzeit rückgängig**
+
+</td></tr>
+</table>
 
 </div>
 
