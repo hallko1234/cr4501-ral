@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CR4501 · RAL-Anzeige einspielen</title>
+<title>CR4501 · Welches RAL ist das?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -11,147 +11,171 @@
 :root{
   --grafit:#16181c; --grafit-hell:#1e2127; --linie:#31353d;
   --schrift:#e7e9ec; --gedaempft:#8f959f;
-  --signal:#f7d117; --warn:#e8622a; --gut:#3fbf7f;
+  --signal:#f7d117; --warn:#e8622a; --gut:#3fbf7f; --info:#5aa9e6;
   --rand:6px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{
-  background:var(--grafit); color:var(--schrift);
-  font-family:'Barlow',system-ui,sans-serif; font-size:16px; line-height:1.55;
-  -webkit-font-smoothing:antialiased;
-}
-.huelle{max-width:820px;margin:0 auto;padding:0 20px 96px}
+body{background:var(--grafit);color:var(--schrift);
+  font-family:'Barlow',system-ui,sans-serif;font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased}
+.huelle{max-width:840px;margin:0 auto;padding:0 20px 96px}
+code,kbd{font-family:'JetBrains Mono',monospace;font-size:.88em}
 
-/* ---- Kopf: der Farbstreifen ist die Signatur ---- */
-#streifen{display:flex;height:88px;width:100%;gap:0}
+#streifen{display:flex;height:88px;width:100%}
 #streifen div{flex:1 1 auto;min-width:0}
 @media(max-width:640px){#streifen{height:56px}}
 
-header{padding:44px 0 36px;border-bottom:1px solid var(--linie)}
-h1{
-  font-family:'Barlow Condensed',sans-serif; font-weight:700;
-  font-size:clamp(34px,6vw,56px); line-height:.98; letter-spacing:-.01em;
-  margin:0 0 14px; text-transform:uppercase;
-}
+header{padding:44px 0 32px;border-bottom:1px solid var(--linie)}
+h1{font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:clamp(34px,6vw,56px);line-height:.98;letter-spacing:-.01em;
+  margin:0 0 14px;text-transform:uppercase}
 h1 em{font-style:normal;color:var(--signal)}
-.unterzeile{color:var(--gedaempft);max-width:56ch;margin:0}
-.geraet{
-  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;
-  color:var(--gedaempft);text-transform:uppercase;margin:0 0 18px
-}
+.geraet{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;
+  color:var(--gedaempft);text-transform:uppercase;margin:0 0 18px}
+.unterzeile{color:var(--gedaempft);max-width:58ch;margin:0}
 
-/* ---- Schritte ---- */
+/* --- Systemprüfung --- */
+#pruefung{margin:26px 0 0;border:1px solid var(--linie);border-radius:var(--rand);overflow:hidden}
+#pruefung .kopf{display:flex;align-items:center;gap:12px;padding:14px 18px;
+  background:var(--grafit-hell);font-family:'Barlow Condensed',sans-serif;
+  text-transform:uppercase;letter-spacing:.03em;font-size:17px;font-weight:600}
+#pruefung .kopf .punkt{width:9px;height:9px;border-radius:50%;background:var(--gedaempft);flex:none}
+#pruefung.gut .punkt{background:var(--gut)} #pruefung.warn .punkt{background:var(--warn)}
+#pruefung .leib{padding:16px 18px}
+.zeile{display:grid;grid-template-columns:20px 1fr;gap:10px;margin:0 0 8px;font-size:15px}
+.zeile:last-child{margin-bottom:0}
+.zeile b{color:var(--schrift);font-weight:600}
+.zeile .z{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7}
+.zeile.ja .z{color:var(--gut)} .zeile.nein .z{color:var(--warn)} .zeile.egal .z{color:var(--gedaempft)}
+.zeile p{margin:0;color:var(--gedaempft)}
+
+/* --- Schritte --- */
 .schritt{border-bottom:1px solid var(--linie);padding:28px 0;display:grid;
-  grid-template-columns:52px 1fr;gap:20px;align-items:start}
+  grid-template-columns:52px 1fr;gap:20px;align-items:start;opacity:.45;transition:opacity .25s}
+.schritt.aktiv,.schritt.fertig{opacity:1}
 .nr{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
   color:var(--linie);padding-top:6px}
-.schritt.aktiv .nr{color:var(--signal)}
-.schritt.fertig .nr{color:var(--gut)}
+.schritt.aktiv .nr{color:var(--signal)} .schritt.fertig .nr{color:var(--gut)}
 .schritt h2{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
   letter-spacing:.02em;font-size:22px;margin:0 0 6px;font-weight:600}
 .schritt p{margin:0 0 14px;color:var(--gedaempft)}
+.schritt p b{color:var(--schrift)}
 @media(max-width:560px){.schritt{grid-template-columns:1fr;gap:8px}.nr{padding-top:0}}
-
-button{
-  font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
-  letter-spacing:.04em;font-size:16px;font-weight:600;
-  background:var(--signal);color:#101215;border:0;border-radius:var(--rand);
-  padding:11px 22px;cursor:pointer;transition:filter .15s,transform .05s;
-}
-button:hover:not(:disabled){filter:brightness(1.12)}
-button:active:not(:disabled){transform:translateY(1px)}
-button:disabled{background:var(--grafit-hell);color:#5a606a;cursor:not-allowed}
-button.leise{background:transparent;color:var(--schrift);border:1px solid var(--linie)}
-button.leise:hover:not(:disabled){border-color:var(--gedaempft);filter:none}
-button.gefahr{background:var(--warn);color:#fff}
-button:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
-
-.balken{height:3px;background:var(--grafit-hell);border-radius:2px;overflow:hidden;margin:14px 0 6px}
-.balken i{display:block;height:100%;width:0;background:var(--signal);transition:width .2s}
-
-/* ---- Protokoll ---- */
-#protokoll{
-  font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;
-  background:#101216;border:1px solid var(--linie);border-radius:var(--rand);
-  padding:14px 16px;max-height:280px;overflow:auto;white-space:pre-wrap;
-  color:var(--gedaempft);margin-top:10px
-}
-#protokoll b{color:var(--schrift);font-weight:400}
-#protokoll .ok{color:var(--gut)}
-#protokoll .no{color:var(--warn)}
-
-.hinweis{border-left:2px solid var(--warn);padding:10px 0 10px 16px;margin:18px 0;
-  color:var(--gedaempft);font-size:14.5px}
-.hinweis b{color:var(--schrift)}
-
-table.karte{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;
-  font-size:12.5px;margin:10px 0 4px}
-table.karte td{padding:5px 0;border-bottom:1px solid var(--grafit-hell);color:var(--gedaempft)}
-table.karte td:first-child{color:var(--schrift);width:11ch}
-table.karte td:last-child{text-align:right}
-
-footer{padding-top:34px;color:var(--gedaempft);font-size:14px}
-footer a{color:var(--signal)}
-#unmoeglich{display:none;background:var(--warn);color:#fff;padding:14px 20px;
-  font-weight:600;text-align:center}
 
 .weg{display:grid;grid-template-columns:26px 1fr;gap:12px;margin:0 0 12px;align-items:start}
 .weg span{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
   color:#101215;background:var(--signal);border-radius:3px;text-align:center;
   line-height:20px;height:20px;margin-top:3px}
 .weg p{margin:0}
+
+button{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+  letter-spacing:.04em;font-size:16px;font-weight:600;
+  background:var(--signal);color:#101215;border:0;border-radius:var(--rand);
+  padding:11px 22px;cursor:pointer;transition:filter .15s,transform .05s}
+button:hover:not(:disabled){filter:brightness(1.12)}
+button:active:not(:disabled){transform:translateY(1px)}
+button:disabled{background:var(--grafit-hell);color:#5a606a;cursor:not-allowed}
+button.leise{background:transparent;color:var(--schrift);border:1px solid var(--linie)}
+button.leise:hover:not(:disabled){border-color:var(--gedaempft);filter:none}
+button:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.knopfreihe{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+.balken{height:3px;background:var(--grafit-hell);border-radius:2px;overflow:hidden;margin:14px 0 4px}
+.balken i{display:block;height:100%;width:0;background:var(--signal);transition:width .2s}
+.stand{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gedaempft);min-height:1.3em}
+
+#protokoll{font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.75;
+  background:#101216;border:1px solid var(--linie);border-radius:var(--rand);
+  padding:14px 16px;max-height:300px;overflow:auto;white-space:pre-wrap;
+  color:var(--gedaempft);margin-top:18px}
+#protokoll b{color:var(--schrift);font-weight:400}
+#protokoll .ok{color:var(--gut)} #protokoll .no{color:var(--warn)} #protokoll .tipp{color:var(--info)}
+
+details{border:1px solid var(--linie);border-radius:var(--rand);margin:12px 0;
+  background:var(--grafit-hell)}
+details[open]{background:transparent}
+summary{cursor:pointer;padding:12px 16px;font-family:'Barlow Condensed',sans-serif;
+  text-transform:uppercase;letter-spacing:.03em;font-weight:600;font-size:16px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'+ ';color:var(--signal);font-family:'JetBrains Mono',monospace}
+details[open] summary::before{content:'– '}
+details .inhalt{padding:0 16px 16px;color:var(--gedaempft);font-size:15px}
+details .inhalt b{color:var(--schrift)}
+details .inhalt ol,details .inhalt ul{margin:8px 0;padding-left:20px}
+details .inhalt li{margin:5px 0}
+
+.befehl{display:flex;gap:8px;align-items:stretch;margin:10px 0}
+.befehl code{flex:1;background:#101216;border:1px solid var(--linie);border-radius:4px;
+  padding:9px 12px;overflow-x:auto;white-space:nowrap;color:var(--schrift);font-size:12.5px}
+.befehl button{padding:6px 12px;font-size:13px}
+
 .abschnitt{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
-  font-size:20px;margin:34px 0 8px;font-weight:600;letter-spacing:.02em}
+  font-size:20px;margin:36px 0 8px;font-weight:600;letter-spacing:.02em}
 .klein{color:var(--gedaempft);font-size:14.5px;margin:0 0 12px}
 .klein b{color:var(--schrift)}
-.klein code{font-family:'JetBrains Mono',monospace;font-size:13px}
-.hinweis a{color:var(--signal)}
+table.karte{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;
+  font-size:12.5px;margin:10px 0 4px}
+table.karte td{padding:5px 0;border-bottom:1px solid var(--grafit-hell);color:var(--gedaempft)}
+table.karte td:first-child{color:var(--schrift);width:11ch}
+table.karte td:last-child{text-align:right}
+footer{padding-top:34px;color:var(--gedaempft);font-size:14px}
+footer a{color:var(--signal)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 
 <div id="streifen" aria-hidden="true"></div>
-<div id="unmoeglich">Dieser Browser kann nicht mit USB-Geräten sprechen. Nimm Chrome oder Edge.</div>
 
 <div class="huelle">
 <header>
   <p class="geraet">3nh CR4501 · Color Reader</p>
   <h1>Welches RAL<br><em>ist das?</em></h1>
   <p class="unterzeile">Das CR4501 misst Farben sehr genau — nur sagt es einem nicht,
-  welcher RAL-Ton dabei herauskommt. Dafür braucht es sonst Handy, App und Geduld.
-  Diese Erweiterung legt die Antwort direkt aufs Display: Nach jeder Messung steht da
-  die nächstliegende RAL-Classic-Farbe mit Namen und wie gut sie passt. Messen, ablesen,
-  weiter.</p>
+  welcher RAL-Ton dabei herauskommt. Diese Erweiterung legt die Antwort direkt aufs
+  Display: nach jeder Messung die nächstliegende RAL-Classic-Farbe mit Namen und wie gut
+  sie passt. Messen, ablesen, weiter.</p>
+
+  <div id="pruefung">
+    <div class="kopf"><span class="punkt"></span><span id="pruefTitel">System wird geprüft …</span></div>
+    <div class="leib" id="pruefLeib"></div>
+  </div>
 </header>
 
 <div class="schritt" id="s1">
   <div class="nr">01</div>
   <div>
     <h2>Gerät in den Aktualisierungsmodus</h2>
-    <p>Der Ablauf ist immer derselbe, und der zweite Schritt ist der, den alle
-    überspringen.</p>
-    <div class="weg">
-      <span>1</span>
-      <p><b style="color:var(--schrift)">Ausschalten.</b> Messtaste lange drücken, bis das
-      Gerät ausgeht.</p>
+    <p><b>Das Gerät muss ausgeschaltet sein</b> — dazu die Messtaste lange gedrückt halten,
+    bis es abschaltet. Danach mindestens <b>fünf Sekunden</b> nichts anfassen. Erst dann
+    einer der beiden Wege:</p>
+    <div class="weg"><span>A</span><p>Messtaste erneut lange halten, bis der Ring um die
+      Taste <b>rot blinkt</b> — sofort loslassen.</p></div>
+    <div class="weg"><span>B</span><p>Messtaste und Eingabetaste zusammen, die Wippe dafür
+      in der Mitte hineindrücken. Das rote Blinken kommt sofort, gleich loslassen.</p></div>
+    <p>Der Bildschirm bleibt dunkel, das gehört so. Jetzt per USB anstecken.</p>
+    <div class="knopfreihe">
+      <button id="btnVerbinden">Gerät suchen</button>
+      <button id="btnErneut" class="leise" style="display:none">Nochmal versuchen</button>
     </div>
-    <div class="weg">
-      <span>2</span>
-      <p><b style="color:var(--schrift)">Mindestens fünf Sekunden warten.</b> Nichts anfassen.
-      Ohne diese Pause reagiert das Gerät im nächsten Schritt nicht.</p>
-    </div>
-    <div class="weg">
-      <span>3</span>
-      <p><b style="color:var(--schrift)">Messtaste wieder lange halten</b>, bis der Ring um die
-      Taste <b style="color:var(--schrift)">rot blinkt</b>. Sofort loslassen — fertig, das ist
-      der Aktualisierungsmodus.</p>
-    </div>
-    <p class="klein">Es geht auch anders herum: nach dem Ausschalten und den fünf Sekunden
-    Messtaste und Eingabetaste zusammen drücken — die Wippe dafür in der Mitte
-    hineindrücken. Das rote Blinken kommt dann sofort, gleich wieder loslassen.</p>
-    <p>Der Bildschirm bleibt dabei dunkel, das gehört so. Jetzt per USB anstecken.</p>
-    <button id="btnVerbinden">Gerät suchen</button>
+    <div id="geraeteinfo"></div>
+    <details id="hilfeFinden">
+      <summary>Es steht nichts in der Liste</summary>
+      <div class="inhalt">
+        <p>Der Reihe nach durchgehen, meist ist es einer der ersten drei Punkte:</p>
+        <ol>
+          <li><b>Blinkt der Ring rot?</b> Wenn nicht, ist das Gerät nicht im
+            Aktualisierungsmodus. Nochmal ausschalten, fünf Sekunden warten, neu versuchen.</li>
+          <li><b>Zu spät losgelassen?</b> Beim roten Blinken muss die Taste sofort los —
+            hältst du weiter, startet das Gerät normal.</li>
+          <li><b>Ladekabel statt Datenkabel.</b> Viele USB-Kabel führen nur Strom.
+            Zum Test: ein Kabel nehmen, mit dem schon einmal Daten übertragen wurden.</li>
+          <li><b>USB-Verteiler dazwischen.</b> Direkt am Rechner anstecken.</li>
+          <li><b>Treiber</b> — siehe der Kasten oben in der Systemprüfung.</li>
+        </ol>
+      </div>
+    </details>
   </div>
 </div>
 
@@ -160,10 +184,11 @@ footer a{color:var(--signal)}
   <div>
     <h2>Erst sichern</h2>
     <p>Bevor irgendetwas geschrieben wird, holt sich das Werkzeug die Firmware vom Gerät
-    und legt sie dir als Datei hin. Heb sie auf. Solange du die hast, ist nichts
+    und legt sie dir als Datei hin. <b>Heb sie auf.</b> Solange du die hast, ist nichts
     endgültig — Schritt 4 spielt sie jederzeit wieder zurück.</p>
-    <button id="btnSichern" disabled>Auslesen und sichern</button>
+    <div class="knopfreihe"><button id="btnSichern" disabled>Auslesen und sichern</button></div>
     <div class="balken"><i id="fortSichern"></i></div>
+    <div class="stand" id="standSichern"></div>
   </div>
 </div>
 
@@ -174,8 +199,9 @@ footer a{color:var(--signal)}
     <p>Jetzt wird geschrieben. Vorher schaut das Werkzeug an jeder einzelnen Stelle nach,
     ob dort auch wirklich steht, was es erwartet — und bricht lieber ab, als auf gut Glück
     loszulegen. Danach liest es alles zurück und vergleicht Byte für Byte.</p>
-    <button id="btnSchreiben" disabled>Einspielen</button>
+    <div class="knopfreihe"><button id="btnSchreiben" disabled>Einspielen</button></div>
     <div class="balken"><i id="fortSchreiben"></i></div>
+    <div class="stand" id="standSchreiben"></div>
   </div>
 </div>
 
@@ -186,302 +212,489 @@ footer a{color:var(--signal)}
     <p>Gefällt es dir nicht, oder ist etwas schiefgelaufen: gesicherte Datei auswählen,
     und das Gerät ist wieder wie vorher.</p>
     <input type="file" id="dateiOriginal" accept=".bin" style="display:none">
-    <button id="btnZurueck" class="leise" disabled>Sicherung wählen und einspielen</button>
+    <div class="knopfreihe">
+      <button id="btnZurueck" class="leise" disabled>Sicherung wählen und einspielen</button>
+    </div>
     <div class="balken"><i id="fortZurueck"></i></div>
+    <div class="stand" id="standZurueck"></div>
   </div>
 </div>
 
-<div id="protokoll">Bereit.</div>
+<div id="protokoll"></div>
 
-<div class="hinweis">
-  <b>Wenn der Browser das Gerät nicht findet:</b> Unter Windows fehlt ihm meist nur der
-  passende Treiber. Das Programm <a href="https://zadig.akeo.ie">Zadig</a> weist ihn in
-  einer Minute zu — <i>Options → List All Devices</i>, in der Liste
-  <b>STM32 BOOTLOADER</b> suchen, rechts <b>WinUSB</b> einstellen, <i>Replace Driver</i>.
-  Das ist einmalig, danach nie wieder.
-</div>
+<details id="hilfeAllgemein">
+  <summary>Wenn während des Schreibens etwas schiefgeht</summary>
+  <div class="inhalt">
+    <p><b>Bricht der Vorgang mitten drin ab, ist das Gerät nicht kaputt.</b> Der
+    Bootloader sitzt in einem eigenen, unveränderlichen Speicherbereich und startet
+    immer. Du kommst also immer wieder in den Aktualisierungsmodus.</p>
+    <ol>
+      <li>Gerät vom USB trennen und wieder anstecken</li>
+      <li>Erneut in den Aktualisierungsmodus bringen (Schritt 1)</li>
+      <li>Seite neu laden, <b>Gerät suchen</b>, dann <b>Schritt 4</b> mit deiner Sicherung</li>
+    </ol>
+    <p>Falls die Seite gar nicht mehr will, geht es auch mit
+    <a href="https://dfu-util.sourceforge.net" style="color:var(--signal)">dfu-util</a>:</p>
+    <div class="befehl">
+      <code>dfu-util -a 0 -s 0x08004000 -D deine_sicherung.bin</code>
+      <button class="leise kopieren" data-text="dfu-util -a 0 -s 0x08004000 -D deine_sicherung.bin">Kopieren</button>
+    </div>
+    <p>Niemals die Option <code>-t</code> verwenden, und immer den ganzen Bereich am Stück
+    schreiben — der Bootloader löscht beim ersten Schreibbefehl alles und erwartet danach
+    das vollständige Abbild.</p>
+  </div>
+</details>
 
 <section>
   <h2 class="abschnitt">Was am Gerät verändert wird</h2>
   <table class="karte" id="karte"></table>
-  <p class="klein">
-  Sieben Stellen, zusammen gut fünf Kilobyte, alle im Programmbereich des Geräts.
-  Was <b>nicht</b> angefasst wird: alles ab
-  <code>0x08030000</code> — Startbild, Einstellungen und vor allem die
-  <b>Werkskalibrierung deines Geräts</b>. Die ist bei jedem Gerät anders, und eine fremde
-  hineinzuschreiben würde es dauerhaft falsch messen lassen. Das Werkzeug verweigert dort
-  jeden Schreibzugriff, unabhängig davon, was man ihm sagt.</p>
+  <p class="klein">Sieben Stellen, zusammen gut fünf Kilobyte, alle im Programmbereich.
+  Was <b>nicht</b> angefasst wird: alles ab <code>0x08030000</code> — Startbild,
+  Einstellungen und vor allem die <b>Werkskalibrierung deines Geräts</b>. Die ist bei
+  jedem Gerät anders, und eine fremde hineinzuschreiben würde es dauerhaft falsch messen
+  lassen. Das Werkzeug verweigert dort jeden Schreibzugriff.</p>
 </section>
 
 <section>
   <h2 class="abschnitt">Woher die Farben kommen</h2>
   <p class="klein">216 RAL-Classic-Töne, mit einem Fächer eingemessen, jede Farbe dreimal.
-  Die Wiederholstreuung lag im Schnitt bei 0,08 ΔE, im schlechtesten Fall bei 0,50 — für
-  die Erkennung im Alltag also reichlich genau.</p>
+  Wiederholstreuung im Schnitt 0,08 ΔE, im schlechtesten Fall 0,50.</p>
   <p class="klein">Ehrlich dazugesagt: Die Werte stammen von <i>einem</i> Fächer und
-  <i>einem</i> Gerät. Fächer altern, vergilben, und jedes Messgerät hat seine eigene
+  <i>einem</i> Gerät. Fächer altern und vergilben, jedes Messgerät hat seine eigene
   Kalibrierung. Für „welches RAL ist das ungefähr" ist das genau richtig. Für eine
-  Abnahme oder einen Reklamationsfall nimmt man weiterhin den Fächer in die Hand.</p>
+  Abnahme nimmt man weiterhin den Fächer in die Hand.</p>
 </section>
 
 <footer>
-  Ein Feierabendprojekt, kein Produkt von 3nh. Benutzung auf eigene Gefahr — aber
-  mit Rückweg, und die Kalibrierung deines Geräts bleibt in jedem Fall unberührt.
+  Ein Feierabendprojekt, kein Produkt von 3nh. Benutzung auf eigene Gefahr — aber mit
+  Rückweg, und die Kalibrierung deines Geräts bleibt unberührt.
   <br><a href="https://github.com/hallko1234/cr4501-ral">Quelltext und Dokumentation auf GitHub</a>
 </footer>
 </div>
 
 <script>
-/* ====== Patchdaten werden beim Bauen hier eingesetzt ====== */
 const DATEN = {"blobs": [{"addr": 134407120, "name": "RAL-Bildschirm", "b64": "LenwT7FOm7AA8Fj61vgAJK9LmkJA8KuB1vgINAErQPOmgdb4CDSz9ch/APOggU/wAFTU+MAOAPAD+gdGQvYDE3oemkLU+MQO1PjIngDyj4EA8Pb5Q/LIJEbykFUDGatCgEYA8oSBSEYA8Or5BESsQoFGAPJ8gQAhT/D/NA1GC0YgRk/wCg7W+AgkkULA8nKBGrIO+wPzBpLW+AQkjU8aRLL4BoDW+AQkE0Sz+AiQAPAM+kLyD3Mf+oD7s+uLD1hGKL9kI0/qgAYov7b78/ZP8AoBfkoov54b0vgENDi/ACYB+wUz24gov/ayB5PS+AQ0YxwUvyBGACAA8Of5QvIPc4Cys+uADyi/ZCNP6oAFLL+1+/P1ACVP8AAEJL9dG+2ycxuHIiAhIEYFkwCU8CO4R0zyGGOAIiIhBiAAk5YjuEeUI34iJCEIIM34AJC4R0FGE6gA8Jr5BJAEmxP4BJC58QAPQPAygVAjViI6ITAgzfgAkLhHT/AUDE/2/3MkAcTxhwgI69h4zekAPE/qaAhLRjshNCBQSt/4RKHN+AiQ0EcE6wgCeiNWIQUyqPEFAM34AJC4R0/wIA5P9v9zBJrN6QA+WCFLRijq6HDN+AiQ0EcxRg3xWgAA8Fj5AkYBRgtGHHgBMQAs+tElIVxwGXAFmxghAyvMv0/0/GNP9HxDCCDN6QAxApQjRp4h0EdC8g9zm0WN+FtAAPLagAoiu/vy82Qhs/vy8Lv78fEC+xAzm7IwM434WjAuIwomjfhZMA0jsfv29Ab7FBAaRjAwATsN8UwMDPgDAAhGCSghRvDYICEC8WgDa0QD+B4cRSED+B8cZCEAIALxZANrRAQ6A/gcHGJEFFwALEDwpYBv8AkDFCZYQ0jyEEOBMM3pADYg6uBwI0aiIQKU0EcIS9P4FAQGm6NCAPORgAAjBEwBOBD4AS9ysRcrQPCOgArgAL8A5QIITVRQMSWuAAj86AII0bYACAAgaDNrRAP4HAyHItYjviEAkLhHT/b/csAgE6kA8PT4B5kNqADwwfhC9jJjrfhMMCAjjfhOMAMjATgN8U4BEPgBL1wcACpA8IOAICJoM2tEKUYD+BwsCqgA8Kf4E6sBOBkZEPgBL2McACp10QTxaAEN6wEEJSFoM2tEBPgcHNwgA/gcLBOpSPIQQgDwvfgbsL3o8I8O+wHy1vgExNb4BKQy+QzAkkS6+QKg1vgEtKjrCgoK+wr6p+sMDAz7DKxaRLL5BCCp6wICAvsCwoJCBdOiQgjTIkYURgExZOYdRgRGC0YQRvbnDUb15wE0xOYJI2MhLecBMFTnEPgBKwAq+9EBNGTnEQYc1dT4DBTU+BBkAvB/ArJCv/ZhrwE6DNIBORH4AS8AKj/0Wa8XKz/0Vq8TrvJUATPz5xH4AWsALvvR6+cD8WgBaUQB+BwsATNF5yNGAfgBL3LnHEYB+AErgOcBRsDzx1AQtZix/ygb0MDxlgMfKxXcZCTB8xYCQvQAAgArBPsC8gXd2kAAKRBGANpQQhC9+dAfMwPboPGWA5pA8+cAIvHnACDz5wAiELUDRgD4ASxpsQokATix+/TyBPsSEzAzAPgBPQtGCSsRRvTYA+AwIgI4A/gCLBC9LenwT0TyjSzA9gEMYEcDRhC1ULEYIrP78PEBOgFEBEZP6lEAAdCEQvXREL0wtQAjBEaFsM1ctbkKIENDw/GHA1gcpL8D69NzWBBP8BQDuL8oRs3pACMClQpGACMhRgNMoEcFsDC9ATPk5wC/0bYACFJBTAA="}, {"addr": 134408448, "name": "Farbtabelle", "b64": "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AFCWiQBXkIkAn3dhcnqJAE94aWSJAEKAbokAQo6JAFRvbWF0ZW6JAEFsdJsASJSbAEtvcmFsbGVuiQBSb3NlAEVyZJyJAIOJAEykc4kAjIkAjGiUiQBIaW2ciQBSkIkAT3JpZW50iQCIcnViaW6JAIibAKJsaWxhAKKKAEVyaWthigBCb3JkZWF1eIoAmnVsaWxhAINwlgBQlooAhooAjYoAl21hZ2VudGEAiIoAiGJyb22cAFZpb2xldHSCAJGCAFVsdHJhbWFyaW6CAFNhcGhpcoIAn3dhcnqCAIaCAEJyaWxsYW50ggBHgIIAQXp1coIARaWCAFN0YWhsggCYggBLb2JhbHSCAFRhdWKdbGF1AEhpbW1lbIIAg4IAVI+CAENhcHJpggBPemVhboIAV2Fzc2VyggBOpHSCAEZlcm6CAI2CAIhlpQCIbqR0ggBQYXRpbmGBAFNtYXJhZ2SBAExhdWKBAE+SgQCadYEATW9vc4EAR4BvkgBGbGFzY2hlboEAQoBugQBUYW6egQBHcmFzgQBSZXNlZGGBAJ93YXJ6gQCfaWxmgQCVb5IAn3dhcnpvkgBUj4EATWFpgQCVgQCmgQBDaHJvbW94aWSBAJpzc4EAQoBub5IAg4EARmFyboEAT3BhbIEAmIEAS6Nlcm6BAE1pbnqBAIaBAE1pbnR0jwCNdI8AiIEAiG9wYWyBAFKQgQCMgQBGYXNlcoEARmVoZ4AAU2lsYmVyZ4AAT5JngABNb29zZ4AAhmeAAE1hdXNngABCjmeAAEtoYWtpZ4AAkWeAAFplbHRngABFaXNlbmeAAEJhc2FsdGeAAEKAbmeAAJ+jZXJngABBbnRocmF6aXRngACfd2FyemeAAFVtYnJhZ4AAQmV0b25ngACZZ4AAR3Jhbml0Z4AAU3SQZ4AAmnVngABLaWVzZWxngABaZW1lbnRngACVZ4AAmGeAAFBsYXRpbmeAAFN0YXViZ4AAQWNoYXRngABRdWFyemeAAEZloWeAAINngCBBAINngCBCAFNlaWRlbmeAAJdngCAxAJdngCAyAJdngCA0AIhtYXVzZ4AAkWKAbgCgYoBuAIZigG4ATGVobWKAbgBLp2KAbgBSZWhigG4AT5JigG4ATnVzc2KAbgCiYoBuAFNlcGlhYoBuAEthc3RhbmmdgG4ATWFoYWdvbmligG4An29rb2xhZJ2AbgBHgGKAbgCfd2FyemKAbgBPcmFuZ2VigG4AQo5igG4AmnNzYoBuAFRlcnJhYoBuAIhrpwBDcmVtZYsAR4CLAIaLAIZzhwBUo3OHAKaTAEeAkwBSkIsAmXOHAFKQgG2LAIOLAINzhwBQYXB5cnVziwCIaJRngACIZHVua2VsZ4AA"}], "patches": [{"addr": 134300296, "alt": "2de9f04f", "neu": "1af0a2b8", "was": "RAL-Bildschirm einhängen"}, {"addr": 134261172, "alt": "90f87002", "neu": "002000bf", "was": "Taste rechts freigeben"}, {"addr": 134261084, "alt": "90f87002", "neu": "002000bf", "was": "Taste links freigeben"}, {"addr": 134261024, "alt": "90f87002", "neu": "002000bf", "was": "Eingabetaste freigeben (Abfrage)"}, {"addr": 134260380, "alt": "91f87012", "neu": "002100bf", "was": "Eingabetaste freigeben (Auswertung)"}]};
 
-/* ====== Speicherkarte des Geräts ====== */
-const APP_START = 0x08004000, APP_LAENGE = 180224;
-const GRENZE    = 0x08030000;           // darüber wird niemals geschrieben
-const SEITE     = 2048;
+const APP_START=0x08004000, APP_LAENGE=180224, GRENZE=0x08030000, SEITE=2048;
+const $=s=>document.querySelector(s);
+const hex=n=>'0x'+n.toString(16).toUpperCase().padStart(8,'0');
+const schlafen=ms=>new Promise(r=>setTimeout(r,ms));
 
-/* ====== Anzeige ====== */
-const $ = s => document.querySelector(s);
-const prot = $('#protokoll');
-function sag(text, art){
-  const z = document.createElement(art === 'roh' ? 'span' : 'b');
-  if(art === 'ok' || art === 'no') z.className = art;
-  z.textContent = text + '\n';
-  prot.appendChild(z); prot.scrollTop = prot.scrollHeight;
+/* ---------- Protokoll ---------- */
+const prot=$('#protokoll');
+function sag(text,art){
+  const z=document.createElement('b');
+  if(art) z.className=art;
+  const t=new Date().toTimeString().slice(0,8);
+  z.textContent=t+'  '+text+'\n';
+  prot.appendChild(z); prot.scrollTop=prot.scrollHeight;
 }
-function fort(id, anteil){ $(id).style.width = Math.round(anteil*100) + '%'; }
-function schritt(id, zustand){ $(id).className = 'schritt ' + zustand; }
-const hex = n => '0x' + n.toString(16).toUpperCase().padStart(8,'0');
+function tipp(text){ sag('        '+text,'tipp'); }
+function fort(id,a){ $(id).style.width=Math.round(a*100)+'%'; }
+function stand(id,t){ $(id).textContent=t; }
+function schritt(id,z){ $(id).className='schritt '+z; }
 
-/* ====== Farbstreifen aus der echten Tabelle ====== */
+/* ---------- Systemprüfung ---------- */
+function systemErkennen(){
+  const ua=navigator.userAgent;
+  const d=navigator.userAgentData;
+  let os='unbekannt';
+  const p=(d&&d.platform)||navigator.platform||'';
+  if(/Win/i.test(p)||/Windows/i.test(ua)) os='windows';
+  else if(/Mac/i.test(p)||/Macintosh/i.test(ua)) os='macos';
+  else if(/Android/i.test(ua)) os='android';
+  else if(/Linux|X11/i.test(p)||/Linux/i.test(ua)) os='linux';
+  else if(/iPhone|iPad/i.test(ua)) os='ios';
+
+  let browser='anderer';
+  if(/Edg\//.test(ua)) browser='edge';
+  else if(/OPR\//.test(ua)) browser='opera';
+  else if(/Firefox\//.test(ua)) browser='firefox';
+  else if(/Chrome\//.test(ua)) browser='chrome';
+  else if(/Safari\//.test(ua)) browser='safari';
+
+  return {os,browser,
+    webusb:('usb' in navigator),
+    sicher:(location.protocol==='https:'||location.hostname==='localhost')};
+}
+
+const NAMEN={windows:'Windows',macos:'macOS',linux:'Linux',android:'Android',
+  ios:'iPhone oder iPad',unbekannt:'unbekanntes System'};
+const BNAMEN={chrome:'Chrome',edge:'Edge',opera:'Opera',firefox:'Firefox',
+  safari:'Safari',anderer:'dieser Browser'};
+
+function zeile(art,zeichen,html){
+  return `<div class="zeile ${art}"><span class="z">${zeichen}</span><p>${html}</p></div>`;
+}
+
+function pruefungAnzeigen(){
+  const s=systemErkennen(); window.SYS=s;
+  const teile=[]; let alles=true;
+
+  teile.push(zeile('egal','··',`Erkannt: <b>${NAMEN[s.os]}</b>, ${BNAMEN[s.browser]}`));
+
+  if(!s.sicher){
+    alles=false;
+    teile.push(zeile('nein','!!',`Die Seite läuft nicht über HTTPS. Browser erlauben
+      USB-Zugriff nur auf gesicherten Seiten.`));
+  }
+
+  if(s.webusb){
+    teile.push(zeile('ja','ok',`Dein Browser kann mit USB-Geräten sprechen.`));
+  }else{
+    alles=false;
+    if(s.os==='ios'){
+      teile.push(zeile('nein','!!',`Auf iPhone und iPad ist USB-Zugriff im Browser
+        gesperrt — <b>systemweit</b>, auch in Chrome. Das Werkzeug braucht einen
+        Rechner mit Windows, macOS oder Linux.`));
+    }else if(s.browser==='firefox'||s.browser==='safari'){
+      teile.push(zeile('nein','!!',`${BNAMEN[s.browser]} unterstützt kein WebUSB und wird
+        es absehbar auch nicht. Nimm <a href="https://www.google.com/chrome/"
+        style="color:var(--signal)">Chrome</a> oder Edge — beide sind auf deinem System
+        verfügbar.`));
+    }else{
+      teile.push(zeile('nein','!!',`Dieser Browser meldet keine USB-Unterstützung.
+        Mit <a href="https://www.google.com/chrome/" style="color:var(--signal)">Chrome</a>
+        oder Edge ab Version 89 klappt es. Falls du Chrome benutzt: eventuell ist
+        WebUSB per Richtlinie abgeschaltet — prüfe
+        <code>chrome://policy</code>.`));
+    }
+  }
+
+  if(s.os==='windows'){
+    teile.push(zeile('egal','··',`<b>Windows braucht einmalig einen Treiber.</b> Wenn das
+      Gerät gleich nicht in der Liste auftaucht, fehlt er — die Anleitung steht unten
+      im aufklappbaren Kasten. Hast du das Gerät schon mit dfu-util benutzt, ist alles
+      da.`));
+  }else if(s.os==='macos'){
+    teile.push(zeile('ja','ok',`Unter macOS ist kein Treiber nötig.`));
+  }else if(s.os==='linux'){
+    teile.push(zeile('egal','··',`Unter Linux braucht es eine Zugriffsregel, sonst gehört
+      das Gerät nur root. Der Befehl steht unten im aufklappbaren Kasten.`));
+  }else if(s.os==='android'){
+    teile.push(zeile('egal','··',`Unter Android geht es nur mit einem OTG-Adapter, und
+      längst nicht jedes Gerät gibt USB frei. Ein Rechner ist der sicherere Weg.`));
+  }
+
+  $('#pruefLeib').innerHTML=teile.join('');
+  $('#pruefTitel').textContent=alles?'Alles bereit':'Es fehlt noch etwas';
+  $('#pruefung').className=alles?'gut':'warn';
+  $('#btnVerbinden').disabled=!alles;
+  return {s,alles};
+}
+
+/* Betriebssystemabhängige Treiberhilfe */
+function treiberhilfe(os){
+  if(os==='windows') return `
+  <details id="hilfeTreiber"><summary>Windows: Treiber zuweisen</summary><div class="inhalt">
+    <p>Windows bringt für den Aktualisierungsmodus keinen Treiber mit, den ein Browser
+    ansprechen darf. Das Programm <b>Zadig</b> weist ihn in einer Minute zu.</p>
+    <ol>
+      <li><a href="https://zadig.akeo.ie" style="color:var(--signal)">zadig.akeo.ie</a>
+        öffnen und herunterladen — eine einzelne Datei, keine Installation</li>
+      <li>Gerät im Aktualisierungsmodus anstecken (Ring blinkt rot)</li>
+      <li>Zadig starten, im Menü <b>Options → List All Devices</b> anhaken</li>
+      <li>In der oberen Liste <b>STM32 BOOTLOADER</b> auswählen. Zur Kontrolle steht
+        darunter <code>USB ID 0483 DF11</code></li>
+      <li>Rechts daneben <b>WinUSB</b> einstellen — <b>nicht</b> libusbK und nicht
+        libusb-win32. Nur WinUSB funktioniert im Browser.</li>
+      <li><b>Replace Driver</b> klicken, kurz warten</li>
+      <li>Diese Seite neu laden und nochmal <b>Gerät suchen</b></li>
+    </ol>
+    <p>Das ist einmalig. Der Treiber gilt danach für dieses Gerät dauerhaft, und
+    dfu-util funktioniert weiterhin.</p>
+  </div></details>`;
+  if(os==='linux') return `
+  <details id="hilfeTreiber"><summary>Linux: Zugriffsregel anlegen</summary><div class="inhalt">
+    <p>Kein Treiber nötig, nur eine Regel — sonst gehört das Gerät root und der Browser
+    kommt nicht heran.</p>
+    <div class="befehl">
+      <code>echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", MODE="0666"' | sudo tee /etc/udev/rules.d/50-stm32-dfu.rules &amp;&amp; sudo udevadm control --reload-rules</code>
+      <button class="leise kopieren" data-text='echo &apos;SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", MODE="0666"&apos; | sudo tee /etc/udev/rules.d/50-stm32-dfu.rules &amp;&amp; sudo udevadm control --reload-rules'>Kopieren</button>
+    </div>
+    <p>Danach Gerät einmal abziehen und wieder anstecken.</p>
+  </div></details>`;
+  return '';
+}
+
+/* ---------- Farbstreifen aus der echten Tabelle ---------- */
 function streifenZeichnen(){
-  const roh = Uint8Array.from(atob(DATEN.blobs[1].b64), c => c.charCodeAt(0));
-  const sicht = new DataView(roh.buffer);
-  const anzahl = sicht.getUint32(8, true);
-  const start = 0x40;
-  const ziel = $('#streifen');
-  for(let i = 0; i < anzahl; i++){
-    const rgb = sicht.getUint16(start + i*10 + 8, true);
-    const r = ((rgb >> 11) & 0x1f) * 255 / 31;
-    const g = ((rgb >> 5)  & 0x3f) * 255 / 63;
-    const b = ( rgb        & 0x1f) * 255 / 31;
-    const d = document.createElement('div');
-    d.style.background = `rgb(${r|0},${g|0},${b|0})`;
+  const roh=Uint8Array.from(atob(DATEN.blobs[1].b64),c=>c.charCodeAt(0));
+  const v=new DataView(roh.buffer);
+  const anzahl=v.getUint32(8,true), start=0x40, ziel=$('#streifen');
+  for(let i=0;i<anzahl;i++){
+    const rgb=v.getUint16(start+i*10+8,true);
+    const r=((rgb>>11)&0x1f)*255/31, g=((rgb>>5)&0x3f)*255/63, b=(rgb&0x1f)*255/31;
+    const d=document.createElement('div');
+    d.style.background=`rgb(${r|0},${g|0},${b|0})`;
     ziel.appendChild(d);
   }
   return anzahl;
 }
-
-/* ====== Änderungsübersicht ====== */
 function karteFuellen(){
-  const t = $('#karte');
+  const t=$('#karte');
   for(const p of DATEN.patches)
+    t.insertAdjacentHTML('beforeend',`<tr><td>${hex(p.addr)}</td><td>${p.was}</td><td>4 B</td></tr>`);
+  for(const b of DATEN.blobs)
     t.insertAdjacentHTML('beforeend',
-      `<tr><td>${hex(p.addr)}</td><td>${p.was}</td><td>4 B</td></tr>`);
-  for(const b of DATEN.blobs){
-    const n = atob(b.b64).length;
-    t.insertAdjacentHTML('beforeend',
-      `<tr><td>${hex(b.addr)}</td><td>${b.name}</td><td>${n} B</td></tr>`);
-  }
+      `<tr><td>${hex(b.addr)}</td><td>${b.name}</td><td>${atob(b.b64).length} B</td></tr>`);
 }
 
-/* ====== DfuSe über WebUSB ====== */
-const DNLOAD=1, UPLOAD=2, GETSTATUS=3, CLRSTATUS=4, ABORT=6;
-let geraet = null, schnittstelle = 0, blockgroesse = 1024, original = null;
+/* ---------- DfuSe über WebUSB ---------- */
+const DNLOAD=1,UPLOAD=2,GETSTATUS=3,CLRSTATUS=4,ABORT=6;
+let geraet=null, schnittstelle=0, blockgroesse=1024, original=null, laeuft=false;
 
-const schlafen = ms => new Promise(r => setTimeout(r, ms));
-
-async function raus(befehl, wert, daten){
-  const r = await geraet.controlTransferOut(
-    {requestType:'class', recipient:'interface', request:befehl, value:wert, index:schnittstelle},
-    daten);
-  if(r.status !== 'ok') throw new Error('Steuerbefehl abgewiesen: ' + befehl);
+async function raus(befehl,wert,daten){
+  const r=await geraet.controlTransferOut(
+    {requestType:'class',recipient:'interface',request:befehl,value:wert,index:schnittstelle},daten);
+  if(r.status!=='ok') throw new Error('Gerät hat den Befehl abgewiesen ('+r.status+')');
   return r;
 }
-async function rein(befehl, wert, laenge){
-  const r = await geraet.controlTransferIn(
-    {requestType:'class', recipient:'interface', request:befehl, value:wert, index:schnittstelle},
-    laenge);
-  if(r.status !== 'ok') throw new Error('Lesebefehl abgewiesen: ' + befehl);
+async function rein(befehl,wert,laenge){
+  const r=await geraet.controlTransferIn(
+    {requestType:'class',recipient:'interface',request:befehl,value:wert,index:schnittstelle},laenge);
+  if(r.status!=='ok') throw new Error('Gerät antwortet nicht ('+r.status+')');
   return new Uint8Array(r.data.buffer);
 }
 async function status(){
-  const s = await rein(GETSTATUS, 0, 6);
-  return {fehler:s[0], warten:s[1] | (s[2]<<8) | (s[3]<<16), zustand:s[4]};
+  const s=await rein(GETSTATUS,0,6);
+  return {fehler:s[0],warten:s[1]|(s[2]<<8)|(s[3]<<16),zustand:s[4]};
 }
+const FEHLERTEXT={1:'Datei passt nicht zum Gerät',2:'Schreiben verweigert',
+  3:'Löschen fehlgeschlagen',4:'Prüfen des Löschvorgangs fehlgeschlagen',
+  5:'Schreiben fehlgeschlagen',6:'Prüfen des Schreibvorgangs fehlgeschlagen',
+  7:'Adresse außerhalb des Speichers',8:'Unerwartetes Ende',9:'Firmware unbrauchbar',
+  10:'Herstellerfehler',11:'Unerwarteter USB-Zustand',12:'Unerwarteter Zustand',
+  15:'Unbekannter Fehler'};
 async function warten(){
-  let s = await status();
-  while(s.zustand === 4 || s.zustand === 3){         // dfuDNBUSY / dfuDNLOAD-SYNC
-    await schlafen(Math.max(s.warten, 1));
-    s = await status();
+  let s=await status();
+  while(s.zustand===4||s.zustand===3){ await schlafen(Math.max(s.warten,1)); s=await status(); }
+  if(s.fehler!==0){
+    const t=FEHLERTEXT[s.fehler]||('Code '+s.fehler);
+    await raus(CLRSTATUS,0,new Uint8Array());
+    throw new Error('Gerät meldet: '+t);
   }
-  if(s.fehler !== 0){ await raus(CLRSTATUS, 0, new Uint8Array()); 
-    throw new Error('Gerät meldet Fehler ' + s.fehler); }
   return s;
 }
-async function abbrechen(){ await raus(ABORT, 0, new Uint8Array()); await status(); }
-
+async function abbrechen(){ await raus(ABORT,0,new Uint8Array()); await status(); }
 async function zurueckAufLeerlauf(){
-  // Nach jedem Sonderbefehl steht das Gerät in dfuDNLOAD-IDLE. Von dort sind
-  // weder Lese- noch neue Schreibbefehle gültig — erst ABORT bringt es zurück.
-  await raus(ABORT, 0, new Uint8Array());
-  const s = await status();
-  if(s.zustand !== 2) throw new Error('Gerät bleibt in Zustand ' + s.zustand + ' statt Leerlauf');
+  await raus(ABORT,0,new Uint8Array());
+  const s=await status();
+  if(s.zustand!==2) throw new Error('Gerät bleibt in Zustand '+s.zustand+' statt Leerlauf');
 }
 async function zeigerSetzen(adresse){
-  const b = new Uint8Array(5); b[0] = 0x21;
-  new DataView(b.buffer).setUint32(1, adresse, true);
-  await raus(DNLOAD, 0, b); await warten();
-  await zurueckAufLeerlauf();
+  const b=new Uint8Array(5); b[0]=0x21;
+  new DataView(b.buffer).setUint32(1,adresse,true);
+  await raus(DNLOAD,0,b); await warten(); await zurueckAufLeerlauf();
 }
 async function seiteLoeschen(adresse){
-  if(adresse >= GRENZE) throw new Error('Sperre: ' + hex(adresse) + ' liegt im geschützten Bereich');
-  const b = new Uint8Array(5); b[0] = 0x41;
-  new DataView(b.buffer).setUint32(1, adresse, true);
-  await raus(DNLOAD, 0, b); await warten();
-  await zurueckAufLeerlauf();
+  if(adresse>=GRENZE) throw new Error('Sicherung greift: '+hex(adresse)+' liegt im geschützten Bereich');
+  const b=new Uint8Array(5); b[0]=0x41;
+  new DataView(b.buffer).setUint32(1,adresse,true);
+  await raus(DNLOAD,0,b); await warten(); await zurueckAufLeerlauf();
 }
-
-async function lesen(adresse, laenge, melde){
+async function lesen(adresse,laenge,melde){
   await abbrechen(); await zeigerSetzen(adresse);
-  const aus = new Uint8Array(laenge);
-  let gelesen = 0, block = 2;
-  while(gelesen < laenge){
-    const stueck = await rein(UPLOAD, block++, Math.min(blockgroesse, laenge - gelesen));
-    if(stueck.length === 0) break;
-    aus.set(stueck, gelesen); gelesen += stueck.length;
-    if(melde) melde(gelesen / laenge);
+  const aus=new Uint8Array(laenge); let gelesen=0,block=2;
+  while(gelesen<laenge){
+    const s=await rein(UPLOAD,block++,Math.min(blockgroesse,laenge-gelesen));
+    if(s.length===0) break;
+    aus.set(s,gelesen); gelesen+=s.length;
+    if(melde) melde(gelesen/laenge,gelesen);
   }
-  if(gelesen !== laenge) throw new Error('Nur ' + gelesen + ' von ' + laenge + ' Byte gelesen');
+  if(gelesen!==laenge) throw new Error('Nur '+gelesen+' von '+laenge+' Byte gelesen');
   return aus;
 }
-
-async function schreiben(adresse, daten, melde){
-  if(adresse + daten.length > GRENZE)
-    throw new Error('Sperre: Schreibbereich reicht über ' + hex(GRENZE) + ' hinaus');
-  sag('Lösche ' + Math.ceil(daten.length / SEITE) + ' Seiten …');
-  for(let a = adresse; a < adresse + daten.length; a += SEITE){
-    await seiteLoeschen(a);
-    if(melde) melde(0.35 * (a - adresse) / daten.length);
+async function schreiben(adresse,daten,melde){
+  if(adresse+daten.length>GRENZE)
+    throw new Error('Sicherung greift: Bereich reicht über '+hex(GRENZE)+' hinaus');
+  const seiten=Math.ceil(daten.length/SEITE);
+  sag('Lösche '+seiten+' Speicherseiten …');
+  let n=0;
+  for(let a=adresse;a<adresse+daten.length;a+=SEITE){
+    await seiteLoeschen(a); n++;
+    if(melde) melde(0.35*n/seiten,'Löschen '+n+'/'+seiten);
   }
   await abbrechen(); await zeigerSetzen(adresse);
-  let geschrieben = 0, block = 2;
-  while(geschrieben < daten.length){
-    const stueck = daten.subarray(geschrieben, geschrieben + blockgroesse);
-    await raus(DNLOAD, block++, stueck); await warten();
-    geschrieben += stueck.length;
-    if(melde) melde(0.35 + 0.65 * geschrieben / daten.length);
+  sag('Schreibe '+daten.length+' Byte …');
+  let g=0,block=2;
+  while(g<daten.length){
+    const s=daten.subarray(g,g+blockgroesse);
+    await raus(DNLOAD,block++,s); await warten();
+    g+=s.length;
+    if(melde) melde(0.35+0.65*g/daten.length,'Schreiben '+g+'/'+daten.length+' Byte');
   }
 }
 
-/* ====== Ablauf ====== */
-$('#btnVerbinden').onclick = async () => {
+/* ---------- Ablauf ---------- */
+function fehlerhilfe(e){
+  const m=(e&&e.message)||String(e);
+  if(/transfer error|Gerät antwortet nicht|abgewiesen/i.test(m)){
+    tipp('Das passiert fast immer, wenn das Gerät aus dem Aktualisierungsmodus gefallen ist.');
+    tipp('USB abziehen, Gerät neu in den Modus bringen (Schritt 1), Seite neu laden.');
+  }else if(/NetworkError|disconnect/i.test(m)){
+    tipp('Die Verbindung ist abgerissen. Kabel prüfen, möglichst direkt am Rechner anstecken.');
+  }
+}
+
+$('#btnVerbinden').onclick=async()=>{
   try{
-    geraet = await navigator.usb.requestDevice({filters:[{vendorId:0x0483, productId:0xdf11}]});
+    sag('Suche nach Geräten im Aktualisierungsmodus …');
+    geraet=await navigator.usb.requestDevice({filters:[{vendorId:0x0483,productId:0xdf11}]});
     await geraet.open();
     if(!geraet.configuration) await geraet.selectConfiguration(1);
-    const s = geraet.configuration.interfaces[0];
-    schnittstelle = s.interfaceNumber;
+    const s=geraet.configuration.interfaces[0];
+    schnittstelle=s.interfaceNumber;
     await geraet.claimInterface(schnittstelle);
-    await geraet.selectAlternateInterface(schnittstelle, 0);
+    await geraet.selectAlternateInterface(schnittstelle,0);
     await abbrechen();
-    sag('Verbunden: ' + (geraet.productName || 'DFU-Gerät') +
-        '  ·  Seriennummer ' + (geraet.serialNumber || 'unbekannt'), 'ok');
+
+    const bez=(s.alternates[0]&&s.alternates[0].interfaceName)||'';
+    sag('Verbunden: '+(geraet.productName||'DFU-Gerät'),'ok');
+    sag('Seriennummer '+(geraet.serialNumber||'unbekannt'));
+    if(bez) sag('Speicherbeschreibung: '+bez);
+    if(bez && !/Internal Flash/i.test(bez))
+      tipp('Das sieht nicht nach dem internen Flash aus — bitte melden, bevor du weitermachst.');
+
+    $('#hilfeFinden').open=false;
+    $('#btnErneut').style.display='none';
     schritt('#s1','fertig'); schritt('#s2','aktiv');
-    $('#btnSichern').disabled = false; $('#btnZurueck').disabled = false;
-  }catch(e){ sag('Verbinden hat nicht geklappt: ' + e.message, 'no');
-           sag('War das Gerät vorher aus, hast du fünf Sekunden gewartet, und hat der Ring rot geblinkt? Ohne das findet der Browser nichts.'); }
-};
-
-$('#btnSichern').onclick = async () => {
-  $('#btnSichern').disabled = true;
-  try{
-    sag('Lese ' + APP_LAENGE + ' Byte ab ' + hex(APP_START) + ' …');
-    original = await lesen(APP_START, APP_LAENGE, a => fort('#fortSichern', a));
-    const name = 'cr4501_original_' + (geraet.serialNumber || 'gerat') + '_' +
-                 new Date().toISOString().slice(0,10) + '.bin';
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([original], {type:'application/octet-stream'}));
-    a.download = name; a.click();
-    sag('Gesichert als ' + name, 'ok');
-    sag('Heb die Datei gut auf — sie ist dein Rückweg.');
-    schritt('#s2','fertig'); schritt('#s3','aktiv');
-    $('#btnSchreiben').disabled = false;
-  }catch(e){ sag('Auslesen hat nicht geklappt: ' + e.message, 'no');
-           sag('Gerät einmal aus- und wieder in den Aktualisierungsmodus bringen, dann nochmal.'); $('#btnSichern').disabled = false; }
-};
-
-$('#btnSchreiben').onclick = async () => {
-  $('#btnSchreiben').disabled = true;
-  try{
-    if(!original) throw new Error('Erst sichern');
-    const neu = new Uint8Array(original);          // Kopie, Original bleibt unberührt
-    const bytes = s => Uint8Array.from(s.match(/../g).map(h => parseInt(h,16)));
-
-    sag('Prüfe die Änderungsstellen …');
-    for(const p of DATEN.patches){
-      const off = p.addr - APP_START, soll = bytes(p.alt);
-      const ist = neu.subarray(off, off + 4);
-      if(!soll.every((v,i) => v === ist[i]))
-        throw new Error('Bei ' + hex(p.addr) + ' steht ' +
-          [...ist].map(b=>b.toString(16).padStart(2,'0')).join('') +
-          ' statt ' + p.alt + '. Diese Firmware-Version kenne ich nicht. Bitte melde dich, dann schaue ich sie mir an.');
-    }
-    for(const b of DATEN.blobs){
-      const roh = Uint8Array.from(atob(b.b64), c => c.charCodeAt(0));
-      const off = b.addr - APP_START;
-      if(!neu.subarray(off, off + roh.length).every(v => v === 0xff))
-        throw new Error('Bei ' + hex(b.addr) + ' liegt schon etwas. Vermutlich ist die Erweiterung bereits drauf.');
-    }
-    sag('Alles wie erwartet. Es kann losgehen.', 'ok');
-
-    for(const p of DATEN.patches) neu.set(bytes(p.neu), p.addr - APP_START);
-    for(const b of DATEN.blobs)
-      neu.set(Uint8Array.from(atob(b.b64), c => c.charCodeAt(0)), b.addr - APP_START);
-
-    await schreiben(APP_START, neu, a => fort('#fortSchreiben', a));
-    sag('Geschrieben. Lese zur Kontrolle zurück …');
-    const probe = await lesen(APP_START, APP_LAENGE, null);
-    let abweichung = -1;
-    for(let i = 0; i < neu.length; i++) if(probe[i] !== neu[i]){ abweichung = i; break; }
-    if(abweichung >= 0) throw new Error('Rücklesen weicht ab bei ' + hex(APP_START + abweichung));
-    fort('#fortSchreiben', 1);
-    sag('Passt. Gerät neu starten und eine Messung machen.', 'ok');
-    sag('Mit der Eingabetaste wechselst du zwischen den Ansichten.');
-    schritt('#s3','fertig');
+    $('#btnSichern').disabled=false; $('#btnZurueck').disabled=false;
+    $('#btnVerbinden').disabled=true;
   }catch(e){
-    sag('Abgebrochen: ' + e.message, 'no');
-    sag('Solange oben kein "Lösche …" steht, ist am Gerät nichts passiert.');
-    $('#btnSchreiben').disabled = false;
+    if(e && e.name==='NotFoundError'){
+      sag('Kein Gerät ausgewählt.','no');
+      tipp('War die Liste leer? Dann klapp den Kasten „Es steht nichts in der Liste" auf.');
+      $('#hilfeFinden').open=true;
+    }else{
+      sag('Verbinden hat nicht geklappt: '+((e&&e.message)||e),'no');
+      fehlerhilfe(e);
+    }
+    $('#btnErneut').style.display='inline-block';
   }
 };
+$('#btnErneut').onclick=()=>$('#btnVerbinden').click();
 
-$('#btnZurueck').onclick = () => $('#dateiOriginal').click();
-$('#dateiOriginal').onchange = async ev => {
-  const datei = ev.target.files[0]; if(!datei) return;
+$('#btnSichern').onclick=async()=>{
+  if(laeuft) return; laeuft=true; $('#btnSichern').disabled=true;
   try{
-    const daten = new Uint8Array(await datei.arrayBuffer());
-    if(daten.length !== APP_LAENGE)
-      throw new Error('Datei ist ' + daten.length + ' Byte groß, erwartet werden ' + APP_LAENGE);
-    sag('Spiele ' + datei.name + ' ein …');
-    await schreiben(APP_START, daten, a => fort('#fortZurueck', a));
-    fort('#fortZurueck', 1);
-    sag('Original ist wieder drauf.', 'ok');
-  }catch(e){ sag('Wiederherstellen hat nicht geklappt: ' + e.message, 'no'); }
-  ev.target.value = '';
+    sag('Lese '+APP_LAENGE+' Byte ab '+hex(APP_START)+' …');
+    original=await lesen(APP_START,APP_LAENGE,(a,g)=>{
+      fort('#fortSichern',a); stand('#standSichern',g+' / '+APP_LAENGE+' Byte');
+    });
+    const name='cr4501_original_'+(geraet.serialNumber||'geraet')+'_'+
+      new Date().toISOString().slice(0,10)+'.bin';
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([original],{type:'application/octet-stream'}));
+    a.download=name; a.click();
+    sag('Gesichert als '+name,'ok');
+    tipp('Heb die Datei gut auf — sie ist dein Rückweg.');
+    stand('#standSichern','fertig · '+APP_LAENGE+' Byte');
+    schritt('#s2','fertig'); schritt('#s3','aktiv');
+    $('#btnSchreiben').disabled=false;
+  }catch(e){
+    sag('Auslesen hat nicht geklappt: '+((e&&e.message)||e),'no');
+    fehlerhilfe(e); $('#btnSichern').disabled=false;
+  }
+  laeuft=false;
 };
 
-/* ====== Start ====== */
-const anzahl = streifenZeichnen();
+$('#btnSchreiben').onclick=async()=>{
+  if(laeuft) return; laeuft=true; $('#btnSchreiben').disabled=true;
+  let angefasst=false;
+  try{
+    if(!original) throw new Error('Erst sichern');
+    const neu=new Uint8Array(original);
+    const bytes=s=>Uint8Array.from(s.match(/../g).map(h=>parseInt(h,16)));
+
+    sag('Prüfe die sieben Änderungsstellen …');
+    for(const p of DATEN.patches){
+      const off=p.addr-APP_START, soll=bytes(p.alt), ist=neu.subarray(off,off+4);
+      if(!soll.every((v,i)=>v===ist[i])){
+        const g=[...ist].map(b=>b.toString(16).padStart(2,'0')).join('');
+        if(g===p.neu) throw new Error('Die Erweiterung ist bereits auf dem Gerät.');
+        throw new Error('Bei '+hex(p.addr)+' steht '+g+' statt '+p.alt+
+          ' — diese Firmware-Version kenne ich nicht.');
+      }
+    }
+    for(const b of DATEN.blobs){
+      const roh=Uint8Array.from(atob(b.b64),c=>c.charCodeAt(0));
+      const off=b.addr-APP_START;
+      if(!neu.subarray(off,off+roh.length).every(v=>v===0xff))
+        throw new Error('Bei '+hex(b.addr)+' liegt schon etwas — vermutlich ist die Erweiterung drauf.');
+    }
+    sag('Alles wie erwartet. Es kann losgehen.','ok');
+
+    for(const p of DATEN.patches) neu.set(bytes(p.neu),p.addr-APP_START);
+    for(const b of DATEN.blobs)
+      neu.set(Uint8Array.from(atob(b.b64),c=>c.charCodeAt(0)),b.addr-APP_START);
+
+    angefasst=true;
+    await schreiben(APP_START,neu,(a,t)=>{fort('#fortSchreiben',a); stand('#standSchreiben',t);});
+    sag('Geschrieben. Lese zur Kontrolle zurück …');
+    stand('#standSchreiben','Kontrolle läuft …');
+    const probe=await lesen(APP_START,APP_LAENGE,null);
+    let ab=-1;
+    for(let i=0;i<neu.length;i++) if(probe[i]!==neu[i]){ ab=i; break; }
+    if(ab>=0) throw new Error('Rücklesen weicht ab bei '+hex(APP_START+ab));
+    fort('#fortSchreiben',1); stand('#standSchreiben','fertig und geprüft');
+    sag('Passt. Alle '+APP_LAENGE+' Byte stimmen überein.','ok');
+    tipp('Gerät neu starten, eine Messung machen, mit der Eingabetaste durch die Ansichten.');
+    schritt('#s3','fertig');
+  }catch(e){
+    sag('Abgebrochen: '+((e&&e.message)||e),'no');
+    if(!angefasst) tipp('Am Gerät wurde nichts verändert — der Abbruch kam vor dem ersten Schreibbefehl.');
+    else{ tipp('Es wurde bereits geschrieben. Spiel jetzt in Schritt 4 deine Sicherung zurück.');
+          $('#hilfeAllgemein').open=true; }
+    fehlerhilfe(e);
+    $('#btnSchreiben').disabled=false;
+  }
+  laeuft=false;
+};
+
+$('#btnZurueck').onclick=()=>$('#dateiOriginal').click();
+$('#dateiOriginal').onchange=async ev=>{
+  const datei=ev.target.files[0]; if(!datei) return;
+  if(laeuft) return; laeuft=true;
+  try{
+    const daten=new Uint8Array(await datei.arrayBuffer());
+    if(daten.length!==APP_LAENGE)
+      throw new Error(datei.name+' ist '+daten.length+' Byte groß, erwartet werden '+APP_LAENGE);
+    sag('Spiele '+datei.name+' ein …');
+    await schreiben(APP_START,daten,(a,t)=>{fort('#fortZurueck',a); stand('#standZurueck',t);});
+    fort('#fortZurueck',1); stand('#standZurueck','fertig');
+    sag('Original ist wieder drauf.','ok');
+  }catch(e){
+    sag('Wiederherstellen hat nicht geklappt: '+((e&&e.message)||e),'no');
+    fehlerhilfe(e);
+  }
+  ev.target.value=''; laeuft=false;
+};
+
+/* ---------- Start ---------- */
+const anzahl=streifenZeichnen();
 karteFuellen();
-document.querySelector('.unterzeile').insertAdjacentHTML('beforeend',
+$('.unterzeile').insertAdjacentHTML('beforeend',
   ` <b style="color:var(--schrift)">${anzahl} RAL-Classic-Töne</b> sind eingemessen dabei.`);
-schritt('#s1','aktiv');
-if(!('usb' in navigator)){
-  $('#unmoeglich').style.display = 'block';
-  $('#btnVerbinden').disabled = true;
-  sag('Dieser Browser kann kein WebUSB. Mit Chrome oder Edge klappt es.', 'no');
+const {s:SYS}=pruefungAnzeigen();
+const hilfe=treiberhilfe(SYS.os);
+if(hilfe) $('#hilfeFinden').insertAdjacentHTML('afterend',hilfe);
+document.body.addEventListener('click',ev=>{
+  const b=ev.target.closest('.kopieren'); if(!b) return;
+  navigator.clipboard.writeText(b.dataset.text).then(()=>{
+    const alt=b.textContent; b.textContent='Kopiert'; setTimeout(()=>b.textContent=alt,1400);
+  });
+});
+if('usb' in navigator){
+  navigator.usb.addEventListener('disconnect',ev=>{
+    if(geraet && ev.device===geraet){
+      sag('Gerät wurde getrennt.','no');
+      tipp('Das ist nach einem Neustart des Geräts normal. Zum Weitermachen Seite neu laden.');
+    }
+  });
 }
+schritt('#s1','aktiv');
+sag('Bereit.');
 </script>
 </body>
 </html>
