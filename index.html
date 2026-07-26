@@ -502,15 +502,18 @@ async function lesen(adr,len,melde){
     if(melde) melde(g/len,g);
   }
   if(g!==len) throw new Error('Nur '+g+' von '+len+' Byte gelesen');
+  await zurueckAufLeerlauf();   // sonst bleibt das Gerät in dfuUPLOAD-IDLE
   return aus;
 }
+let etwasVeraendert=false;
 async function schreiben(adr,daten,melde){
   if(adr+daten.length>GRENZE) throw new Error('Sicherung greift: Bereich reicht über '+hex(GRENZE)+' hinaus');
+  await zurueckAufLeerlauf();   // egal woher wir kommen
   const seiten=Math.ceil(daten.length/SEITE);
   sag('Lösche '+seiten+' Speicherseiten …');
   let n=0;
   for(let a=adr;a<adr+daten.length;a+=SEITE){
-    await seiteLoeschen(a); n++;
+    await seiteLoeschen(a); etwasVeraendert=true; n++;
     if(melde) melde(.35*n/seiten,'Löschen '+n+'/'+seiten);
   }
   await abbrechen(); await zeigerSetzen(adr);
@@ -587,7 +590,6 @@ $('#btnSichern').onclick=async()=>{
 
 $('#btnSchreiben').onclick=async()=>{
   if(laeuft) return; laeuft=true; $('#btnSchreiben').disabled=true;
-  let angefasst=false;
   try{
     if(!original) throw new Error('Erst sichern');
     const neu=new Uint8Array(original);
@@ -610,7 +612,7 @@ $('#btnSchreiben').onclick=async()=>{
     sag('Alles wie erwartet.','ok');
     for(const p of DATEN.patches) neu.set(bytes(p.neu),p.addr-APP_START);
     for(const b of DATEN.blobs) neu.set(Uint8Array.from(atob(b.b64),c=>c.charCodeAt(0)),b.addr-APP_START);
-    angefasst=true;
+    etwasVeraendert=false;
     await schreiben(APP_START,neu,(a,t)=>{fort('#fortSchreiben',a); stand('#standSchreiben',t);});
     sag('Geschrieben. Lese zur Kontrolle zurück …');
     stand('#standSchreiben','Kontrolle läuft …');
@@ -623,9 +625,12 @@ $('#btnSchreiben').onclick=async()=>{
     zeigeSeite(4);
   }catch(e){
     sag('Abgebrochen: '+((e&&e.message)||e),'no');
-    if(!angefasst) tipp('Am Gerät wurde nichts verändert — der Abbruch kam vor dem ersten Schreibbefehl.');
-    else tipp('Es wurde schon geschrieben. Spiel deine Sicherung zurück (Seite 4).');
-    fehlerhilfe(e); $('#btnSchreiben').disabled=false;
+    if(!etwasVeraendert) tipp('Am Gerät wurde nichts verändert — der Abbruch kam vor dem ersten Löschbefehl.');
+    else tipp('Es wurde bereits geschrieben. Spiel deine Sicherung zurück (Seite 4).');
+    fehlerhilfe(e);
+    try{ await abbrechen(); sag('Gerät in den Leerlauf zurückgeholt — ein neuer Versuch ist möglich.'); }
+    catch(e2){ tipp('Das Gerät reagiert nicht mehr. USB abziehen und neu in den Modus bringen.'); }
+    $('#btnSchreiben').disabled=false;
   }
   laeuft=false;
 };
@@ -649,7 +654,9 @@ $('#dateiOriginal').onchange=async ev=>{
     alert('Fertig — das Original ist wieder auf dem Gerät.');
   }catch(e){
     sag('Wiederherstellen hat nicht geklappt: '+((e&&e.message)||e),'no');
-    fehlerhilfe(e); alert('Hat nicht geklappt: '+((e&&e.message)||e));
+    fehlerhilfe(e);
+    try{ await abbrechen(); }catch(e2){}
+    alert('Hat nicht geklappt: '+((e&&e.message)||e));
   }
   ev.target.value=''; laeuft=false;
 };
