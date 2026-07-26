@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CR4501 · Welches RAL ist das?</title>
+<title>Colorimeter CR4501 RAL Hack</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--grafit:#16181c;--grafit-hell:#1e2127;--linie:#31353d;
   --schrift:#e7e9ec;--gedaempft:#8f959f;
-  --signal:#f7d117;--warn:#e8622a;--gut:#3fbf7f;--info:#5aa9e6;--rand:6px}
+  --signal:#f7d117;--warn:#e8622a;--gut:#3fbf7f;--rand:6px}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{background:var(--grafit);color:var(--schrift);
-  font-family:'Barlow',system-ui,sans-serif;font-size:16px;line-height:1.55;
+  font-family:'Barlow',system-ui,sans-serif;font-size:16px;line-height:1.6;
   -webkit-font-smoothing:antialiased}
 .huelle{max-width:720px;margin:0 auto;padding:0 20px 80px}
 code,kbd{font-family:'JetBrains Mono',monospace;font-size:.88em}
@@ -24,37 +24,43 @@ a{color:var(--signal)}
 #streifen div{flex:1 1 auto;min-width:0}
 @media(max-width:640px){#streifen{height:44px}}
 
-header{padding:34px 0 22px}
+#sprachwahl{display:flex;justify-content:flex-end;gap:4px;padding:14px 0 0}
+#sprachwahl button{background:transparent;border:1px solid var(--linie);color:var(--gedaempft);
+  padding:4px 11px;font-size:12px;letter-spacing:.06em}
+#sprachwahl button.an{background:var(--signal);border-color:var(--signal);color:#101215}
+
+header{padding:14px 0 22px}
 .geraet{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.09em;
   color:var(--gedaempft);text-transform:uppercase;margin:0 0 12px}
 h1{font-family:'Barlow Condensed',sans-serif;font-weight:700;
   font-size:clamp(30px,5.5vw,46px);line-height:1;letter-spacing:-.01em;
   margin:0;text-transform:uppercase}
 h1 em{font-style:normal;color:var(--signal)}
+#intro{color:var(--gedaempft);margin:16px 0 0}
+#intro b{color:var(--schrift)}
 
-/* Fortschrittsleiste der Seiten */
-#leiste{display:flex;gap:6px;margin:22px 0 0;border-bottom:1px solid var(--linie);
-  padding-bottom:22px}
+#leiste{display:flex;gap:6px;margin:22px 0 0;border-bottom:1px solid var(--linie);padding-bottom:22px}
 #leiste div{flex:1;height:3px;background:var(--grafit-hell);border-radius:2px}
 #leiste div.erledigt{background:var(--gut)}
 #leiste div.hier{background:var(--signal)}
 #leisteText{font-family:'JetBrains Mono',monospace;font-size:11.5px;
   color:var(--gedaempft);margin:10px 0 0;letter-spacing:.05em}
 
-.seite{display:none;padding:28px 0 0}
+.seite{display:none;padding:26px 0 0}
 .seite.sichtbar{display:block}
-.seite h2{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+h2{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
   letter-spacing:.02em;font-size:26px;margin:0 0 14px;font-weight:600}
-.seite p{margin:0 0 14px;color:var(--gedaempft)}
-.seite p b{color:var(--schrift)}
-.seite ol,.seite ul{color:var(--gedaempft);padding-left:22px;margin:0 0 16px}
-.seite li{margin:7px 0}
-.seite li b{color:var(--schrift)}
+h3{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+  letter-spacing:.02em;font-size:19px;margin:32px 0 10px;font-weight:600}
+p{margin:0 0 14px;color:var(--gedaempft)}
+p b{color:var(--schrift)}
+ol,ul{color:var(--gedaempft);padding-left:22px;margin:0 0 16px}
+li{margin:7px 0} li b{color:var(--schrift)}
 
 .weg{display:grid;grid-template-columns:26px 1fr;gap:12px;margin:0 0 14px;align-items:start}
 .weg span{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
   color:#101215;background:var(--signal);border-radius:3px;text-align:center;
-  line-height:20px;height:20px;margin-top:3px}
+  line-height:20px;height:20px;margin-top:4px}
 .weg p{margin:0}
 
 figure.bild{margin:0 0 18px;border:1px solid var(--linie);border-radius:var(--rand);
@@ -62,10 +68,10 @@ figure.bild{margin:0 0 18px;border:1px solid var(--linie);border-radius:var(--ra
 figure.bild img{display:block;width:100%;height:auto}
 figure.bild figcaption{padding:9px 14px;font-size:13.5px;color:var(--gedaempft);
   border-top:1px solid var(--linie)}
+figure.bild figcaption b{color:var(--schrift)}
 
 .kasten{border-left:2px solid var(--signal);padding:2px 0 2px 16px;margin:0 0 18px}
 .kasten.achtung{border-color:var(--warn)}
-.kasten p{margin:0 0 6px}
 .kasten p:last-child{margin:0}
 
 button{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
@@ -91,7 +97,7 @@ button:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
   padding:13px 15px;max-height:220px;overflow:auto;white-space:pre-wrap;
   color:var(--gedaempft);margin:18px 0 0}
 #protokoll b{color:var(--schrift);font-weight:400}
-#protokoll .ok{color:var(--gut)} #protokoll .no{color:var(--warn)} #protokoll .tipp{color:var(--info)}
+#protokoll .ok{color:var(--gut)} #protokoll .no{color:var(--warn)} #protokoll .tipp{color:#5aa9e6}
 
 details{border:1px solid var(--linie);border-radius:var(--rand);margin:14px 0 0}
 summary{cursor:pointer;padding:11px 15px;font-family:'Barlow Condensed',sans-serif;
@@ -121,170 +127,73 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
 <div id="streifen" aria-hidden="true"></div>
 
 <div class="huelle">
+<div id="sprachwahl">
+  <button id="spDe" class="an">Deutsch</button><button id="spEn">English</button>
+</div>
+
 <header>
   <p class="geraet">3nh CR4501 · Color Reader</p>
-  <h1>Welches RAL<br><em>ist das?</em></h1>
+  <h1 id="titel"></h1>
+  <p id="intro"></p>
   <div id="leiste"><div></div><div></div><div></div><div></div></div>
   <p id="leisteText"></p>
 </header>
 
-<!-- ============ 1 · Aktualisierungsmodus ============ -->
 <section class="seite" id="seite1">
-  <h2>Gerät in den Aktualisierungsmodus</h2>
   <div id="browserWarnung"></div>
-
-  <p><b>Zuerst ausschalten:</b> Messtaste lange gedrückt halten, bis das Gerät abschaltet.
-  Danach <b>mindestens fünf Sekunden</b> nichts anfassen — ohne diese Pause reagiert es
-  nicht.</p>
-
-  <p>Dann einer der beiden Wege:</p>
-  <div class="weg"><span>A</span><p>Messtaste erneut lange halten, bis der Ring um die
-    Taste <b>rot blinkt</b>. Sofort loslassen.</p></div>
-  <div class="weg"><span>B</span><p>Messtaste und Eingabetaste zusammen — die Wippe dafür
-    in der Mitte hineindrücken. Das rote Blinken kommt sofort, gleich loslassen.</p></div>
-
-  <figure class="bild"><img src="bilder/dfu-druecken.jpg" alt="Finger hält die Messtaste, der Ring leuchtet rot"
-    onerror="this.closest('figure').remove()">
-    <figcaption>Weg A: Messtaste halten — sobald der Ring rot wird, sofort loslassen.</figcaption></figure>
-
-  <figure class="bild"><img src="bilder/dfu-modus.jpg" alt="Gerät mit rot leuchtendem Ring um die Messtaste"
-    onerror="this.closest('figure').remove()">
-    <figcaption>So sieht es aus, wenn es geklappt hat. Der Ring blinkt rot, der Bildschirm bleibt dunkel.</figcaption></figure>
-
-  <div class="kasten">
-    <p><b>Der Bildschirm bleibt dunkel.</b> Das ist richtig so — im Aktualisierungsmodus
-    zeigt das Gerät nichts an.</p>
-  </div>
-
-  <p>Jetzt per USB an den Rechner anstecken.</p>
-
-  <figure class="bild"><img src="bilder/usb-anstecken.jpg" alt="USB-C-Stecker vor der Buchse des Geräts"
-    onerror="this.closest('figure').remove()">
-    <figcaption>Ein Kabel nehmen, mit dem schon einmal Daten übertragen wurden — reine
-    Ladekabel funktionieren nicht.</figcaption></figure>
-
+  <div id="t1"></div>
   <div class="navi">
-    <button class="leise" id="btnDirektZurueck">Nur Sicherung einspielen</button>
-    <button id="w1">Weiter</button>
+    <button class="leise" id="btnDirektZurueck"></button>
+    <button id="w1"></button>
   </div>
 </section>
 
-<!-- ============ 2 · Treiber ============ -->
 <section class="seite" id="seite2">
-  <h2 id="treiberTitel">Treiber einrichten</h2>
-  <div id="treiberInhalt"></div>
+  <div id="t2"></div>
   <div class="navi">
-    <button class="leise" data-zurueck="1">Zurück</button>
-    <button id="w2">Weiter</button>
+    <button class="leise" data-zurueck="1"></button>
+    <button id="w2"></button>
   </div>
 </section>
 
-<!-- ============ 3 · Sichern und einspielen ============ -->
 <section class="seite" id="seite3">
-  <h2>Sichern und einspielen</h2>
-  <p>Drei Schritte, die nacheinander freigeschaltet werden. Das Werkzeug sichert
-  <b>zuerst</b> deine vorhandene Firmware — erst danach wird überhaupt etwas geschrieben.</p>
-
-  <div class="knopfreihe"><button id="btnVerbinden">1 · Gerät suchen</button></div>
-  <div id="geraeteinfo"></div>
-
-  <figure class="bild"><img src="bilder/browser-auswahl.png" alt="Auswahlfenster des Browsers mit dem Gerät"
-    onerror="this.closest('figure').remove()">
-    <figcaption><b>So muss es aussehen:</b> Die Zeile mit dem Gerät ist angeklickt und
-    blau hinterlegt, dann ist <b>Verbinden</b> aktiv. Ohne Anklicken bleibt der Knopf
-    ausgegraut — das ist hier die häufigste Stolperstelle.</figcaption></figure>
-
-  <div class="knopfreihe"><button id="btnSichern" disabled>2 · Auslesen und sichern</button></div>
+  <div id="t3"></div>
+  <div class="knopfreihe"><button id="btnVerbinden"></button></div>
+  <div id="t3bild"></div>
+  <div class="knopfreihe"><button id="btnSichern" disabled></button></div>
   <div class="balken"><i id="fortSichern"></i></div>
   <div class="stand" id="standSichern"></div>
-
-  <div class="knopfreihe"><button id="btnSchreiben" disabled>3 · Erweiterung einspielen</button></div>
+  <div class="knopfreihe"><button id="btnSchreiben" disabled></button></div>
   <div class="balken"><i id="fortSchreiben"></i></div>
   <div class="stand" id="standSchreiben"></div>
-
   <div id="protokoll"></div>
-
-  <details id="hilfeFinden">
-    <summary>Es steht nichts in der Geräteliste</summary>
-    <div class="inhalt"><ol>
-      <li><b>Blinkt der Ring rot?</b> Sonst ist das Gerät nicht im Aktualisierungsmodus —
-        zurück zu Seite 1.</li>
-      <li><b>Zu spät losgelassen?</b> Beim roten Blinken muss die Taste sofort los,
-        sonst startet das Gerät normal.</li>
-      <li><b>Ladekabel statt Datenkabel.</b> Viele USB-Kabel führen nur Strom.</li>
-      <li><b>USB-Verteiler dazwischen.</b> Direkt am Rechner anstecken.</li>
-      <li><b>Treiber</b> — zurück auf Seite 2.</li>
-    </ol></div>
-  </details>
-
+  <details id="hilfeFinden"><summary id="hilfeFindenTitel"></summary>
+    <div class="inhalt" id="hilfeFindenInhalt"></div></details>
   <div class="navi">
-    <button class="leise" data-zurueck="2">Zurück</button>
-    <button id="w3" disabled>Weiter</button>
+    <button class="leise" data-zurueck="2"></button>
+    <button id="w3" disabled></button>
   </div>
 </section>
 
-<!-- ============ 4 · Fertig ============ -->
 <section class="seite" id="seite4">
-  <h2>Fertig — und jetzt testen</h2>
-  <div class="melde ok"><b>Die Erweiterung ist eingespielt und zurückgelesen geprüft.</b></div>
-
-  <p><b>Gerät neu starten:</b> USB abziehen, Messtaste kurz drücken. Es startet ganz normal,
-  das Startbild ist unverändert.</p>
-
-  <p><b>Testen:</b> Eine Messung auf einer beliebigen Fläche machen. Dann mit der
-  <b>Eingabetaste</b> durch die Ansichten schalten — eine davon zeigt jetzt die
-  RAL-Nummer mit Namen und wie gut sie passt.</p>
-
-  <figure class="bild"><img src="bilder/ral-anzeige.jpg" alt="RAL-Anzeige am Display"
-    onerror="this.closest('figure').remove()">
-    <figcaption>So sieht die neue Ansicht aus.</figcaption></figure>
-
-  <p>Nebenbei tun jetzt auch die Tasten links und rechts und die Eingabetaste das, was man
-  von ihnen erwartet — die Werksfirmware sperrt sie auf den Messansichten.</p>
-
-  <h2 style="font-size:20px;margin-top:32px">Falls du es rückgängig machen willst</h2>
-  <p>Gerät wieder in den Aktualisierungsmodus bringen (Seite 1), dann hier weiter:</p>
-
+  <div id="t4"></div>
   <div class="knopfreihe">
-    <button id="btnVerbinden4">Gerät suchen</button>
-    <button class="leise" id="btnOriginalHolen">Sicherung nochmal herunterladen</button>
-    <button class="leise" id="btnZurueck" disabled>Sicherung einspielen</button>
+    <button id="btnVerbinden4"></button>
+    <button class="leise" id="btnOriginalHolen"></button>
+    <button class="leise" id="btnZurueck" disabled></button>
     <input type="file" id="dateiOriginal" accept=".bin" style="display:none">
   </div>
-  <div class="stand" id="melde4">Noch kein Gerät verbunden.</div>
+  <div class="stand" id="melde4"></div>
   <div class="balken"><i id="fortZurueck"></i></div>
   <div class="stand" id="standZurueck"></div>
-
-  <div class="kasten achtung">
-    <p><b>Bricht ein Schreibvorgang ab, ist das Gerät nicht kaputt.</b> Der Bootloader
-    liegt in einem eigenen Speicherbereich, den niemand beschreiben kann — du kommst
-    immer wieder in den Aktualisierungsmodus und kannst deine Sicherung einspielen.</p>
-  </div>
-
-  <details>
-    <summary>Ohne Browser, mit dfu-util</summary>
-    <div class="inhalt">
-      <div class="befehl">
-        <code>dfu-util -a 0 -s 0x08004000 -D deine_sicherung.bin</code>
-        <button class="leise kopieren" data-text="dfu-util -a 0 -s 0x08004000 -D deine_sicherung.bin">Kopieren</button>
-      </div>
-      <p>Niemals die Option <code>-t</code> verwenden und immer den ganzen Bereich am
-      Stück schreiben — der Bootloader löscht beim ersten Schreibbefehl alles und
-      erwartet danach das vollständige Abbild.</p>
-    </div>
-  </details>
-
+  <div id="t4b"></div>
   <div class="navi">
-    <button class="leise" data-zurueck="3">Zurück</button>
+    <button class="leise" data-zurueck="3"></button>
     <span></span>
   </div>
 </section>
 
-<footer>
-  Ein Feierabendprojekt, kein Produkt von 3nh. Die Kalibrierung deines Geräts bleibt
-  unberührt — alles ab <code>0x08030000</code> wird nicht angefasst.
-  <br><a href="https://github.com/hallko1234/cr4501-ral">Quelltext und Dokumentation</a>
-</footer>
+<footer id="fuss"></footer>
 </div>
 
 <script>
@@ -294,41 +203,470 @@ const $=s=>document.querySelector(s);
 const hex=n=>'0x'+n.toString(16).toUpperCase().padStart(8,'0');
 const schlafen=ms=>new Promise(r=>setTimeout(r,ms));
 
-/* ---------- Seitenführung ---------- */
-const TITEL=['Aktualisierungsmodus','Treiber','Sichern und einspielen','Testen'];
+/* ================== Texte ================== */
+const T={
+de:{
+ lang:'de',
+ titel:'Colorimeter CR4501<br><em>RAL Hack</em>',
+ intro:`Dein CR4501 misst Farben auf ein Hundertstel genau. Nur verrät es dir nicht,
+   <i>welches RAL</i> das ist — dafür sollst du das Handy zücken und eine App öffnen.
+   Draußen auf der Baustelle, mit Handschuhen, ist das keine gute Idee.
+   Dieser Umbau bringt die Antwort dorthin, wo sie hingehört: <b>aufs Display</b>.
+   Messen, ablesen, weiter.`,
+ schritte:['Aktualisierungsmodus','Treiber','Sichern und einspielen','Testen'],
+ schrittText:(n,t)=>'Schritt '+n+' von 4 · '+t,
+ weiter:'Weiter', zurueck:'Zurück', direktZurueck:'Nur Sicherung einspielen',
+ verbinden:'1 · Gerät suchen', sichern:'2 · Auslesen und sichern',
+ schreiben:'3 · Erweiterung einspielen',
+ verbinden4:'Gerät suchen', holen:'Sicherung nochmal herunterladen',
+ einspielen:'Sicherung einspielen', neuLaden:'Seite neu laden', kopieren:'Kopieren',
+ keinGeraet:'Noch kein Gerät verbunden.',
+ keinGeraet2:'Noch kein Gerät verbunden — erst Gerät suchen.',
+ getrennt:'Verbindung getrennt — Gerät neu in den Aktualisierungsmodus bringen und suchen.',
+ verbundenMit:(p,s)=>'verbunden mit '+p+' · Seriennummer '+s,
+ hilfeFindenTitel:'Es steht nichts in der Geräteliste',
+ hilfeFinden:`<ol>
+   <li><b>Blinkt der Ring rot?</b> Sonst ist das Gerät nicht im Aktualisierungsmodus —
+     zurück zu Seite 1.</li>
+   <li><b>Zu spät losgelassen?</b> Beim roten Blinken muss die Taste sofort los, sonst
+     startet das Gerät ganz normal.</li>
+   <li><b>Ladekabel statt Datenkabel.</b> Viele USB-Kabel führen nur Strom. Nimm eines,
+     mit dem schon einmal Daten übertragen wurden.</li>
+   <li><b>USB-Verteiler dazwischen.</b> Direkt am Rechner anstecken.</li>
+   <li><b>Treiber</b> — zurück auf Seite 2.</li></ol>`,
+ s1:`<h2>Gerät in den Aktualisierungsmodus</h2>
+   <p>Der einzige Handgriff, der etwas Gefühl braucht. Beim ersten Mal klappt er selten
+   auf Anhieb — das ist normal, probier ihn ruhig zwei-, dreimal.</p>
+   <p><b>Zuerst ausschalten:</b> Messtaste lange gedrückt halten, bis das Gerät ausgeht.
+   Dann <b>mindestens fünf Sekunden</b> nichts anfassen. Ohne diese Pause reagiert es
+   nicht — sie ist nicht optional.</p>
+   <p>Und dann einer der beiden Wege:</p>
+   <div class="weg"><span>A</span><p>Messtaste wieder lange halten, bis der Ring um die
+     Taste <b>rot blinkt</b>. In dem Moment sofort loslassen.</p></div>
+   <div class="weg"><span>B</span><p>Messtaste und Eingabetaste zusammen — die Wippe dafür
+     in der Mitte hineindrücken. Das rote Blinken kommt sofort, gleich loslassen.</p></div>
+   <figure class="bild"><img src="bilder/dfu-druecken.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Weg A: halten, bis der Ring rot
+     wird — und dann sofort loslassen.</figcaption></figure>
+   <figure class="bild"><img src="bilder/dfu-modus.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>So sieht es aus, wenn es
+     geklappt hat.</figcaption></figure>
+   <div class="kasten"><p><b>Der Bildschirm bleibt dunkel.</b> Das ist kein Fehler, im
+     Aktualisierungsmodus zeigt das Gerät nichts an. Nur der Ring blinkt.</p></div>
+   <p>Jetzt per USB an den Rechner.</p>
+   <figure class="bild"><img src="bilder/usb-anstecken.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Nimm ein Kabel, mit dem schon
+     einmal Daten übertragen wurden. Reine Ladekabel gibt es öfter, als man denkt.</figcaption></figure>`,
+ s2win:`<h2>Windows braucht einen Treiber</h2>
+   <p>Einmalig, und danach nie wieder. Windows bringt für den Aktualisierungsmodus keinen
+   Treiber mit, den ein Browser ansprechen darf. Das erledigt <b>Zadig</b> — eine einzelne
+   Datei, keine Installation.</p>
+   <div class="kasten"><p><b>Hast du das Gerät schon mit dfu-util benutzt?</b> Dann ist
+   wahrscheinlich alles da. Geh einfach weiter und komm nur hierher zurück, falls das
+   Gerät nicht in der Liste auftaucht.</p></div>
+   <figure class="bild"><img src="bilder/geraetemanager-fehlt.png" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>So sieht es <b>ohne</b> Treiber
+     aus: im Geräte-Manager unter „Andere Geräte", mit Warnzeichen.</figcaption></figure>
+   <p><a href="https://zadig.akeo.ie" target="_blank" rel="noopener">zadig.akeo.ie öffnen
+   und herunterladen</a></p>
+   <figure class="bild"><img src="bilder/zadig-download.png" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Unter <b>Download</b> die
+     aktuelle Version.</figcaption></figure>
+   <ol>
+     <li>Gerät im Aktualisierungsmodus anstecken — der Ring muss rot blinken</li>
+     <li>Zadig starten, im Menü <b>Options → List All Devices</b> anhaken</li>
+     <li>Oben <b>STM32 DownLoad Firmware Update</b> auswählen. Zur Kontrolle steht
+       darunter <code>USB ID 0483 DF11</code></li>
+     <li>Rechts daneben <b>WinUSB</b> einstellen</li>
+     <li><b>Install Driver</b> klicken und warten</li>
+   </ol>
+   <figure class="bild"><img src="bilder/zadig-winusb.png" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Oben das Gerät, darunter
+     <b>0483 DF11</b>, rechts <b>WinUSB</b>.</figcaption></figure>
+   <figure class="bild"><img src="bilder/zadig-installiert.png" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Dauert ein paar Sekunden.
+     Nicht abbrechen.</figcaption></figure>
+   <div class="kasten achtung"><p><b>Unbedingt WinUSB.</b> Nicht libusbK, nicht
+   libusb-win32. Die funktionieren mit dfu-util, aber der Browser sieht das Gerät damit
+   nicht — das ist hier der häufigste Fehler.</p></div>
+   <figure class="bild"><img src="bilder/geraetemanager-gut.png" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Danach steht das Gerät unter
+     <b>USB-Geräte</b>. So gehört es sich.</figcaption></figure>
+   <div class="kasten"><p><b>Zum Schluss die Seite neu laden.</b> Der Browser merkt sich
+   beim Öffnen, welche USB-Geräte er ansprechen darf — wechselt zwischendurch der Treiber,
+   bekommt die offene Seite das nicht mit. Nach dem Neuladen landest du automatisch wieder
+   hier.</p>
+   <div class="knopfreihe"><button id="btnNeuLaden"></button></div></div>`,
+ s2linux:`<h2>Kurz eine Zugriffsregel</h2>
+   <p>Unter Linux braucht es keinen Treiber, nur eine Regel — sonst gehört das Gerät root
+   und der Browser kommt nicht heran.</p>
+   <div class="befehl"><code>echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", MODE="0666"' | sudo tee /etc/udev/rules.d/50-stm32-dfu.rules &amp;&amp; sudo udevadm control --reload-rules</code>
+   <button class="leise kopieren" data-text='echo &apos;SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", MODE="0666"&apos; | sudo tee /etc/udev/rules.d/50-stm32-dfu.rules &amp;&amp; sudo udevadm control --reload-rules'></button></div>
+   <p>Danach das Gerät einmal abziehen und wieder anstecken.</p>`,
+ s2mac:`<h2>Hier gibt es nichts zu tun</h2>
+   <div class="melde ok"><b>Unter macOS ist kein Treiber nötig.</b> Chrome spricht das
+   Gerät direkt an — geh einfach weiter.</div>`,
+ s2andere:`<h2>Treiber</h2>
+   <p>Auf diesem System ist meist nichts nötig. Sollte das Gerät im nächsten Schritt nicht
+   in der Liste stehen, fehlen die Zugriffsrechte für USB-Geräte.</p>`,
+ s3:`<h2>Sichern und einspielen</h2>
+   <p>Drei Knöpfe, einer nach dem anderen. Gesichert wird <b>zuerst</b> — erst danach
+   wird überhaupt etwas geschrieben. Falls unterwegs etwas schiefgeht, hast du deine
+   Firmware also schon in der Hand.</p>`,
+ s3bild:`<figure class="bild"><img src="bilder/browser-auswahl.png" alt=""
+   onerror="this.closest('figure').remove()"><figcaption><b>So muss es aussehen:</b> Die
+   Zeile mit dem Gerät ist angeklickt und blau hinterlegt, dann ist <b>Verbinden</b>
+   aktiv. Ohne Anklicken bleibt der Knopf grau — daran scheitern die meisten.</figcaption></figure>`,
+ s4:`<h2>Geschafft — jetzt ausprobieren</h2>
+   <div class="melde ok"><b>Die Erweiterung ist eingespielt und zurückgelesen geprüft.</b></div>
+   <p><b>Gerät neu starten:</b> USB abziehen, Messtaste kurz drücken. Es startet ganz
+   normal, das Startbild ist unverändert — von außen sieht man dem Gerät nichts an.</p>
+   <p><b>Ausprobieren:</b> Eine Messung auf irgendeiner Fläche machen. Dann mit der
+   <b>Eingabetaste</b> durch die Ansichten schalten. Eine davon zeigt jetzt die RAL-Nummer
+   mit Namen und wie gut sie passt.</p>
+   <figure class="bild"><img src="bilder/ral-anzeige.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>So sieht die neue Ansicht
+     aus.</figcaption></figure>
+   <p>Nebenbei tun jetzt auch links, rechts und die Eingabetaste das, was man von ihnen
+   erwartet — die Werksfirmware sperrt sie auf den Messansichten.</p>
+   <h3>Falls du es rückgängig machen willst</h3>
+   <p>Gerät wieder in den Aktualisierungsmodus bringen, hier verbinden, dann die
+   gesicherte Datei einspielen. Danach ist alles wie vorher.</p>`,
+ s4b:`<div class="kasten achtung"><p><b>Bricht ein Schreibvorgang ab, ist das Gerät nicht
+   kaputt.</b> Der Bootloader liegt in einem eigenen Speicherbereich, den niemand
+   beschreiben kann — du kommst immer wieder in den Aktualisierungsmodus und kannst deine
+   Sicherung einspielen.</p></div>
+   <details><summary>Ohne Browser, mit dfu-util</summary><div class="inhalt">
+   <div class="befehl"><code>dfu-util -a 0 -s 0x08004000 -D deine_sicherung.bin</code>
+   <button class="leise kopieren" data-text="dfu-util -a 0 -s 0x08004000 -D deine_sicherung.bin"></button></div>
+   <p>Niemals die Option <code>-t</code> verwenden und immer den ganzen Bereich am Stück
+   schreiben — der Bootloader löscht beim ersten Schreibbefehl alles und erwartet danach
+   das vollständige Abbild.</p></div></details>`,
+ fuss:`Ein Feierabendprojekt, kein Produkt von 3nh. Die Kalibrierung deines Geräts bleibt
+   unberührt — alles ab <code>0x08030000</code> wird nicht angefasst.
+   <br><a href="https://github.com/hallko1234/cr4501-ral">Quelltext und Dokumentation</a>`,
+ /* Meldungen */
+ mBereit:'Bereit.',
+ mSuche:'Suche Geräte im Aktualisierungsmodus …',
+ mVerbunden:p=>'Verbunden: '+p,
+ mSeriennummer:s=>'Seriennummer '+s,
+ mSpeicher:b=>'Speicher: '+b,
+ mKeinGeraet:'Kein Gerät ausgewählt.',
+ mTippAnklicken:'Stand das Gerät in der Liste? Dann die Zeile erst anklicken, dann Verbinden.',
+ mTippLeer:'War die Liste leer? Der Kasten unten geht die Ursachen durch.',
+ mVerbindenFehler:m=>'Verbinden hat nicht geklappt: '+m,
+ mLese:n=>'Lese '+n+' Byte …',
+ mGesichert:n=>'Gesichert als '+n,
+ mTippHeben:'Heb die Datei auf — sie ist dein Rückweg.',
+ mLesenFehler:m=>'Auslesen hat nicht geklappt: '+m,
+ mPruefe:'Prüfe die sieben Änderungsstellen …',
+ mWieErwartet:'Alles wie erwartet.',
+ mLoesche:n=>'Lösche '+n+' Speicherseiten …',
+ mSchreibe:n=>'Schreibe '+n+' Byte …',
+ mKontrolle:'Geschrieben. Lese zur Kontrolle zurück …',
+ mPasst:n=>'Passt. Alle '+n+' Byte stimmen überein.',
+ mAbgebrochen:m=>'Abgebrochen: '+m,
+ mNichtsVeraendert:'Am Gerät wurde nichts verändert — der Abbruch kam vor dem ersten Löschbefehl.',
+ mSchonGeschrieben:'Es wurde bereits geschrieben. Spiel deine Sicherung zurück (Seite 4).',
+ mErholt:'Gerät in den Leerlauf zurückgeholt — ein neuer Versuch ist möglich.',
+ mReagiertNicht:'Das Gerät reagiert nicht mehr. USB abziehen und neu in den Modus bringen.',
+ mSpiele:n=>'Spiele '+n+' ein …',
+ mOriginalDrauf:'Original ist wieder drauf.',
+ mZurueckFehler:m=>'Wiederherstellen hat nicht geklappt: '+m,
+ mGetrennt:'Gerät wurde getrennt.',
+ mTippGetrennt:'Nach einem Neustart des Geräts ist das normal — einfach neu suchen.',
+ mTippModus:'Meist ist das Gerät aus dem Aktualisierungsmodus gefallen.',
+ mTippModus2:'USB abziehen, zurück auf Seite 1, neu in den Modus bringen, Seite neu laden.',
+ mTippKabel:'Verbindung abgerissen — Kabel prüfen, möglichst direkt am Rechner anstecken.',
+ mNeuGeladen:'Seite neu geladen — der Browser sieht jetzt den aktuellen Treiber.',
+ mFertigAlert:'Fertig — das Original ist wieder auf dem Gerät.',
+ mKeineSicherung:'In diesem Fenster wurde noch keine Sicherung ausgelesen.',
+ eErstVerbinden:'Erst oben auf Gerät suchen klicken',
+ eErstSichern:'Erst sichern',
+ eSchonDrauf:'Die Erweiterung ist bereits auf dem Gerät.',
+ eUnbekannt:(a,g,s)=>'Bei '+a+' steht '+g+' statt '+s+' — diese Firmware-Version kenne ich nicht.',
+ eBelegt:a=>'Bei '+a+' liegt schon etwas — vermutlich ist die Erweiterung drauf.',
+ eGroesse:(n,i,s)=>n+' ist '+i+' Byte groß, erwartet werden '+s,
+ eSperre:a=>'Sicherung greift: '+a+' liegt im geschützten Bereich',
+ eSperre2:a=>'Sicherung greift: Bereich reicht über '+a+' hinaus',
+ eAbgewiesen:s=>'Gerät hat den Befehl abgewiesen ('+s+')',
+ eKeineAntwort:s=>'Gerät antwortet nicht ('+s+')',
+ eZustand:z=>'Gerät bleibt in Zustand '+z+' statt Leerlauf',
+ eGeraetMeldet:t=>'Gerät meldet: '+t,
+ eNurGelesen:(g,l)=>'Nur '+g+' von '+l+' Byte gelesen',
+ eAbweichung:a=>'Rücklesen weicht ab bei '+a,
+ fehler:{1:'Datei passt nicht zum Gerät',2:'Schreiben verweigert',3:'Löschen fehlgeschlagen',
+   4:'Löschvorgang nicht bestätigt',5:'Schreiben fehlgeschlagen',6:'Schreibvorgang nicht bestätigt',
+   7:'Adresse außerhalb des Speichers',8:'Unerwartetes Ende',9:'Firmware unbrauchbar',
+   10:'Herstellerfehler',11:'Unerwarteter USB-Zustand',12:'Unerwarteter Zustand',15:'Unbekannter Fehler'},
+ wKeinHttps:`<b>Diese Seite läuft nicht über HTTPS.</b> Browser erlauben den Zugriff auf
+   USB-Geräte nur auf gesicherten Seiten.`,
+ wIos:`<b>Auf iPhone und iPad geht es nicht.</b> Apple sperrt den USB-Zugriff systemweit,
+   auch in Chrome. Du brauchst einen Rechner mit Windows, macOS oder Linux.`,
+ wFalscherBrowser:`<b>Dieser Browser kann kein WebUSB</b> — und wird es absehbar auch nicht.
+   Öffne die Seite in <a href="https://www.google.com/chrome/">Chrome</a> oder Edge.`,
+ wKeinUsb:`<b>Dieser Browser meldet keine USB-Unterstützung.</b> Mit
+   <a href="https://www.google.com/chrome/">Chrome</a> oder Edge ab Version 89 klappt es.
+   Falls du schon Chrome benutzt, ist WebUSB vielleicht per Firmenrichtlinie abgeschaltet —
+   nachsehen unter <code>chrome://policy</code>.`,
+ statLoeschen:(n,g)=>'Löschen '+n+'/'+g,
+ statSchreiben:(g,s)=>'Schreiben '+g+'/'+s+' Byte',
+ statBytes:(g,s)=>g+' / '+s+' Byte',
+ statFertig:n=>'fertig · '+n+' Byte',
+ statGeprueft:'fertig und geprüft',
+ statKontrolle:'Kontrolle läuft …',
+ statFertig2:'fertig'
+},
+en:{
+ lang:'en',
+ titel:'Colorimeter CR4501<br><em>RAL Hack</em>',
+ intro:`Your CR4501 measures colour down to a hundredth. It just won't tell you
+   <i>which RAL</i> that is — for that you're meant to pull out your phone and open an app.
+   On site, with gloves on, that's a poor idea. This modification puts the answer where it
+   belongs: <b>on the device's own screen</b>. Measure, read, move on.`,
+ schritte:['Update mode','Driver','Back up and flash','Try it out'],
+ schrittText:(n,t)=>'Step '+n+' of 4 · '+t,
+ weiter:'Next', zurueck:'Back', direktZurueck:'Only restore a backup',
+ verbinden:'1 · Find device', sichern:'2 · Read and back up',
+ schreiben:'3 · Flash the extension',
+ verbinden4:'Find device', holen:'Download the backup again',
+ einspielen:'Restore a backup', neuLaden:'Reload this page', kopieren:'Copy',
+ keinGeraet:'No device connected yet.',
+ keinGeraet2:'No device connected yet — find the device first.',
+ getrennt:'Disconnected — put the device back into update mode and search again.',
+ verbundenMit:(p,s)=>'connected to '+p+' · serial '+s,
+ hilfeFindenTitel:'The device list is empty',
+ hilfeFinden:`<ol>
+   <li><b>Is the ring flashing red?</b> If not, the device isn't in update mode — back to
+     step 1.</li>
+   <li><b>Released too late?</b> The moment it flashes red, let go. Hold longer and the
+     device just boots normally.</li>
+   <li><b>Charge-only cable.</b> Plenty of USB cables carry power only. Use one you've
+     transferred data with before.</li>
+   <li><b>USB hub in between.</b> Plug straight into the computer.</li>
+   <li><b>Driver</b> — back to step 2.</li></ol>`,
+ s1:`<h2>Put the device into update mode</h2>
+   <p>The one step that takes a bit of feel. It rarely works first try — that's normal,
+   just have another go.</p>
+   <p><b>Switch it off first:</b> hold the measure button until the device turns off.
+   Then <b>wait at least five seconds</b> without touching anything. Without that pause it
+   won't respond — this isn't optional.</p>
+   <p>Then either way works:</p>
+   <div class="weg"><span>A</span><p>Hold the measure button again until the ring around it
+     <b>flashes red</b>. Let go immediately at that moment.</p></div>
+   <div class="weg"><span>B</span><p>Press the measure button and the enter button together —
+     push the rocker in at its centre. The red flash comes right away; let go at once.</p></div>
+   <figure class="bild"><img src="bilder/dfu-druecken.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Option A: hold until the ring
+     turns red — then let go straight away.</figcaption></figure>
+   <figure class="bild"><img src="bilder/dfu-modus.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>This is what it looks like when
+     it worked.</figcaption></figure>
+   <div class="kasten"><p><b>The screen stays dark.</b> Nothing is wrong — in update mode
+     the device displays nothing at all. Only the ring flashes.</p></div>
+   <p>Now plug it into the computer.</p>
+   <figure class="bild"><img src="bilder/usb-anstecken.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Use a cable you've transferred
+     data with before. Charge-only cables are more common than you'd think.</figcaption></figure>`,
+ s2win:`<h2>Windows needs a driver</h2>
+   <p>Once, and never again. Windows ships no driver for update mode that a browser is
+   allowed to talk to. <b>Zadig</b> sorts that out — a single file, no installation.</p>
+   <div class="kasten"><p><b>Have you used the device with dfu-util before?</b> Then it's
+   probably already set up. Just carry on, and only come back here if the device doesn't
+   show up in the list.</p></div>
+   <figure class="bild"><img src="bilder/geraetemanager-fehlt.png" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>This is what it looks like
+     <b>without</b> the driver: under „Other devices" with a warning mark.</figcaption></figure>
+   <p><a href="https://zadig.akeo.ie" target="_blank" rel="noopener">Open zadig.akeo.ie and
+   download it</a></p>
+   <figure class="bild"><img src="bilder/zadig-download.png" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>The current version is under
+     <b>Download</b>.</figcaption></figure>
+   <ol>
+     <li>Plug in the device in update mode — the ring must be flashing red</li>
+     <li>Start Zadig, tick <b>Options → List All Devices</b></li>
+     <li>Pick <b>STM32 DownLoad Firmware Update</b> at the top. To check, it shows
+       <code>USB ID 0483 DF11</code> underneath</li>
+     <li>Set <b>WinUSB</b> on the right</li>
+     <li>Click <b>Install Driver</b> and wait</li>
+   </ol>
+   <figure class="bild"><img src="bilder/zadig-winusb.png" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Device at the top,
+     <b>0483 DF11</b> below it, <b>WinUSB</b> on the right.</figcaption></figure>
+   <figure class="bild"><img src="bilder/zadig-installiert.png" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Takes a few seconds. Don't
+     interrupt it.</figcaption></figure>
+   <div class="kasten achtung"><p><b>It must be WinUSB.</b> Not libusbK, not libusb-win32.
+   Those work with dfu-util, but the browser won't see the device — this is the most common
+   mistake here.</p></div>
+   <figure class="bild"><img src="bilder/geraetemanager-gut.png" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Afterwards the device sits under
+     <b>USB devices</b>. That's how it should be.</figcaption></figure>
+   <div class="kasten"><p><b>Finally, reload this page.</b> The browser decides at load time
+   which USB devices it may talk to — if the driver changes in between, the open page never
+   finds out. After reloading you'll land right back here.</p>
+   <div class="knopfreihe"><button id="btnNeuLaden"></button></div></div>`,
+ s2linux:`<h2>Just one access rule</h2>
+   <p>No driver needed on Linux, only a rule — otherwise the device belongs to root and the
+   browser can't reach it.</p>
+   <div class="befehl"><code>echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", MODE="0666"' | sudo tee /etc/udev/rules.d/50-stm32-dfu.rules &amp;&amp; sudo udevadm control --reload-rules</code>
+   <button class="leise kopieren" data-text='echo &apos;SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", MODE="0666"&apos; | sudo tee /etc/udev/rules.d/50-stm32-dfu.rules &amp;&amp; sudo udevadm control --reload-rules'></button></div>
+   <p>Then unplug the device once and plug it back in.</p>`,
+ s2mac:`<h2>Nothing to do here</h2>
+   <div class="melde ok"><b>macOS needs no driver.</b> Chrome talks to the device directly —
+   just carry on.</div>`,
+ s2andere:`<h2>Driver</h2>
+   <p>Usually nothing is needed on this system. If the device doesn't appear in the list in
+   the next step, USB access permissions are missing.</p>`,
+ s3:`<h2>Back up and flash</h2>
+   <p>Three buttons, one after another. The backup comes <b>first</b> — nothing is written
+   before that. So if anything goes sideways later, your firmware is already in hand.</p>`,
+ s3bild:`<figure class="bild"><img src="bilder/browser-auswahl.png" alt=""
+   onerror="this.closest('figure').remove()"><figcaption><b>This is how it should look:</b>
+   the device row is clicked and highlighted, which makes <b>Connect</b> active. Without
+   clicking it the button stays grey — that's what trips most people up.</figcaption></figure>`,
+ s4:`<h2>Done — now try it</h2>
+   <div class="melde ok"><b>The extension is flashed and verified by reading it back.</b></div>
+   <p><b>Restart the device:</b> unplug USB, tap the measure button. It boots completely
+   normally, the splash screen is unchanged — from the outside you'd never know.</p>
+   <p><b>Try it:</b> take a measurement of any surface. Then cycle through the views with
+   the <b>enter button</b>. One of them now shows the RAL number with its name and how well
+   it matches.</p>
+   <figure class="bild"><img src="bilder/ral-anzeige.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>The new view.</figcaption></figure>
+   <p>As a bonus, left, right and the enter button now do what you'd expect — the factory
+   firmware locks them out on the measurement screens.</p>
+   <h3>If you want to undo it</h3>
+   <p>Put the device back into update mode, connect here, then restore your backup file.
+   Everything will be exactly as it was.</p>`,
+ s4b:`<div class="kasten achtung"><p><b>If a write aborts halfway, the device isn't
+   bricked.</b> The bootloader lives in its own memory area that nothing can overwrite — you
+   can always get back into update mode and restore your backup.</p></div>
+   <details><summary>Without a browser, using dfu-util</summary><div class="inhalt">
+   <div class="befehl"><code>dfu-util -a 0 -s 0x08004000 -D your_backup.bin</code>
+   <button class="leise kopieren" data-text="dfu-util -a 0 -s 0x08004000 -D your_backup.bin"></button></div>
+   <p>Never use the <code>-t</code> option, and always write the whole region in one go —
+   the bootloader erases everything on the first write command and expects the complete
+   image afterwards.</p></div></details>`,
+ fuss:`A weekend project, not a 3nh product. Your device's calibration stays untouched —
+   nothing above <code>0x08030000</code> is ever written.
+   <br><a href="https://github.com/hallko1234/cr4501-ral">Source and documentation</a>`,
+ mBereit:'Ready.',
+ mSuche:'Looking for devices in update mode …',
+ mVerbunden:p=>'Connected: '+p,
+ mSeriennummer:s=>'Serial '+s,
+ mSpeicher:b=>'Memory: '+b,
+ mKeinGeraet:'No device selected.',
+ mTippAnklicken:'Was the device listed? Then click the row first, then Connect.',
+ mTippLeer:'Was the list empty? The box below walks through the causes.',
+ mVerbindenFehler:m=>'Connecting failed: '+m,
+ mLese:n=>'Reading '+n+' bytes …',
+ mGesichert:n=>'Saved as '+n,
+ mTippHeben:'Keep that file — it is your way back.',
+ mLesenFehler:m=>'Reading failed: '+m,
+ mPruefe:'Checking the seven patch locations …',
+ mWieErwartet:'Everything as expected.',
+ mLoesche:n=>'Erasing '+n+' memory pages …',
+ mSchreibe:n=>'Writing '+n+' bytes …',
+ mKontrolle:'Written. Reading back to verify …',
+ mPasst:n=>'All good. All '+n+' bytes match.',
+ mAbgebrochen:m=>'Aborted: '+m,
+ mNichtsVeraendert:'Nothing was changed on the device — this aborted before the first erase.',
+ mSchonGeschrieben:'Writing had already started. Restore your backup (step 4).',
+ mErholt:'Device returned to idle — you can try again.',
+ mReagiertNicht:'The device stopped responding. Unplug USB and enter update mode again.',
+ mSpiele:n=>'Flashing '+n+' …',
+ mOriginalDrauf:'The original is back on the device.',
+ mZurueckFehler:m=>'Restoring failed: '+m,
+ mGetrennt:'Device disconnected.',
+ mTippGetrennt:'That is normal after restarting the device — just search again.',
+ mTippModus:'Usually the device dropped out of update mode.',
+ mTippModus2:'Unplug USB, back to step 1, enter update mode again, reload the page.',
+ mTippKabel:'Connection lost — check the cable, plug straight into the computer.',
+ mNeuGeladen:'Page reloaded — the browser now sees the current driver.',
+ mFertigAlert:'Done — the original is back on the device.',
+ mKeineSicherung:'No backup has been read in this window yet.',
+ eErstVerbinden:'Click Find device above first',
+ eErstSichern:'Back up first',
+ eSchonDrauf:'The extension is already on this device.',
+ eUnbekannt:(a,g,s)=>'At '+a+' there is '+g+' instead of '+s+' — I do not know this firmware version.',
+ eBelegt:a=>'There is already something at '+a+' — the extension is probably installed.',
+ eGroesse:(n,i,s)=>n+' is '+i+' bytes, but '+s+' are expected',
+ eSperre:a=>'Safety check: '+a+' lies in the protected region',
+ eSperre2:a=>'Safety check: the range would reach beyond '+a,
+ eAbgewiesen:s=>'Device rejected the request ('+s+')',
+ eKeineAntwort:s=>'Device is not responding ('+s+')',
+ eZustand:z=>'Device stays in state '+z+' instead of idle',
+ eGeraetMeldet:t=>'Device reports: '+t,
+ eNurGelesen:(g,l)=>'Only read '+g+' of '+l+' bytes',
+ eAbweichung:a=>'Read-back differs at '+a,
+ fehler:{1:'File does not match the device',2:'Write refused',3:'Erase failed',
+   4:'Erase not confirmed',5:'Write failed',6:'Write not confirmed',
+   7:'Address outside memory',8:'Unexpected end',9:'Firmware unusable',
+   10:'Vendor-specific error',11:'Unexpected USB state',12:'Unexpected state',15:'Unknown error'},
+ wKeinHttps:`<b>This page is not served over HTTPS.</b> Browsers only allow USB access on
+   secure pages.`,
+ wIos:`<b>This does not work on iPhone or iPad.</b> Apple blocks USB access system-wide,
+   Chrome included. You need a computer running Windows, macOS or Linux.`,
+ wFalscherBrowser:`<b>This browser cannot do WebUSB</b> — and won't any time soon. Open the
+   page in <a href="https://www.google.com/chrome/">Chrome</a> or Edge.`,
+ wKeinUsb:`<b>This browser reports no USB support.</b>
+   <a href="https://www.google.com/chrome/">Chrome</a> or Edge from version 89 will work.
+   If you are already using Chrome, WebUSB may be disabled by company policy — check
+   <code>chrome://policy</code>.`,
+ statLoeschen:(n,g)=>'Erasing '+n+'/'+g,
+ statSchreiben:(g,s)=>'Writing '+g+'/'+s+' bytes',
+ statBytes:(g,s)=>g+' / '+s+' bytes',
+ statFertig:n=>'done · '+n+' bytes',
+ statGeprueft:'done and verified',
+ statKontrolle:'verifying …',
+ statFertig2:'done'
+}};
+let L=T.de;
+
+/* ================== System ================== */
+function systemErkennen(){
+  const ua=navigator.userAgent,d=navigator.userAgentData;
+  const p=(d&&d.platform)||navigator.platform||'';
+  let os='andere';
+  if(/Win/i.test(p)||/Windows/i.test(ua)) os='windows';
+  else if(/iPhone|iPad/i.test(ua)) os='ios';
+  else if(/Mac/i.test(p)||/Macintosh/i.test(ua)) os='macos';
+  else if(/Android/i.test(ua)) os='android';
+  else if(/Linux|X11/i.test(p)) os='linux';
+  let br='andere';
+  if(/Edg\//.test(ua)) br='edge'; else if(/OPR\//.test(ua)) br='opera';
+  else if(/Firefox\//.test(ua)) br='firefox'; else if(/Chrome\//.test(ua)) br='chrome';
+  else if(/Safari\//.test(ua)) br='safari';
+  return {os,br,webusb:('usb' in navigator),
+    sicher:(location.protocol==='https:'||location.hostname==='localhost')};
+}
+const SYS=systemErkennen();
+
+/* ================== Anzeige ================== */
+const TITEL=()=>L.schritte;
 let seite=1;
 function zeigeSeite(n){
   seite=n;
-  document.querySelectorAll('.seite').forEach((s,i)=>
-    s.classList.toggle('sichtbar', i+1===n));
-  document.querySelectorAll('#leiste div').forEach((d,i)=>{
-    d.className = i+1<n ? 'erledigt' : (i+1===n ? 'hier' : '');
-  });
-  $('#leisteText').textContent='Schritt '+n+' von 4 · '+TITEL[n-1];
+  document.querySelectorAll('.seite').forEach((s,i)=>s.classList.toggle('sichtbar',i+1===n));
+  document.querySelectorAll('#leiste div').forEach((d,i)=>
+    d.className=i+1<n?'erledigt':(i+1===n?'hier':''));
+  $('#leisteText').textContent=L.schrittText(n,TITEL()[n-1]);
   if(n===4){
     const m=$('#melde4');
-    if(geraet && geraet.opened){
-      m.textContent='verbunden mit '+(geraet.productName||'DFU-Gerät')+
-        ' · Seriennummer '+(geraet.serialNumber||'unbekannt');
+    if(geraet&&geraet.opened){
+      m.textContent=L.verbundenMit(geraet.productName||'DFU',geraet.serialNumber||'?');
       $('#btnZurueck').disabled=false; $('#btnVerbinden4').disabled=true;
     }else{
-      m.textContent='Noch kein Gerät verbunden — erst Gerät suchen.';
+      m.textContent=L.keinGeraet2;
       $('#btnZurueck').disabled=true; $('#btnVerbinden4').disabled=false;
     }
   }
   window.scrollTo({top:0,behavior:'smooth'});
 }
-document.querySelectorAll('[data-zurueck]').forEach(b=>
-  b.onclick=()=>zeigeSeite(+b.dataset.zurueck));
-$('#w1').onclick=()=>zeigeSeite(2);
-$('#w2').onclick=()=>zeigeSeite(3);
-$('#w3').onclick=()=>zeigeSeite(4);
-
-/* ---------- Protokoll ---------- */
 const prot=$('#protokoll');
 function sag(text,art){
-  const z=document.createElement('b');
-  if(art) z.className=art;
+  const z=document.createElement('b'); if(art) z.className=art;
   z.textContent=new Date().toTimeString().slice(0,8)+'  '+text+'\n';
   prot.appendChild(z); prot.scrollTop=prot.scrollHeight;
 }
@@ -336,123 +674,61 @@ const tipp=t=>sag('        '+t,'tipp');
 const fort=(id,a)=>$(id).style.width=Math.round(a*100)+'%';
 const stand=(id,t)=>$(id).textContent=t;
 
-/* ---------- System erkennen ---------- */
-function systemErkennen(){
-  const ua=navigator.userAgent, d=navigator.userAgentData;
-  const p=(d&&d.platform)||navigator.platform||'';
-  let os='unbekannt';
-  if(/Win/i.test(p)||/Windows/i.test(ua)) os='windows';
-  else if(/iPhone|iPad/i.test(ua)) os='ios';
-  else if(/Mac/i.test(p)||/Macintosh/i.test(ua)) os='macos';
-  else if(/Android/i.test(ua)) os='android';
-  else if(/Linux|X11/i.test(p)) os='linux';
-  let browser='anderer';
-  if(/Edg\//.test(ua)) browser='edge';
-  else if(/OPR\//.test(ua)) browser='opera';
-  else if(/Firefox\//.test(ua)) browser='firefox';
-  else if(/Chrome\//.test(ua)) browser='chrome';
-  else if(/Safari\//.test(ua)) browser='safari';
-  return {os,browser,webusb:('usb' in navigator),
-    sicher:(location.protocol==='https:'||location.hostname==='localhost')};
+function texteSetzen(){
+  document.documentElement.lang=L.lang;
+  $('#titel').innerHTML=L.titel;
+  $('#intro').innerHTML=L.intro+' <b>'+ANZAHL+'</b> '+
+    (L.lang==='de'?'RAL-Classic-Töne sind eingemessen dabei.':'measured RAL Classic tones are included.');
+  $('#t1').innerHTML=L.s1;
+  $('#t2').innerHTML=SYS.os==='windows'?L.s2win:SYS.os==='linux'?L.s2linux:
+                     SYS.os==='macos'?L.s2mac:L.s2andere;
+  $('#t3').innerHTML=L.s3;
+  $('#t3bild').innerHTML=L.s3bild;
+  $('#t4').innerHTML=L.s4;
+  $('#t4b').innerHTML=L.s4b;
+  $('#fuss').innerHTML=L.fuss;
+  $('#hilfeFindenTitel').textContent=L.hilfeFindenTitel;
+  $('#hilfeFindenInhalt').innerHTML=L.hilfeFinden;
+  $('#w1').textContent=L.weiter; $('#w2').textContent=L.weiter; $('#w3').textContent=L.weiter;
+  document.querySelectorAll('[data-zurueck]').forEach(b=>b.textContent=L.zurueck);
+  $('#btnDirektZurueck').textContent=L.direktZurueck;
+  $('#btnVerbinden').textContent=L.verbinden;
+  $('#btnSichern').textContent=L.sichern;
+  $('#btnSchreiben').textContent=L.schreiben;
+  $('#btnVerbinden4').textContent=L.verbinden4;
+  $('#btnOriginalHolen').textContent=L.holen;
+  $('#btnZurueck').textContent=L.einspielen;
+  document.querySelectorAll('.kopieren').forEach(b=>b.textContent=L.kopieren);
+  const kn=$('#btnNeuLaden');
+  if(kn){ kn.textContent=L.neuLaden;
+    kn.onclick=()=>{ try{sessionStorage.setItem('cr_seite','2');}catch(e){} location.reload(); }; }
+  if(!$('#melde4').textContent||$('#melde4').dataset.leer!=='0') $('#melde4').textContent=L.keinGeraet;
+  browserPruefen();
+  zeigeSeite(seite);
 }
-const SYS=systemErkennen();
-
 function browserPruefen(){
-  if(SYS.webusb && SYS.sicher) return true;
-  let text;
-  if(!SYS.sicher) text=`<b>Diese Seite läuft nicht über HTTPS.</b> Browser erlauben den
-    Zugriff auf USB-Geräte nur auf gesicherten Seiten.`;
-  else if(SYS.os==='ios') text=`<b>Auf iPhone und iPad geht es nicht.</b> Apple sperrt den
-    USB-Zugriff systemweit, auch in Chrome. Du brauchst einen Rechner mit Windows,
-    macOS oder Linux.`;
-  else if(SYS.browser==='firefox'||SYS.browser==='safari')
-    text=`<b>Dieser Browser kann kein WebUSB</b> — und wird es absehbar auch nicht.
-    Öffne die Seite in <a href="https://www.google.com/chrome/">Chrome</a> oder Edge.`;
-  else text=`<b>Dieser Browser meldet keine USB-Unterstützung.</b> Mit
-    <a href="https://www.google.com/chrome/">Chrome</a> oder Edge ab Version 89 klappt es.
-    Falls du bereits Chrome benutzt, ist WebUSB vielleicht per Firmenrichtlinie
-    abgeschaltet — nachsehen unter <code>chrome://policy</code>.`;
-  $('#browserWarnung').innerHTML='<div class="melde no">'+text+'</div>';
+  const w=$('#browserWarnung');
+  if(SYS.webusb&&SYS.sicher){ w.innerHTML=''; $('#w1').disabled=false; return; }
+  let t;
+  if(!SYS.sicher) t=L.wKeinHttps;
+  else if(SYS.os==='ios') t=L.wIos;
+  else if(SYS.br==='firefox'||SYS.br==='safari') t=L.wFalscherBrowser;
+  else t=L.wKeinUsb;
+  w.innerHTML='<div class="melde no">'+t+'</div>';
   $('#w1').disabled=true;
-  return false;
+}
+function sprache(l){
+  L=T[l];
+  $('#spDe').className=l==='de'?'an':'';
+  $('#spEn').className=l==='en'?'an':'';
+  try{ sessionStorage.setItem('cr_sprache',l); }catch(e){}
+  texteSetzen();
 }
 
-/* ---------- Treiberseite je nach System ---------- */
-function treiberseite(){
-  const t=$('#treiberTitel'), i=$('#treiberInhalt');
-  if(SYS.os==='windows'){
-    t.textContent='Treiber einrichten';
-    i.innerHTML=`
-    <p>Windows bringt für den Aktualisierungsmodus keinen Treiber mit, den ein Browser
-    ansprechen darf. Das erledigt <b>Zadig</b> — eine einzelne Datei, keine Installation,
-    einmalig.</p>
-    <div class="kasten"><p><b>Hast du das Gerät schon mit dfu-util benutzt?</b> Dann ist
-    vermutlich alles da. Geh weiter und komm nur hierher zurück, falls das Gerät nicht
-    in der Liste auftaucht.</p></div>
-    <p><a href="https://zadig.akeo.ie" target="_blank" rel="noopener">zadig.akeo.ie
-    öffnen und herunterladen</a></p>
-    <figure class="bild"><img src="bilder/geraetemanager-fehlt.png" alt="Geräte-Manager, Gerät unter Andere Geräte"
-      onerror="this.closest('figure').remove()">
-      <figcaption>So sieht es <b>ohne</b> Treiber aus: Das Gerät steht im Geräte-Manager
-      unter „Andere Geräte" mit einem Warnzeichen.</figcaption></figure>
-    <figure class="bild"><img src="bilder/zadig-download.png" alt="Die Downloadseite von Zadig"
-      onerror="this.closest('figure').remove()">
-      <figcaption>Auf zadig.akeo.ie unter <b>Download</b> die aktuelle Version laden.
-      Eine einzelne Datei, keine Installation.</figcaption></figure>
-    <ol>
-      <li>Gerät im Aktualisierungsmodus anstecken — der Ring muss rot blinken</li>
-      <li>Zadig starten, <b>Options → List All Devices</b> anhaken</li>
-      <li>In der oberen Liste <b>STM32 DownLoad Firmware Update</b> auswählen —
-        zur Kontrolle steht darunter <code>USB ID 0483 DF11</code></li>
-      <li>Rechts daneben <b>WinUSB</b> einstellen</li>
-      <li><b>Install Driver</b> klicken und warten, bis es durchgelaufen ist</li>
-    </ol>
-    <figure class="bild"><img src="bilder/zadig-winusb.png" alt="Zadig mit STM32 DownLoad Firmware Update und WinUSB"
-      onerror="this.closest('figure').remove()">
-      <figcaption>Oben <b>STM32 DownLoad Firmware Update</b>, darunter zur Kontrolle
-      <b>0483 DF11</b>, rechts <b>WinUSB</b>. Dann Install Driver.</figcaption></figure>
-    <figure class="bild"><img src="bilder/zadig-installiert.png" alt="Zadig installiert den Treiber"
-      onerror="this.closest('figure').remove()">
-      <figcaption>Dauert ein paar Sekunden. Nicht abbrechen.</figcaption></figure>
-    <figure class="bild"><img src="bilder/geraetemanager-gut.png" alt="Geräte-Manager, Gerät unter USB-Geräte"
-      onerror="this.closest('figure').remove()">
-      <figcaption>Danach steht das Gerät unter <b>USB-Geräte</b> statt unter „Andere
-      Geräte". So gehört es sich.</figcaption></figure>
-    <div class="kasten achtung"><p><b>Unbedingt WinUSB wählen</b> — nicht libusbK und nicht
-    libusb-win32. Die funktionieren mit dfu-util, aber der Browser sieht das Gerät damit
-    nicht. Das ist der häufigste Fehler an dieser Stelle.</p></div>
-    <div class="kasten"><p><b>Zum Schluss: diese Seite neu laden.</b> Der Browser merkt
-    sich beim Öffnen, welche USB-Geräte er ansprechen darf — wechselt zwischendurch der
-    Treiber, bekommt die offene Seite das nicht mit und findet das Gerät weiterhin nicht.
-    Nach dem Neuladen landest du automatisch wieder hier.</p>
-    <div class="knopfreihe"><button id="btnNeuLaden">Seite neu laden</button></div></div>`;
-  }else if(SYS.os==='linux'){
-    t.textContent='Zugriffsregel anlegen';
-    i.innerHTML=`
-    <p>Unter Linux braucht es keinen Treiber, nur eine Regel — sonst gehört das Gerät
-    root und der Browser kommt nicht heran.</p>
-    <div class="befehl">
-      <code>echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", MODE="0666"' | sudo tee /etc/udev/rules.d/50-stm32-dfu.rules &amp;&amp; sudo udevadm control --reload-rules</code>
-      <button class="leise kopieren" data-text='echo &apos;SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", MODE="0666"&apos; | sudo tee /etc/udev/rules.d/50-stm32-dfu.rules &amp;&amp; sudo udevadm control --reload-rules'>Kopieren</button>
-    </div>
-    <p>Danach das Gerät einmal abziehen und wieder anstecken.</p>`;
-  }else if(SYS.os==='macos'){
-    t.textContent='Nichts zu tun';
-    i.innerHTML=`<div class="melde ok"><b>Unter macOS ist kein Treiber nötig.</b>
-      Chrome spricht das Gerät direkt an — weiter zum nächsten Schritt.</div>`;
-  }else{
-    t.textContent='Treiber';
-    i.innerHTML=`<p>Auf diesem System ist meist kein Treiber nötig. Sollte das Gerät im
-      nächsten Schritt nicht in der Liste auftauchen, fehlen die Zugriffsrechte für
-      USB-Geräte.</p>`;
-  }
-}
-
-/* ---------- Farbstreifen ---------- */
+/* ================== Farbstreifen ================== */
 function streifenZeichnen(){
   const roh=Uint8Array.from(atob(DATEN.blobs[1].b64),c=>c.charCodeAt(0));
-  const v=new DataView(roh.buffer);
-  const n=v.getUint32(8,true), ziel=$('#streifen');
+  const v=new DataView(roh.buffer), n=v.getUint32(8,true), ziel=$('#streifen');
   for(let i=0;i<n;i++){
     const rgb=v.getUint16(0x40+i*10+8,true);
     const d=document.createElement('div');
@@ -461,47 +737,45 @@ function streifenZeichnen(){
   }
   return n;
 }
+const ANZAHL=streifenZeichnen();
 
-/* ---------- DfuSe ---------- */
+/* ================== DfuSe ================== */
 const DNLOAD=1,UPLOAD=2,GETSTATUS=3,CLRSTATUS=4,ABORT=6;
-let geraet=null,schnittstelle=0,blockgroesse=1024,original=null,dateiname='',laeuft=false;
+let geraet=null,schnittstelle=0,blockgroesse=1024,original=null,dateiname='',
+    laeuft=false,etwasVeraendert=false;
 
 async function raus(b,w,d){
   const r=await geraet.controlTransferOut(
     {requestType:'class',recipient:'interface',request:b,value:w,index:schnittstelle},d);
-  if(r.status!=='ok') throw new Error('Gerät hat den Befehl abgewiesen ('+r.status+')');
+  if(r.status!=='ok') throw new Error(L.eAbgewiesen(r.status));
 }
 async function rein(b,w,l){
   const r=await geraet.controlTransferIn(
     {requestType:'class',recipient:'interface',request:b,value:w,index:schnittstelle},l);
-  if(r.status!=='ok') throw new Error('Gerät antwortet nicht ('+r.status+')');
+  if(r.status!=='ok') throw new Error(L.eKeineAntwort(r.status));
   return new Uint8Array(r.data.buffer);
 }
 async function status(){const s=await rein(GETSTATUS,0,6);
   return {fehler:s[0],warten:s[1]|(s[2]<<8)|(s[3]<<16),zustand:s[4]};}
-const FEHLER={1:'Datei passt nicht zum Gerät',2:'Schreiben verweigert',3:'Löschen fehlgeschlagen',
-  4:'Löschvorgang nicht bestätigt',5:'Schreiben fehlgeschlagen',6:'Schreibvorgang nicht bestätigt',
-  7:'Adresse außerhalb des Speichers',8:'Unerwartetes Ende',9:'Firmware unbrauchbar',
-  10:'Herstellerfehler',11:'Unerwarteter USB-Zustand',12:'Unerwarteter Zustand',15:'Unbekannter Fehler'};
 async function warten(){
   let s=await status();
   while(s.zustand===4||s.zustand===3){await schlafen(Math.max(s.warten,1)); s=await status();}
-  if(s.fehler!==0){const t=FEHLER[s.fehler]||('Code '+s.fehler);
-    await raus(CLRSTATUS,0,new Uint8Array()); throw new Error('Gerät meldet: '+t);}
+  if(s.fehler!==0){const t=L.fehler[s.fehler]||('Code '+s.fehler);
+    await raus(CLRSTATUS,0,new Uint8Array()); throw new Error(L.eGeraetMeldet(t));}
   return s;
 }
 async function abbrechen(){await raus(ABORT,0,new Uint8Array()); await status();}
 async function zurueckAufLeerlauf(){
   await raus(ABORT,0,new Uint8Array());
   const s=await status();
-  if(s.zustand!==2) throw new Error('Gerät bleibt in Zustand '+s.zustand+' statt Leerlauf');
+  if(s.zustand!==2) throw new Error(L.eZustand(s.zustand));
 }
 async function zeigerSetzen(a){
   const b=new Uint8Array(5); b[0]=0x21; new DataView(b.buffer).setUint32(1,a,true);
   await raus(DNLOAD,0,b); await warten(); await zurueckAufLeerlauf();
 }
 async function seiteLoeschen(a){
-  if(a>=GRENZE) throw new Error('Sicherung greift: '+hex(a)+' liegt im geschützten Bereich');
+  if(a>=GRENZE) throw new Error(L.eSperre(hex(a)));
   const b=new Uint8Array(5); b[0]=0x41; new DataView(b.buffer).setUint32(1,a,true);
   await raus(DNLOAD,0,b); await warten(); await zurueckAufLeerlauf();
 }
@@ -514,38 +788,34 @@ async function lesen(adr,len,melde){
     aus.set(s,g); g+=s.length;
     if(melde) melde(g/len,g);
   }
-  if(g!==len) throw new Error('Nur '+g+' von '+len+' Byte gelesen');
-  await zurueckAufLeerlauf();   // sonst bleibt das Gerät in dfuUPLOAD-IDLE
+  if(g!==len) throw new Error(L.eNurGelesen(g,len));
+  await zurueckAufLeerlauf();
   return aus;
 }
-let etwasVeraendert=false;
 async function schreiben(adr,daten,melde){
-  if(adr+daten.length>GRENZE) throw new Error('Sicherung greift: Bereich reicht über '+hex(GRENZE)+' hinaus');
-  await zurueckAufLeerlauf();   // egal woher wir kommen
+  if(adr+daten.length>GRENZE) throw new Error(L.eSperre2(hex(GRENZE)));
+  await zurueckAufLeerlauf();
   const seiten=Math.ceil(daten.length/SEITE);
-  sag('Lösche '+seiten+' Speicherseiten …');
+  sag(L.mLoesche(seiten));
   let n=0;
   for(let a=adr;a<adr+daten.length;a+=SEITE){
     await seiteLoeschen(a); etwasVeraendert=true; n++;
-    if(melde) melde(.35*n/seiten,'Löschen '+n+'/'+seiten);
+    if(melde) melde(.35*n/seiten,L.statLoeschen(n,seiten));
   }
   await abbrechen(); await zeigerSetzen(adr);
-  sag('Schreibe '+daten.length+' Byte …');
+  sag(L.mSchreibe(daten.length));
   let g=0,bl=2;
   while(g<daten.length){
     const s=daten.subarray(g,g+blockgroesse);
     await raus(DNLOAD,bl++,s); await warten(); g+=s.length;
-    if(melde) melde(.35+.65*g/daten.length,'Schreiben '+g+'/'+daten.length+' Byte');
+    if(melde) melde(.35+.65*g/daten.length,L.statSchreiben(g,daten.length));
   }
 }
 function fehlerhilfe(e){
   const m=(e&&e.message)||String(e);
-  if(/antwortet nicht|abgewiesen|transfer/i.test(m)){
-    tipp('Meist ist das Gerät aus dem Aktualisierungsmodus gefallen.');
-    tipp('USB abziehen, zurück auf Seite 1, neu in den Modus bringen, Seite neu laden.');
-  }else if(/NetworkError|disconnect/i.test(m)){
-    tipp('Verbindung abgerissen — Kabel prüfen, möglichst direkt am Rechner anstecken.');
-  }
+  if(/nicht|not responding|rejected|abgewiesen|transfer/i.test(m)){
+    tipp(L.mTippModus); tipp(L.mTippModus2);
+  }else if(/NetworkError|disconnect/i.test(m)) tipp(L.mTippKabel);
 }
 function sicherungSpeichern(){
   const a=document.createElement('a');
@@ -553,9 +823,9 @@ function sicherungSpeichern(){
   a.download=dateiname; a.click();
 }
 
-/* ---------- Aktionen ---------- */
+/* ================== Ablauf ================== */
 async function verbinden(){
-  sag('Suche Geräte im Aktualisierungsmodus …');
+  sag(L.mSuche);
   geraet=await navigator.usb.requestDevice({filters:[{vendorId:0x0483,productId:0xdf11}]});
   await geraet.open();
   if(!geraet.configuration) await geraet.selectConfiguration(1);
@@ -565,165 +835,141 @@ async function verbinden(){
   await geraet.selectAlternateInterface(schnittstelle,0);
   await abbrechen();
   const bez=(s.alternates[0]&&s.alternates[0].interfaceName)||'';
-  sag('Verbunden: '+(geraet.productName||'DFU-Gerät'),'ok');
-  sag('Seriennummer '+(geraet.serialNumber||'unbekannt'));
-  if(bez) sag('Speicher: '+bez);
-  return 'verbunden mit '+(geraet.productName||'DFU-Gerät')+
-         ' · Seriennummer '+(geraet.serialNumber||'unbekannt');
+  sag(L.mVerbunden(geraet.productName||'DFU'),'ok');
+  sag(L.mSeriennummer(geraet.serialNumber||'?'));
+  if(bez) sag(L.mSpeicher(bez));
+  return L.verbundenMit(geraet.productName||'DFU',geraet.serialNumber||'?');
 }
 function verbindungsfehler(e){
   if(e&&e.name==='NotFoundError'){
-    sag('Kein Gerät ausgewählt.','no');
-    tipp('Stand das Gerät in der Liste? Dann musst du die Zeile erst anklicken, dann Verbinden.');
-    tipp('War die Liste leer? Der Kasten unten geht die Ursachen durch.');
+    sag(L.mKeinGeraet,'no'); tipp(L.mTippAnklicken); tipp(L.mTippLeer);
     $('#hilfeFinden').open=true;
-    return 'Kein Gerät ausgewählt. Blinkt der Ring rot?';
+    return L.mKeinGeraet;
   }
-  sag('Verbinden hat nicht geklappt: '+((e&&e.message)||e),'no'); fehlerhilfe(e);
-  return 'Verbinden hat nicht geklappt: '+((e&&e.message)||e);
+  const t=L.mVerbindenFehler((e&&e.message)||e);
+  sag(t,'no'); fehlerhilfe(e); return t;
 }
 $('#btnVerbinden').onclick=async()=>{
-  try{
-    await verbinden();
-    $('#hilfeFinden').open=false;
+  try{ await verbinden(); $('#hilfeFinden').open=false;
     $('#btnVerbinden').disabled=true; $('#btnSichern').disabled=false;
   }catch(e){ verbindungsfehler(e); }
 };
 $('#btnVerbinden4').onclick=async()=>{
-  try{
-    const t=await verbinden();
-    $('#melde4').textContent=t;
+  const m=$('#melde4'); m.dataset.leer='0';
+  try{ m.textContent=await verbinden();
     $('#btnZurueck').disabled=false; $('#btnVerbinden4').disabled=true;
-  }catch(e){ $('#melde4').textContent=verbindungsfehler(e); }
+  }catch(e){ m.textContent=verbindungsfehler(e); }
 };
 $('#btnDirektZurueck').onclick=()=>zeigeSeite(4);
+$('#w1').onclick=()=>zeigeSeite(2);
+$('#w2').onclick=()=>zeigeSeite(3);
+$('#w3').onclick=()=>zeigeSeite(4);
+document.addEventListener('click',ev=>{
+  const z=ev.target.closest('[data-zurueck]'); if(z) zeigeSeite(+z.dataset.zurueck);
+  const k=ev.target.closest('.kopieren');
+  if(k) navigator.clipboard.writeText(k.dataset.text).then(()=>{
+    const a=k.textContent; k.textContent='✓'; setTimeout(()=>k.textContent=a,1400);});
+});
 
 $('#btnSichern').onclick=async()=>{
   if(laeuft) return; laeuft=true; $('#btnSichern').disabled=true;
   try{
-    sag('Lese '+APP_LAENGE+' Byte …');
+    sag(L.mLese(APP_LAENGE));
     original=await lesen(APP_START,APP_LAENGE,(a,g)=>{
-      fort('#fortSichern',a); stand('#standSichern',g+' / '+APP_LAENGE+' Byte');});
-    dateiname='cr4501_original_'+(geraet.serialNumber||'geraet')+'_'+
+      fort('#fortSichern',a); stand('#standSichern',L.statBytes(g,APP_LAENGE));});
+    dateiname='cr4501_original_'+(geraet.serialNumber||'x')+'_'+
       new Date().toISOString().slice(0,10)+'.bin';
     sicherungSpeichern();
-    sag('Gesichert als '+dateiname,'ok');
-    tipp('Heb die Datei auf — sie ist dein Rückweg.');
-    stand('#standSichern','fertig · '+APP_LAENGE+' Byte');
+    sag(L.mGesichert(dateiname),'ok'); tipp(L.mTippHeben);
+    stand('#standSichern',L.statFertig(APP_LAENGE));
     $('#btnSchreiben').disabled=false;
-  }catch(e){
-    sag('Auslesen hat nicht geklappt: '+((e&&e.message)||e),'no');
-    fehlerhilfe(e); $('#btnSichern').disabled=false;
-  }
+  }catch(e){ sag(L.mLesenFehler((e&&e.message)||e),'no'); fehlerhilfe(e);
+    $('#btnSichern').disabled=false; }
   laeuft=false;
 };
 
 $('#btnSchreiben').onclick=async()=>{
   if(laeuft) return; laeuft=true; $('#btnSchreiben').disabled=true;
   try{
-    if(!original) throw new Error('Erst sichern');
+    if(!original) throw new Error(L.eErstSichern);
     const neu=new Uint8Array(original);
     const bytes=s=>Uint8Array.from(s.match(/../g).map(h=>parseInt(h,16)));
-    sag('Prüfe die sieben Änderungsstellen …');
+    sag(L.mPruefe);
     for(const p of DATEN.patches){
       const off=p.addr-APP_START, soll=bytes(p.alt), ist=neu.subarray(off,off+4);
       if(!soll.every((v,i)=>v===ist[i])){
         const g=[...ist].map(b=>b.toString(16).padStart(2,'0')).join('');
-        if(g===p.neu) throw new Error('Die Erweiterung ist bereits auf dem Gerät.');
-        throw new Error('Bei '+hex(p.addr)+' steht '+g+' statt '+p.alt+
-          ' — diese Firmware-Version kenne ich nicht.');
+        if(g===p.neu) throw new Error(L.eSchonDrauf);
+        throw new Error(L.eUnbekannt(hex(p.addr),g,p.alt));
       }
     }
     for(const b of DATEN.blobs){
       const roh=Uint8Array.from(atob(b.b64),c=>c.charCodeAt(0)), off=b.addr-APP_START;
-      if(!neu.subarray(off,off+roh.length).every(v=>v===0xff))
-        throw new Error('Bei '+hex(b.addr)+' liegt schon etwas — vermutlich ist die Erweiterung drauf.');
+      if(!neu.subarray(off,off+roh.length).every(v=>v===0xff)) throw new Error(L.eBelegt(hex(b.addr)));
     }
-    sag('Alles wie erwartet.','ok');
+    sag(L.mWieErwartet,'ok');
     for(const p of DATEN.patches) neu.set(bytes(p.neu),p.addr-APP_START);
     for(const b of DATEN.blobs) neu.set(Uint8Array.from(atob(b.b64),c=>c.charCodeAt(0)),b.addr-APP_START);
     etwasVeraendert=false;
     await schreiben(APP_START,neu,(a,t)=>{fort('#fortSchreiben',a); stand('#standSchreiben',t);});
-    sag('Geschrieben. Lese zur Kontrolle zurück …');
-    stand('#standSchreiben','Kontrolle läuft …');
+    sag(L.mKontrolle); stand('#standSchreiben',L.statKontrolle);
     const probe=await lesen(APP_START,APP_LAENGE,null);
     let ab=-1; for(let i=0;i<neu.length;i++) if(probe[i]!==neu[i]){ab=i;break;}
-    if(ab>=0) throw new Error('Rücklesen weicht ab bei '+hex(APP_START+ab));
-    fort('#fortSchreiben',1); stand('#standSchreiben','fertig und geprüft');
-    sag('Passt. Alle '+APP_LAENGE+' Byte stimmen überein.','ok');
-    $('#w3').disabled=false;
-    zeigeSeite(4);
+    if(ab>=0) throw new Error(L.eAbweichung(hex(APP_START+ab)));
+    fort('#fortSchreiben',1); stand('#standSchreiben',L.statGeprueft);
+    sag(L.mPasst(APP_LAENGE),'ok');
+    $('#w3').disabled=false; zeigeSeite(4);
   }catch(e){
-    sag('Abgebrochen: '+((e&&e.message)||e),'no');
-    if(!etwasVeraendert) tipp('Am Gerät wurde nichts verändert — der Abbruch kam vor dem ersten Löschbefehl.');
-    else tipp('Es wurde bereits geschrieben. Spiel deine Sicherung zurück (Seite 4).');
+    sag(L.mAbgebrochen((e&&e.message)||e),'no');
+    tipp(etwasVeraendert?L.mSchonGeschrieben:L.mNichtsVeraendert);
     fehlerhilfe(e);
-    try{ await abbrechen(); sag('Gerät in den Leerlauf zurückgeholt — ein neuer Versuch ist möglich.'); }
-    catch(e2){ tipp('Das Gerät reagiert nicht mehr. USB abziehen und neu in den Modus bringen.'); }
+    try{ await abbrechen(); sag(L.mErholt); }catch(e2){ tipp(L.mReagiertNicht); }
     $('#btnSchreiben').disabled=false;
   }
   laeuft=false;
 };
 
-$('#btnOriginalHolen').onclick=()=>{
-  if(!original){ alert('In diesem Fenster wurde noch keine Sicherung ausgelesen.'); return; }
-  sicherungSpeichern();
-};
+$('#btnOriginalHolen').onclick=()=>{ if(!original){alert(L.mKeineSicherung); return;} sicherungSpeichern(); };
 $('#btnZurueck').onclick=()=>$('#dateiOriginal').click();
 $('#dateiOriginal').onchange=async ev=>{
   const datei=ev.target.files[0]; if(!datei||laeuft) return; laeuft=true;
   try{
-    if(!geraet) throw new Error('Erst oben auf Gerät suchen klicken');
+    if(!geraet) throw new Error(L.eErstVerbinden);
     const daten=new Uint8Array(await datei.arrayBuffer());
-    if(daten.length!==APP_LAENGE)
-      throw new Error(datei.name+' ist '+daten.length+' Byte groß, erwartet werden '+APP_LAENGE);
-    sag('Spiele '+datei.name+' ein …');
+    if(daten.length!==APP_LAENGE) throw new Error(L.eGroesse(datei.name,daten.length,APP_LAENGE));
+    sag(L.mSpiele(datei.name));
     await schreiben(APP_START,daten,(a,t)=>{fort('#fortZurueck',a); stand('#standZurueck',t);});
-    fort('#fortZurueck',1); stand('#standZurueck','fertig');
-    sag('Original ist wieder drauf.','ok');
-    alert('Fertig — das Original ist wieder auf dem Gerät.');
+    fort('#fortZurueck',1); stand('#standZurueck',L.statFertig2);
+    sag(L.mOriginalDrauf,'ok'); alert(L.mFertigAlert);
   }catch(e){
-    sag('Wiederherstellen hat nicht geklappt: '+((e&&e.message)||e),'no');
-    fehlerhilfe(e);
+    sag(L.mZurueckFehler((e&&e.message)||e),'no'); fehlerhilfe(e);
     try{ await abbrechen(); }catch(e2){}
-    alert('Hat nicht geklappt: '+((e&&e.message)||e));
+    alert(L.mZurueckFehler((e&&e.message)||e));
   }
   ev.target.value=''; laeuft=false;
 };
-
-document.body.addEventListener('click',ev=>{
-  const b=ev.target.closest('.kopieren'); if(!b) return;
-  navigator.clipboard.writeText(b.dataset.text).then(()=>{
-    const alt=b.textContent; b.textContent='Kopiert'; setTimeout(()=>b.textContent=alt,1400);});
-});
 if('usb' in navigator) navigator.usb.addEventListener('disconnect',ev=>{
   if(geraet&&ev.device===geraet){
-    geraet=null;
-    sag('Gerät wurde getrennt.','no');
-    tipp('Nach einem Neustart des Geräts ist das normal — einfach neu suchen.');
-    const m=$('#melde4');
-    if(m){ m.textContent='Verbindung getrennt — Gerät neu in den Aktualisierungsmodus bringen und suchen.';
-      $('#btnZurueck').disabled=true; $('#btnVerbinden4').disabled=false; }
+    geraet=null; sag(L.mGetrennt,'no'); tipp(L.mTippGetrennt);
+    const m=$('#melde4'); m.dataset.leer='0'; m.textContent=L.getrennt;
+    $('#btnZurueck').disabled=true; $('#btnVerbinden4').disabled=false;
     $('#btnVerbinden').disabled=false;
   }
 });
 
-/* ---------- Start ---------- */
-streifenZeichnen();
-browserPruefen();
-treiberseite();
-const knopfNeu=$('#btnNeuLaden');
-if(knopfNeu) knopfNeu.onclick=()=>{
-  try{ sessionStorage.setItem('cr4501_seite','2'); }catch(e){}
-  location.reload();
-};
-let startseite=1;
+/* ================== Start ================== */
+$('#spDe').onclick=()=>sprache('de');
+$('#spEn').onclick=()=>sprache('en');
+let start=1, sp=null;
 try{
-  if(sessionStorage.getItem('cr4501_seite')==='2'){ startseite=2; sessionStorage.removeItem('cr4501_seite'); }
+  sp=sessionStorage.getItem('cr_sprache');
+  if(sessionStorage.getItem('cr_seite')==='2'){ start=2; sessionStorage.removeItem('cr_seite'); }
 }catch(e){}
-zeigeSeite(startseite);
-sag('Bereit.');
-if(startseite===2) sag('Seite neu geladen — der Browser sieht jetzt den aktuellen Treiber.','ok');
+if(!sp) sp=(navigator.language||'de').toLowerCase().startsWith('de')?'de':'en';
+seite=start;
+sprache(sp==='en'?'en':'de');
+sag(L.mBereit);
+if(start===2) sag(L.mNeuGeladen,'ok');
 </script>
 </body>
 </html>
