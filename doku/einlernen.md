@@ -1,8 +1,24 @@
 # RAL-Farben einlernen
 
 Die Farbtabelle ist nicht abgeschrieben, sondern **gemessen**: 216 RAL-Classic-
-Töne von einem Fächer, jede Farbe dreimal, mit Plausibilitätsprüfung.
-Wiederholstreuung im Mittel 0,08 ΔE, im schlechtesten Fall 0,50.
+Töne, jede Farbe dreimal, mit Plausibilitätsprüfung. Wiederholstreuung im
+Mittel 0,08 ΔE, im schlechtesten Fall 0,50.
+
+## Die Vorlage
+
+Gemessen wurde mit einem **originalen RAL® K7 in seidenmatt** — dem
+Standardfächer für RAL Classic.
+
+Das ist kein Detail. **Nachbau-Farbkarten aus dem Zubehörhandel weichen oft
+spürbar ab**, teils um mehrere ΔE, und untereinander sind sie auch nicht
+einheitlich. Wer damit einlernt, schreibt den Fehler der Karte dauerhaft in
+die Tabelle. Wer damit prüft, misst den Fehler der Karte statt den der Farbe.
+
+Dazu kommt der Glanzgrad: seidenmatt, hochglänzend und matt derselben
+RAL-Nummer messen sich unterschiedlich, weil bei 45°/0°-Geometrie der
+Glanzanteil zwar ausgeblendet wird, die Oberfläche das Licht aber trotzdem
+anders streut. Für ein einheitliches Wörterbuch also durchgehend denselben
+Glanzgrad nehmen.
 
 ## Das Werkzeug am PC
 
