@@ -129,9 +129,10 @@ footer a{color:var(--signal)}
   <div class="nr">01</div>
   <div>
     <h2>Gerät in den Aktualisierungsmodus</h2>
-    <p>Es gibt zwei Wege. Beide brauchen vorher <b style="color:var(--schrift)">fünf Sekunden
-    Ruhe</b> — in der Zeit keine Taste anfassen. Wenn der Ring um die Messtaste
-    <b style="color:var(--schrift)">rot blinkt</b>, hat es geklappt: dann sofort loslassen.</p>
+    <p><b style="color:var(--schrift)">Das Gerät muss ausgeschaltet sein.</b> Danach fünf
+    Sekunden lang keine Taste anfassen — das gehört dazu, sonst reagiert es nicht.
+    Dann einer der beiden Wege. Wenn der Ring um die Messtaste
+    <b style="color:var(--schrift)">rot blinkt</b>, hat es geklappt: sofort loslassen.</p>
     <div class="weg">
       <span>A</span>
       <p>Messtaste gedrückt halten, bis der Ring rot zu blinken beginnt. Sofort loslassen.</p>
@@ -141,7 +142,7 @@ footer a{color:var(--signal)}
       <p>Messtaste und Eingabetaste zusammen — die Wippe dafür in der Mitte hineindrücken.
       Das rote Blinken kommt sofort, gleich wieder loslassen.</p>
     </div>
-    <p>Dann per USB anstecken und hier weiter.</p>
+    <p>Der Bildschirm bleibt dabei dunkel, das gehört so. Jetzt per USB anstecken.</p>
     <button id="btnVerbinden">Gerät suchen</button>
   </div>
 </div>
@@ -372,7 +373,7 @@ $('#btnVerbinden').onclick = async () => {
     schritt('#s1','fertig'); schritt('#s2','aktiv');
     $('#btnSichern').disabled = false; $('#btnZurueck').disabled = false;
   }catch(e){ sag('Verbinden hat nicht geklappt: ' + e.message, 'no');
-           sag('Steckt das Gerät im Aktualisierungsmodus? Der Ring muss vorher rot geblinkt haben.'); }
+           sag('War das Gerät vorher aus, und hat der Ring rot geblinkt? Ohne das findet der Browser nichts.'); }
 };
 
 $('#btnSichern').onclick = async () => {
