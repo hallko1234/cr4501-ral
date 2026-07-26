@@ -164,7 +164,7 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
     Ladekabel funktionieren nicht.</figcaption></figure>
 
   <div class="navi">
-    <span></span>
+    <button class="leise" id="btnDirektZurueck">Nur Sicherung einspielen</button>
     <button id="w1">Weiter</button>
   </div>
 </section>
@@ -246,10 +246,12 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   <p>Gerät wieder in den Aktualisierungsmodus bringen (Seite 1), dann hier weiter:</p>
 
   <div class="knopfreihe">
+    <button id="btnVerbinden4">Gerät suchen</button>
     <button class="leise" id="btnOriginalHolen">Sicherung nochmal herunterladen</button>
-    <button class="leise" id="btnZurueck">Sicherung einspielen</button>
+    <button class="leise" id="btnZurueck" disabled>Sicherung einspielen</button>
     <input type="file" id="dateiOriginal" accept=".bin" style="display:none">
   </div>
+  <div class="stand" id="melde4">Noch kein Gerät verbunden.</div>
   <div class="balken"><i id="fortZurueck"></i></div>
   <div class="stand" id="standZurueck"></div>
 
@@ -303,6 +305,17 @@ function zeigeSeite(n){
     d.className = i+1<n ? 'erledigt' : (i+1===n ? 'hier' : '');
   });
   $('#leisteText').textContent='Schritt '+n+' von 4 · '+TITEL[n-1];
+  if(n===4){
+    const m=$('#melde4');
+    if(geraet && geraet.opened){
+      m.textContent='verbunden mit '+(geraet.productName||'DFU-Gerät')+
+        ' · Seriennummer '+(geraet.serialNumber||'unbekannt');
+      $('#btnZurueck').disabled=false; $('#btnVerbinden4').disabled=true;
+    }else{
+      m.textContent='Noch kein Gerät verbunden — erst Gerät suchen.';
+      $('#btnZurueck').disabled=true; $('#btnVerbinden4').disabled=false;
+    }
+  }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('[data-zurueck]').forEach(b=>
@@ -541,32 +554,49 @@ function sicherungSpeichern(){
 }
 
 /* ---------- Aktionen ---------- */
+async function verbinden(){
+  sag('Suche Geräte im Aktualisierungsmodus …');
+  geraet=await navigator.usb.requestDevice({filters:[{vendorId:0x0483,productId:0xdf11}]});
+  await geraet.open();
+  if(!geraet.configuration) await geraet.selectConfiguration(1);
+  const s=geraet.configuration.interfaces[0];
+  schnittstelle=s.interfaceNumber;
+  await geraet.claimInterface(schnittstelle);
+  await geraet.selectAlternateInterface(schnittstelle,0);
+  await abbrechen();
+  const bez=(s.alternates[0]&&s.alternates[0].interfaceName)||'';
+  sag('Verbunden: '+(geraet.productName||'DFU-Gerät'),'ok');
+  sag('Seriennummer '+(geraet.serialNumber||'unbekannt'));
+  if(bez) sag('Speicher: '+bez);
+  return 'verbunden mit '+(geraet.productName||'DFU-Gerät')+
+         ' · Seriennummer '+(geraet.serialNumber||'unbekannt');
+}
+function verbindungsfehler(e){
+  if(e&&e.name==='NotFoundError'){
+    sag('Kein Gerät ausgewählt.','no');
+    tipp('Stand das Gerät in der Liste? Dann musst du die Zeile erst anklicken, dann Verbinden.');
+    tipp('War die Liste leer? Der Kasten unten geht die Ursachen durch.');
+    $('#hilfeFinden').open=true;
+    return 'Kein Gerät ausgewählt. Blinkt der Ring rot?';
+  }
+  sag('Verbinden hat nicht geklappt: '+((e&&e.message)||e),'no'); fehlerhilfe(e);
+  return 'Verbinden hat nicht geklappt: '+((e&&e.message)||e);
+}
 $('#btnVerbinden').onclick=async()=>{
   try{
-    sag('Suche Geräte im Aktualisierungsmodus …');
-    geraet=await navigator.usb.requestDevice({filters:[{vendorId:0x0483,productId:0xdf11}]});
-    await geraet.open();
-    if(!geraet.configuration) await geraet.selectConfiguration(1);
-    const s=geraet.configuration.interfaces[0];
-    schnittstelle=s.interfaceNumber;
-    await geraet.claimInterface(schnittstelle);
-    await geraet.selectAlternateInterface(schnittstelle,0);
-    await abbrechen();
-    const bez=(s.alternates[0]&&s.alternates[0].interfaceName)||'';
-    sag('Verbunden: '+(geraet.productName||'DFU-Gerät'),'ok');
-    sag('Seriennummer '+(geraet.serialNumber||'unbekannt'));
-    if(bez) sag('Speicher: '+bez);
+    await verbinden();
     $('#hilfeFinden').open=false;
     $('#btnVerbinden').disabled=true; $('#btnSichern').disabled=false;
-  }catch(e){
-    if(e&&e.name==='NotFoundError'){
-      sag('Kein Gerät ausgewählt.','no');
-      tipp('Stand das Gerät in der Liste? Dann musst du die Zeile erst anklicken, dann Verbinden.');
-      tipp('War die Liste leer? Der Kasten unten geht die Ursachen durch.');
-      $('#hilfeFinden').open=true;
-    }else{ sag('Verbinden hat nicht geklappt: '+((e&&e.message)||e),'no'); fehlerhilfe(e); }
-  }
+  }catch(e){ verbindungsfehler(e); }
 };
+$('#btnVerbinden4').onclick=async()=>{
+  try{
+    const t=await verbinden();
+    $('#melde4').textContent=t;
+    $('#btnZurueck').disabled=false; $('#btnVerbinden4').disabled=true;
+  }catch(e){ $('#melde4').textContent=verbindungsfehler(e); }
+};
+$('#btnDirektZurueck').onclick=()=>zeigeSeite(4);
 
 $('#btnSichern').onclick=async()=>{
   if(laeuft) return; laeuft=true; $('#btnSichern').disabled=true;
@@ -643,7 +673,7 @@ $('#btnZurueck').onclick=()=>$('#dateiOriginal').click();
 $('#dateiOriginal').onchange=async ev=>{
   const datei=ev.target.files[0]; if(!datei||laeuft) return; laeuft=true;
   try{
-    if(!geraet) throw new Error('Erst auf Seite 3 das Gerät verbinden');
+    if(!geraet) throw new Error('Erst oben auf Gerät suchen klicken');
     const daten=new Uint8Array(await datei.arrayBuffer());
     if(daten.length!==APP_LAENGE)
       throw new Error(datei.name+' ist '+daten.length+' Byte groß, erwartet werden '+APP_LAENGE);
@@ -668,8 +698,14 @@ document.body.addEventListener('click',ev=>{
 });
 if('usb' in navigator) navigator.usb.addEventListener('disconnect',ev=>{
   if(geraet&&ev.device===geraet){
+    geraet=null;
     sag('Gerät wurde getrennt.','no');
-    tipp('Nach einem Neustart des Geräts ist das normal. Zum Weitermachen Seite neu laden.');}
+    tipp('Nach einem Neustart des Geräts ist das normal — einfach neu suchen.');
+    const m=$('#melde4');
+    if(m){ m.textContent='Verbindung getrennt — Gerät neu in den Aktualisierungsmodus bringen und suchen.';
+      $('#btnZurueck').disabled=true; $('#btnVerbinden4').disabled=false; }
+    $('#btnVerbinden').disabled=false;
+  }
 });
 
 /* ---------- Start ---------- */
