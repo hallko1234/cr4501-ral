@@ -115,6 +115,20 @@ Programmbereich am Stück schreiben. Der Bootloader löscht beim ersten
 Schreibbefehl den ganzen Bereich und erwartet danach das vollständige Abbild —
 seitenweise zu schreiben zerstört alles andere.
 
+## Farben selbst einlernen
+
+Die mitgelieferte Tabelle stammt von einem Fächer und einem Gerät. Wer eigene
+Werte will — anderer Fächer, eigenes Gerät, oder einfach zur Kontrolle —
+findet unter [werkzeug/](werkzeug/) das Programm dafür.
+
+Es misst die 216 Farben der Reihe nach ein, prüft Streuung und Doppelmessungen,
+und baut am Ende aus deiner eigenen Sicherung die fertige Firmware. Die
+spielst du hier im Werkzeug unter *Sicherung einspielen* wieder auf.
+
+```
+python ral_einlernen.py COM3 --original cr4501_original_....bin
+```
+
 ## Technische Dokumentation
 
 Wer tiefer einsteigen will — Speicherkarte, Tastensystem, Bildschirmverwaltung,
