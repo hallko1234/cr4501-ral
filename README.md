@@ -112,7 +112,7 @@ noticing. The tool refuses any write access up there.
 216 RAL Classic tones, each colour measured three times. Repeatability
 averaged 0.08 ΔE, worst case 0.50.
 
-Measured with an **original RAL® K7 in semi-matt**. That is not a detail:
+Measured with an **original RAL® K5 in semi-matt**. That is not a detail:
 **replica colour cards from the accessories trade often deviate noticeably**,
 sometimes by several ΔE, and they are not consistent among themselves. If your
 reading disagrees with one of those, the card is usually to blame.
