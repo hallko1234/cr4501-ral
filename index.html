@@ -14,9 +14,9 @@
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{background:var(--grafit);color:var(--schrift);
-  font-family:'Barlow',system-ui,sans-serif;font-size:16px;line-height:1.6;
+  font-family:'Barlow',system-ui,sans-serif;font-size:17.5px;line-height:1.62;
   -webkit-font-smoothing:antialiased}
-.huelle{max-width:720px;margin:0 auto;padding:0 20px 80px}
+.huelle{max-width:800px;margin:0 auto;padding:0 20px 80px}
 code,kbd{font-family:'JetBrains Mono',monospace;font-size:.88em}
 a{color:var(--signal)}
 
@@ -33,7 +33,7 @@ header{padding:14px 0 22px}
 .geraet{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.09em;
   color:var(--gedaempft);text-transform:uppercase;margin:0 0 12px}
 h1{font-family:'Barlow Condensed',sans-serif;font-weight:700;
-  font-size:clamp(30px,5.5vw,46px);line-height:1;letter-spacing:-.01em;
+  font-size:clamp(34px,6vw,54px);line-height:1;letter-spacing:-.01em;
   margin:0;text-transform:uppercase}
 h1 em{font-style:normal;color:var(--signal)}
 #intro{color:var(--gedaempft);margin:16px 0 0}
@@ -49,24 +49,27 @@ h1 em{font-style:normal;color:var(--signal)}
 .seite{display:none;padding:26px 0 0}
 .seite.sichtbar{display:block}
 h2{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
-  letter-spacing:.02em;font-size:26px;margin:0 0 14px;font-weight:600}
+  letter-spacing:.02em;font-size:30px;margin:0 0 14px;font-weight:600}
 h3{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
-  letter-spacing:.02em;font-size:19px;margin:32px 0 10px;font-weight:600}
+  letter-spacing:.02em;font-size:22px;margin:34px 0 10px;font-weight:600}
 p{margin:0 0 14px;color:var(--gedaempft)}
 p b{color:var(--schrift)}
 ol,ul{color:var(--gedaempft);padding-left:22px;margin:0 0 16px}
 li{margin:7px 0} li b{color:var(--schrift)}
 
 .weg{display:grid;grid-template-columns:26px 1fr;gap:12px;margin:0 0 14px;align-items:start}
-.weg span{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+.weg span{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
   color:#101215;background:var(--signal);border-radius:3px;text-align:center;
   line-height:20px;height:20px;margin-top:4px}
 .weg p{margin:0}
 
+.paar{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 18px;align-items:start}
+.paar figure.bild{margin:0}
+@media(max-width:620px){.paar{grid-template-columns:1fr}}
 figure.bild{margin:0 0 18px;border:1px solid var(--linie);border-radius:var(--rand);
   overflow:hidden;background:var(--grafit-hell)}
 figure.bild img{display:block;width:100%;height:auto}
-figure.bild figcaption{padding:9px 14px;font-size:13.5px;color:var(--gedaempft);
+figure.bild figcaption{padding:10px 14px;font-size:14.5px;color:var(--gedaempft);
   border-top:1px solid var(--linie)}
 figure.bild figcaption b{color:var(--schrift)}
 
@@ -75,7 +78,7 @@ figure.bild figcaption b{color:var(--schrift)}
 .kasten p:last-child{margin:0}
 
 button{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
-  letter-spacing:.04em;font-size:16px;font-weight:600;
+  letter-spacing:.04em;font-size:17px;font-weight:600;
   background:var(--signal);color:#101215;border:0;border-radius:var(--rand);
   padding:11px 22px;cursor:pointer;transition:filter .15s,transform .05s}
 button:hover:not(:disabled){filter:brightness(1.12)}
@@ -90,9 +93,9 @@ button:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
 
 .balken{height:3px;background:var(--grafit-hell);border-radius:2px;overflow:hidden;margin:16px 0 4px}
 .balken i{display:block;height:100%;width:0;background:var(--signal);transition:width .2s}
-.stand{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gedaempft);min-height:1.4em}
+.stand{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--gedaempft);min-height:1.4em}
 
-#protokoll{font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.75;
+#protokoll{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.75;
   background:#101216;border:1px solid var(--linie);border-radius:var(--rand);
   padding:13px 15px;max-height:220px;overflow:auto;white-space:pre-wrap;
   color:var(--gedaempft);margin:18px 0 0}
@@ -100,12 +103,12 @@ button:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
 #protokoll .ok{color:var(--gut)} #protokoll .no{color:var(--warn)} #protokoll .tipp{color:#5aa9e6}
 
 details{border:1px solid var(--linie);border-radius:var(--rand);margin:14px 0 0}
-summary{cursor:pointer;padding:11px 15px;font-family:'Barlow Condensed',sans-serif;
-  text-transform:uppercase;letter-spacing:.03em;font-weight:600;font-size:15px;list-style:none}
+summary{cursor:pointer;padding:12px 16px;font-family:'Barlow Condensed',sans-serif;
+  text-transform:uppercase;letter-spacing:.03em;font-weight:600;font-size:16.5px;list-style:none}
 summary::-webkit-details-marker{display:none}
 summary::before{content:'+ ';color:var(--signal);font-family:'JetBrains Mono',monospace}
 details[open] summary::before{content:'– '}
-details .inhalt{padding:0 15px 15px;color:var(--gedaempft);font-size:14.5px}
+details .inhalt{padding:0 15px 15px;color:var(--gedaempft);font-size:15.5px}
 details .inhalt b{color:var(--schrift)}
 
 .befehl{display:flex;gap:8px;margin:12px 0}
@@ -120,10 +123,10 @@ details .inhalt b{color:var(--schrift)}
 ul.legende{list-style:none;padding:0;margin:0 0 16px}
 ul.legende li{display:grid;grid-template-columns:14px 1fr;gap:12px;margin:0 0 12px;align-items:start}
 ul.legende i{width:14px;height:14px;border-radius:3px;margin-top:5px;display:block}
-.anno{display:grid;grid-template-columns:1fr minmax(0,380px) 1fr;margin:0 -46px 22px}
+.anno{display:grid;grid-template-columns:1fr minmax(0,420px) 1fr;margin:0 -50px 24px}
 .anno img{width:100%;display:block;border-radius:4px}
 .anno .sp{position:relative}
-.anno .sp span{position:absolute;transform:translateY(-50%);font-size:13.5px;line-height:1.4;
+.anno .sp span{position:absolute;transform:translateY(-50%);font-size:14.5px;line-height:1.4;
   color:var(--gedaempft);display:block;width:100%}
 .anno .sp span b{color:var(--schrift);display:block;font-weight:600}
 .anno .li span{right:16px;text-align:right;padding-left:2px}
@@ -279,20 +282,26 @@ de:{
    sichtbar, über 5 ist es klar ein anderer Ton. Und wenn erster und zweiter Treffer dicht
    beieinander liegen, lohnt sich der Blick in den Fächer — dann sind sich die beiden Töne
    tatsächlich ähnlich.</p>
-   <figure class="bild"><img src="bilder/beispiel-6004.jpg" alt=""
+   <div class="paar">
+     <figure class="bild"><img src="bilder/beispiel-6004.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>RAL 6004 Blaugruen, 98 %,
      dE 0,7 — so sieht ein eindeutiger Treffer aus.</figcaption></figure>
-   <figure class="bild"><img src="bilder/beispiel-1011.jpg" alt=""
+     <figure class="bild"><img src="bilder/beispiel-1011.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>RAL 1011 Braunbeige, 97 %,
      dE 0,9 — der Zweitplatzierte liegt mit 55 % weit zurück, da gibt es nichts zu
      überlegen.</figcaption></figure>
-   <figure class="bild"><img src="bilder/beispiel-1006.jpg" alt=""
+   </div>
+
+   <div class="paar">
+     <figure class="bild"><img src="bilder/beispiel-1006.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>RAL 1006 Maisgelb, 92 %,
      dE 2,2 — der Ton stimmt, aber der Abstand ist schon zu sehen. Hier lohnt der Blick
      in den Fächer.</figcaption></figure>
-   <figure class="bild"><img src="bilder/hero-faecher.jpg" alt=""
+     <figure class="bild"><img src="bilder/hero-faecher.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>Der Fächer bleibt in der
      Schublade.</figcaption></figure>
+   </div>
+
    <h3>Was es nicht kann</h3>
    <ul>
      <li><b>Nur RAL Classic.</b> Die 216 Töne von RAL 1000 bis 9023. Kein RAL Design,
@@ -358,12 +367,15 @@ de:{
      Taste <b>rot blinkt</b>. In dem Moment sofort loslassen.</p></div>
    <div class="weg"><span>B</span><p>Messtaste und Eingabetaste zusammen — die Wippe dafür
      in der Mitte hineindrücken. Das rote Blinken kommt sofort, gleich loslassen.</p></div>
-   <figure class="bild"><img src="bilder/dfu-druecken.jpg" alt=""
+   <div class="paar">
+     <figure class="bild"><img src="bilder/dfu-druecken.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>Weg A: halten, bis der Ring rot
      wird — und dann sofort loslassen.</figcaption></figure>
-   <figure class="bild"><img src="bilder/dfu-modus.jpg" alt=""
+     <figure class="bild"><img src="bilder/dfu-modus.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>So sieht es aus, wenn es
      geklappt hat.</figcaption></figure>
+   </div>
+
    <div class="kasten"><p><b>Der Bildschirm bleibt dunkel.</b> Das ist kein Fehler, im
      Aktualisierungsmodus zeigt das Gerät nichts an. Nur der Ring blinkt.</p></div>
    <p>Jetzt per USB an den Rechner.</p>
@@ -377,14 +389,17 @@ de:{
    <div class="kasten"><p><b>Hast du das Gerät schon mit dfu-util benutzt?</b> Dann ist
    wahrscheinlich alles da. Geh einfach weiter und komm nur hierher zurück, falls das
    Gerät nicht in der Liste auftaucht.</p></div>
-   <figure class="bild"><img src="bilder/geraetemanager-fehlt.png" alt=""
+   <div class="paar">
+     <figure class="bild"><img src="bilder/geraetemanager-fehlt.png" alt=""
      onerror="this.closest('figure').remove()"><figcaption>So sieht es <b>ohne</b> Treiber
      aus: im Geräte-Manager unter „Andere Geräte", mit Warnzeichen.</figcaption></figure>
-   <p><a href="https://zadig.akeo.ie" target="_blank" rel="noopener">zadig.akeo.ie öffnen
-   und herunterladen</a></p>
-   <figure class="bild"><img src="bilder/zadig-download.png" alt=""
+     <figure class="bild"><img src="bilder/zadig-download.png" alt=""
      onerror="this.closest('figure').remove()"><figcaption>Unter <b>Download</b> die
      aktuelle Version.</figcaption></figure>
+   </div>
+   <p><a href="https://zadig.akeo.ie" target="_blank" rel="noopener">zadig.akeo.ie öffnen
+   und herunterladen</a></p>
+
    <ol>
      <li>Gerät im Aktualisierungsmodus anstecken — der Ring muss rot blinken</li>
      <li>Zadig starten, im Menü <b>Options → List All Devices</b> anhaken</li>
@@ -393,12 +408,15 @@ de:{
      <li>Rechts daneben <b>WinUSB</b> einstellen</li>
      <li><b>Install Driver</b> klicken und warten</li>
    </ol>
-   <figure class="bild"><img src="bilder/zadig-winusb.png" alt=""
+   <div class="paar">
+     <figure class="bild"><img src="bilder/zadig-winusb.png" alt=""
      onerror="this.closest('figure').remove()"><figcaption>Oben das Gerät, darunter
      <b>0483 DF11</b>, rechts <b>WinUSB</b>.</figcaption></figure>
-   <figure class="bild"><img src="bilder/zadig-installiert.png" alt=""
+     <figure class="bild"><img src="bilder/zadig-installiert.png" alt=""
      onerror="this.closest('figure').remove()"><figcaption>Dauert ein paar Sekunden.
      Nicht abbrechen.</figcaption></figure>
+   </div>
+
    <div class="kasten achtung"><p><b>Unbedingt WinUSB.</b> Nicht libusbK, nicht
    libusb-win32. Die funktionieren mit dfu-util, aber der Browser sieht das Gerät damit
    nicht — das ist hier der häufigste Fehler.</p></div>
@@ -568,20 +586,26 @@ en:{
    <p>About <b>dE</b>: below 1.0 the eye sees no difference, from about 2 it becomes
    visible, above 5 it is clearly a different tone. And when the first and second match sit
    close together, check the fan deck — those two tones really are similar.</p>
-   <figure class="bild"><img src="bilder/beispiel-6004.jpg" alt=""
+   <div class="paar">
+     <figure class="bild"><img src="bilder/beispiel-6004.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>RAL 6004 Blaugruen, 98 %,
      dE 0.7 — this is what a clear hit looks like.</figcaption></figure>
-   <figure class="bild"><img src="bilder/beispiel-1011.jpg" alt=""
+     <figure class="bild"><img src="bilder/beispiel-1011.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>RAL 1011 Braunbeige, 97 %,
      dE 0.9 — the runner-up trails far behind at 55 %, nothing to think about
      here.</figcaption></figure>
-   <figure class="bild"><img src="bilder/beispiel-1006.jpg" alt=""
+   </div>
+
+   <div class="paar">
+     <figure class="bild"><img src="bilder/beispiel-1006.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>RAL 1006 Maisgelb, 92 %,
      dE 2.2 — the tone is right, but the distance is already visible. Worth checking the
      fan deck.</figcaption></figure>
-   <figure class="bild"><img src="bilder/hero-faecher.jpg" alt=""
+     <figure class="bild"><img src="bilder/hero-faecher.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>The fan deck stays in the
      drawer.</figcaption></figure>
+   </div>
+
    <h3>What it cannot do</h3>
    <ul>
      <li><b>RAL Classic only.</b> The 216 tones from RAL 1000 to 9023. No RAL Design, no
@@ -643,12 +667,15 @@ en:{
      <b>flashes red</b>. Let go immediately at that moment.</p></div>
    <div class="weg"><span>B</span><p>Press the measure button and the enter button together —
      push the rocker in at its centre. The red flash comes right away; let go at once.</p></div>
-   <figure class="bild"><img src="bilder/dfu-druecken.jpg" alt=""
+   <div class="paar">
+     <figure class="bild"><img src="bilder/dfu-druecken.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>Option A: hold until the ring
      turns red — then let go straight away.</figcaption></figure>
-   <figure class="bild"><img src="bilder/dfu-modus.jpg" alt=""
+     <figure class="bild"><img src="bilder/dfu-modus.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>This is what it looks like when
      it worked.</figcaption></figure>
+   </div>
+
    <div class="kasten"><p><b>The screen stays dark.</b> Nothing is wrong — in update mode
      the device displays nothing at all. Only the ring flashes.</p></div>
    <p>Now plug it into the computer.</p>
@@ -661,14 +688,17 @@ en:{
    <div class="kasten"><p><b>Have you used the device with dfu-util before?</b> Then it's
    probably already set up. Just carry on, and only come back here if the device doesn't
    show up in the list.</p></div>
-   <figure class="bild"><img src="bilder/geraetemanager-fehlt.png" alt=""
+   <div class="paar">
+     <figure class="bild"><img src="bilder/geraetemanager-fehlt.png" alt=""
      onerror="this.closest('figure').remove()"><figcaption>This is what it looks like
      <b>without</b> the driver: under „Other devices" with a warning mark.</figcaption></figure>
-   <p><a href="https://zadig.akeo.ie" target="_blank" rel="noopener">Open zadig.akeo.ie and
-   download it</a></p>
-   <figure class="bild"><img src="bilder/zadig-download.png" alt=""
+     <figure class="bild"><img src="bilder/zadig-download.png" alt=""
      onerror="this.closest('figure').remove()"><figcaption>The current version is under
      <b>Download</b>.</figcaption></figure>
+   </div>
+   <p><a href="https://zadig.akeo.ie" target="_blank" rel="noopener">Open zadig.akeo.ie and
+   download it</a></p>
+
    <ol>
      <li>Plug in the device in update mode — the ring must be flashing red</li>
      <li>Start Zadig, tick <b>Options → List All Devices</b></li>
@@ -677,12 +707,15 @@ en:{
      <li>Set <b>WinUSB</b> on the right</li>
      <li>Click <b>Install Driver</b> and wait</li>
    </ol>
-   <figure class="bild"><img src="bilder/zadig-winusb.png" alt=""
+   <div class="paar">
+     <figure class="bild"><img src="bilder/zadig-winusb.png" alt=""
      onerror="this.closest('figure').remove()"><figcaption>Device at the top,
      <b>0483 DF11</b> below it, <b>WinUSB</b> on the right.</figcaption></figure>
-   <figure class="bild"><img src="bilder/zadig-installiert.png" alt=""
+     <figure class="bild"><img src="bilder/zadig-installiert.png" alt=""
      onerror="this.closest('figure').remove()"><figcaption>Takes a few seconds. Don't
      interrupt it.</figcaption></figure>
+   </div>
+
    <div class="kasten achtung"><p><b>It must be WinUSB.</b> Not libusbK, not libusb-win32.
    Those work with dfu-util, but the browser won't see the device — this is the most common
    mistake here.</p></div>
