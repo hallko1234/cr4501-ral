@@ -1,5 +1,14 @@
 # Dokumentation
 
+> **English readers:** this documentation is in German, but its substance is
+> addresses, byte sequences and tables — `0x0800A9B4 · 90 f8 70 02 →
+> 00 20 00 bf` reads the same in any language. Chapters cover the memory map,
+> the button system and where the factory lock sits, the screen handling, the
+> RAL screen and its table format, writing above the DFU boundary, the USB
+> protocol, and how the 216 colours were measured. Everything is verified on
+> the device or in the flash dump.
+
+
 Was beim Erschließen der CR4501-Firmware herausgekommen ist. Alle Adressen
 sind am Gerät oder im Flash-Abzug verifiziert, nicht geraten. Wo etwas
 unsicher ist, steht es dabei.
