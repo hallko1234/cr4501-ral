@@ -115,6 +115,17 @@ Programmbereich am Stück schreiben. Der Bootloader löscht beim ersten
 Schreibbefehl den ganzen Bereich und erwartet danach das vollständige Abbild —
 seitenweise zu schreiben zerstört alles andere.
 
+## Technische Dokumentation
+
+Wer tiefer einsteigen will — Speicherkarte, Tastensystem, Bildschirmverwaltung,
+das Einlernen der Farben, das USB-Protokoll und wie der permanente Speicher
+beschrieben wird:
+
+**→ [doku/](doku/)**
+
+Alle Adressen dort sind am Gerät oder im Flash-Abzug verifiziert. Es steht
+auch dabei, was schiefgegangen ist und warum — das erspart die teuren Umwege.
+
 ## Haftung
 
 Ein Feierabendprojekt, kein Produkt von 3nh, keine Garantie auf gar nichts.
