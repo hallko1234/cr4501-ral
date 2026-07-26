@@ -1,4 +1,4 @@
-# Welches RAL ist das?
+# Colorimeter CR4501 · RAL Hack
 
 Das **3nh CR4501** misst Farben sehr genau — nur sagt es einem nicht, welcher
 RAL-Ton dabei herauskommt. Dafür braucht es sonst Handy, App und Geduld.
@@ -7,14 +7,28 @@ Diese Erweiterung legt die Antwort direkt aufs Display: Nach jeder Messung
 steht dort die nächstliegende RAL-Classic-Farbe mit Namen und wie gut sie
 passt. Messen, ablesen, weiter.
 
+<br>
+
+<div align="center">
+
+### [▶  Werkzeug öffnen und loslegen](https://hallko1234.github.io/cr4501-ral/)
+
+[![Werkzeug öffnen](https://img.shields.io/badge/hallko1234.github.io%2Fcr4501--ral-Werkzeug%20öffnen-f7d117?style=for-the-badge&labelColor=16181c)](https://hallko1234.github.io/cr4501-ral/)
+
+**Läuft im Browser · Chrome oder Edge · fünf Minuten · jederzeit rückgängig**
+
+</div>
+
+<br>
+
+Das Werkzeug führt dich Schritt für Schritt durch: Gerät in den
+Aktualisierungsmodus, Treiber prüfen, **erst sichern**, dann einspielen,
+testen. Es wird nichts hochgeladen, es gibt keinen Server, und die Firmware
+deines Geräts verlässt deinen Rechner nicht.
+
 Nebenbei werden die Tasten freigegeben, die die Werksfirmware auf den
 Messansichten sperrt — links, rechts und die Eingabetaste tun danach das,
 was man von ihnen erwartet.
-
-**→ [Werkzeug öffnen](https://hallko1234.github.io/cr4501-ral/)**
-
-Alles läuft im Browser. Es wird nichts hochgeladen, es gibt keinen Server,
-und die Firmware deines Geräts verlässt deinen Rechner nicht.
 
 ---
 
@@ -202,3 +216,11 @@ Ohne Browser geht es genauso:
 ```
 dfu-util -a 0 -s 0x08004000 -D deine_sicherung.bin
 ```
+
+---
+
+<div align="center">
+
+### [▶  Werkzeug öffnen](https://hallko1234.github.io/cr4501-ral/)
+
+</div>
