@@ -59,10 +59,59 @@ uint16_t ral;          // 1000 … 9023
 uint16_t rgb;          // RGB565 für den Hintergrund
 ```
 
-Die Namen liegen als gemeinsamer Textblock mit einer Vorlage dahinter: Bytes
-ab `0x80` in der Vorlage sind Verweise auf Wortbausteine. Anders hätten 216
-deutsche Farbnamen nicht in den freien Speicher gepasst — der ganze Block
-inklusive Namen sind 3732 Byte.
+## Die Namen sind komprimiert
+
+216 deutsche Farbnamen hätten als Klartext nicht in den freien Speicher
+gepasst. Deshalb liegen sie in zwei Teilen.
+
+**Der Bausteinblock** (`Kopf+0x0C`, 226 Byte) enthält 40 nullterminierte
+Wortstücke:
+
+```
+rau        gruen      blau       Verkehrs   orange     gelb
+Signal     chwarz     Perl       rot        violett    weiss
+Leucht     Pastell    eige       uerkis     ein        Gruen
+liv        aluminium  ell        Gelb       urpur      Tele
+Licht      Graphit    Bla        rosa       beer       enb
+nen        Sch        Ocker      nster      Rot        ief
+ach        nzian      Weiss      upfer
+```
+
+**Die Vorlage** (`Kopf+0x14`, 1282 Byte) enthält je Farbe eine
+nullterminierte Bytefolge in derselben Reihenfolge wie die Einträge. Darin
+gilt:
+
+| Byte | Bedeutung |
+|---|---|
+| `< 0x80` | Zeichen im Klartext |
+| `>= 0x80` | Baustein Nummer `byte − 0x80` |
+
+Beispiel, der erste Name:
+
+```
+91 62 8e 00
+│  │  └── Baustein 0x0E = 14 → "eige"
+│  └───── Zeichen 'b'
+└──────── Baustein 0x11 = 17 → "Gruen"
+                              = "Gruenbeige"   (RAL 1000)
+```
+
+So kommt der gesamte Block auf 3732 Byte:
+
+| Teil | Größe |
+|---|---|
+| Kopf | 32 B |
+| 216 Einträge à 10 B | 2160 B |
+| Bausteine | 226 B |
+| Vorlage | 1282 B |
+| Ausrichtung | 32 B |
+
+Umlaute gibt es nicht — der Zeichensatz des Geräts ist GB2312 plus ASCII.
+Deshalb steht auf dem Display `Gruengrau` und nicht `Grüngrau`.
+
+Wer die Tabelle neu erzeugt, muss die Kodierung nicht nachbauen: Die Namen
+ändern sich beim Nachmessen ja nicht. `werkzeug/firmware_bauen.py` nimmt die
+vorhandene Vorlage und ersetzt darin nur L, a, b und die Anzeigefarbe.
 
 ## Was der Code tut
 
