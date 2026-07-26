@@ -150,16 +150,17 @@ ul.legende i{width:14px;height:14px;border-radius:3px;margin-top:5px;display:blo
   .anno{margin:0 0 22px;grid-template-columns:1fr minmax(0,340px) 1fr}
 }
 @media(max-width:900px){
-  /* Beschriftung unter das Bild, damit seitlich nichts abgeschnitten wird */
-  .anno{display:block;margin:0 0 22px}
-  .anno img{max-width:360px;margin:0 auto 16px}
+  /* Bild zuerst, darunter alle fuenf Beschriftungen untereinander */
+  .anno{display:flex;flex-direction:column;margin:0 0 22px}
+  .anno img{order:-1;max-width:340px;margin:0 auto 20px;display:block}
   .anno .sp{position:static;margin:0}
-  .anno .sp span{position:static!important;transform:none!important;
-    left:auto!important;right:auto!important;top:auto!important;
-    width:auto!important;text-align:left!important;padding:0;margin:0 0 11px;
-    display:grid;grid-template-columns:16px 1fr;gap:11px;align-items:start}
-  .anno .sp span::after{position:static;width:14px;height:3px;margin-top:9px;
-    border-radius:2px;align-self:start}
+  .anno .sp span{position:relative!important;display:block!important;
+    transform:none!important;left:auto!important;right:auto!important;top:auto!important;
+    width:auto!important;text-align:left!important;
+    padding:0 0 0 26px;margin:0 0 13px;font-size:15px}
+  .anno .sp span b{display:block;margin:0 0 1px}
+  .anno .sp span::after{position:absolute;left:0;top:10px;width:17px;height:3px;
+    border-radius:2px;margin:0}
 }
 footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   color:var(--gedaempft);font-size:13.5px}
