@@ -6,7 +6,7 @@ Mittel 0,08 ΔE, im schlechtesten Fall 0,50.
 
 ## Die Vorlage
 
-Gemessen wurde mit einem **originalen RAL® K7 in seidenmatt** — dem
+Gemessen wurde mit einem **originalen RAL® K5 in seidenmatt** — dem
 Standardfächer für RAL Classic.
 
 Das ist kein Detail. **Nachbau-Farbkarten aus dem Zubehörhandel weichen oft
