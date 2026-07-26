@@ -26,8 +26,9 @@ und die Firmware deines Geräts verlässt deinen Rechner nicht.
 
 ## In den Aktualisierungsmodus
 
-Das ist der einzige Handgriff, der etwas Gefühl braucht. Zwei Wege, beide
-brauchen vorher **fünf Sekunden Ruhe** — in der Zeit keine Taste anfassen.
+Das ist der einzige Handgriff, der etwas Gefühl braucht. **Das Gerät muss
+dafür ausgeschaltet sein.** Danach fünf Sekunden lang keine Taste anfassen —
+das gehört dazu, sonst reagiert es nicht. Erst dann einer der beiden Wege.
 
 **Weg A** — Messtaste gedrückt halten, bis der Ring um die Taste **rot
 blinkt**. Sofort loslassen.
