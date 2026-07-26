@@ -12,7 +12,9 @@ unsicher ist, steht es dabei.
 | [ral-bildschirm.md](ral-bildschirm.md) | Aufbau des eigenen Bildschirms, Tabellenformat |
 | [permanenter-speicher.md](permanenter-speicher.md) | Schreiben oberhalb 0x08030000, der Loader und seine Gefahr |
 | [usb-protokoll.md](usb-protokoll.md) | Binärframes, Kommandos, Debug-Ausgabe umleiten |
-| [einlernen.md](einlernen.md) | Wie die 216 Farben gemessen wurden, PC-Werkzeug |
+| [einlernen.md](einlernen.md) | Farben einmessen, Prüfungen, und wie daraus die Firmware entsteht |
+
+Die Programme dazu liegen unter [../werkzeug/](../werkzeug/).
 
 ## Wie das entstanden ist
 
