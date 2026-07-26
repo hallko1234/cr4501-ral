@@ -12,7 +12,7 @@
   --schrift:#e7e9ec;--gedaempft:#8f959f;
   --signal:#f7d117;--warn:#e8622a;--gut:#3fbf7f;--rand:6px}
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
+html,body{margin:0;padding:0;overflow-x:hidden}
 body{background:var(--grafit);color:var(--schrift);
   font-family:'Barlow',system-ui,sans-serif;font-size:17.5px;line-height:1.62;
   -webkit-font-smoothing:antialiased}
@@ -146,14 +146,20 @@ ul.legende i{width:14px;height:14px;border-radius:3px;margin-top:5px;display:blo
 .anno .re span::after{left:-11px}
 .anno .sp span.o{color:#fe7e27} .anno .sp span.g{color:#f5d90a}
 .anno .sp span.r{color:#df2228} .anno .sp span.b{color:#6a78e0} .anno .sp span.n{color:#20b04e}
-@media(max-width:860px){ .anno{margin:0 0 22px;grid-template-columns:1fr minmax(0,320px) 1fr} }
-@media(max-width:760px){
-  .anno{display:block}
-  .anno .sp{margin:10px 0 0}
-  .anno .sp span{position:static;transform:none;text-align:left!important;width:auto;
-    padding:0 0 0 18px;margin:0 0 10px}
-  .anno .sp span::after{left:0;top:8px;width:10px}
-  .anno img{max-width:340px;margin:0 auto}
+@media(max-width:980px){
+  .anno{margin:0 0 22px;grid-template-columns:1fr minmax(0,340px) 1fr}
+}
+@media(max-width:900px){
+  /* Beschriftung unter das Bild, damit seitlich nichts abgeschnitten wird */
+  .anno{display:block;margin:0 0 22px}
+  .anno img{max-width:360px;margin:0 auto 16px}
+  .anno .sp{position:static;margin:0}
+  .anno .sp span{position:static!important;transform:none!important;
+    left:auto!important;right:auto!important;top:auto!important;
+    width:auto!important;text-align:left!important;padding:0;margin:0 0 11px;
+    display:grid;grid-template-columns:16px 1fr;gap:11px;align-items:start}
+  .anno .sp span::after{position:static;width:14px;height:3px;margin-top:9px;
+    border-radius:2px;align-self:start}
 }
 footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   color:var(--gedaempft);font-size:13.5px}
