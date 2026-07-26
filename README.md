@@ -123,3 +123,47 @@ Kalibrierung deines Geräts bleibt in jedem Fall unberührt.
 
 Wenn das Werkzeug bei dir abbricht, weil es eine Firmware-Version nicht
 kennt: melde dich, dann schaue ich sie mir an.
+
+---
+
+## Treiber und Systeme im Überblick
+
+Das Werkzeug prüft beim Öffnen selbst, was auf deinem System fehlt, und blendet
+die passende Anleitung ein. Zur Übersicht:
+
+| System | Was nötig ist |
+|---|---|
+| **Windows** | einmalig WinUSB über [Zadig](https://zadig.akeo.ie) |
+| **macOS** | nichts |
+| **Linux** | eine udev-Regel, damit das Gerät nicht nur root gehört |
+| **Android** | OTG-Adapter, klappt nicht auf jedem Gerät |
+| **iPhone / iPad** | geht nicht — USB ist dort systemweit gesperrt, auch in Chrome |
+
+Beim Browser gibt es keine Wahl: **Chrome oder Edge**, ab Version 89. Firefox
+und Safari unterstützen WebUSB nicht und haben angekündigt, das auch nicht zu
+tun.
+
+### Die häufigste Stolperfalle unter Windows
+
+In Zadig stehen mehrere Treiber zur Auswahl. **Nur WinUSB funktioniert im
+Browser.** libusbK und libusb-win32 arbeiten zwar mit dfu-util, aber Chrome
+sieht das Gerät damit nicht. Wer vorher dfu-util eingerichtet hat, hat
+möglicherweise den falschen erwischt — dann in Zadig einfach nochmal auf
+WinUSB wechseln. dfu-util läuft danach weiterhin.
+
+## Wenn etwas schiefgeht
+
+Der Bootloader des Geräts sitzt in einem eigenen Speicherbereich, den weder
+dieses Werkzeug noch dfu-util beschreiben können. **Du kommst deshalb immer
+wieder in den Aktualisierungsmodus**, auch wenn ein Schreibvorgang mitten
+drin abbricht.
+
+1. USB trennen, wieder anstecken
+2. Gerät neu in den Aktualisierungsmodus bringen
+3. Seite neu laden, verbinden, Schritt 4 mit deiner Sicherung
+
+Ohne Browser geht es genauso:
+
+```
+dfu-util -a 0 -s 0x08004000 -D deine_sicherung.bin
+```
