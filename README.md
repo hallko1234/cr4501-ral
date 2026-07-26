@@ -14,11 +14,19 @@ how well it matches. Measure, read, move on.
 
 <div align="center">
 
-### [▶  Open the tool and get started](https://hallko1234.github.io/cr4501-ral-hack/)
+<table>
+<tr><td align="center">
 
-[![Open the tool](https://img.shields.io/badge/hallko1234.github.io%2Fcr4501--ral--hack-Open%20the%20tool-f7d117?style=for-the-badge&labelColor=16181c)](https://hallko1234.github.io/cr4501-ral-hack/)
+# 🔴 &nbsp; [START THE TOOL](https://hallko1234.github.io/cr4501-ral-hack/) &nbsp; 🔴
 
-**Runs in the browser · Chrome or Edge · five minutes · fully reversible**
+### Everything runs in your browser — nothing is uploaded
+
+[![Open the tool](https://img.shields.io/badge/▶%20START%20THE%20TOOL-hallko1234.github.io-f7d117?style=for-the-badge&labelColor=e8622a&color=f7d117)](https://hallko1234.github.io/cr4501-ral-hack/)
+
+**Chrome or Edge · five minutes · fully reversible**
+
+</td></tr>
+</table>
 
 </div>
 
