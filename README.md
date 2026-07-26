@@ -129,6 +129,16 @@ spielst du hier im Werkzeug unter *Sicherung einspielen* wieder auf.
 python ral_einlernen.py COM3 --original cr4501_original_....bin
 ```
 
+## Referenzdateien
+
+Wer selbst disassemblieren oder weiterbauen will, findet unter
+[referenz/](referenz/) den Bildschirmcode, die Farbtabelle und die
+Originalabbilder aus der Entwicklung.
+
+**Nichts davon ist zum blinden Aufspielen gedacht** — insbesondere der Loader
+nicht, der trägt die Werkskalibrierung eines bestimmten Geräts mit sich. Die
+Gründe stehen dort im README.
+
 ## Technische Dokumentation
 
 Wer tiefer einsteigen will — Speicherkarte, Tastensystem, Bildschirmverwaltung,
