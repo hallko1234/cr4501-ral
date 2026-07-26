@@ -129,19 +129,27 @@ footer a{color:var(--signal)}
   <div class="nr">01</div>
   <div>
     <h2>Gerät in den Aktualisierungsmodus</h2>
-    <p><b style="color:var(--schrift)">Das Gerät muss ausgeschaltet sein.</b> Danach fünf
-    Sekunden lang keine Taste anfassen — das gehört dazu, sonst reagiert es nicht.
-    Dann einer der beiden Wege. Wenn der Ring um die Messtaste
-    <b style="color:var(--schrift)">rot blinkt</b>, hat es geklappt: sofort loslassen.</p>
+    <p>Der Ablauf ist immer derselbe, und der zweite Schritt ist der, den alle
+    überspringen.</p>
     <div class="weg">
-      <span>A</span>
-      <p>Messtaste gedrückt halten, bis der Ring rot zu blinken beginnt. Sofort loslassen.</p>
+      <span>1</span>
+      <p><b style="color:var(--schrift)">Ausschalten.</b> Messtaste lange drücken, bis das
+      Gerät ausgeht.</p>
     </div>
     <div class="weg">
-      <span>B</span>
-      <p>Messtaste und Eingabetaste zusammen — die Wippe dafür in der Mitte hineindrücken.
-      Das rote Blinken kommt sofort, gleich wieder loslassen.</p>
+      <span>2</span>
+      <p><b style="color:var(--schrift)">Mindestens fünf Sekunden warten.</b> Nichts anfassen.
+      Ohne diese Pause reagiert das Gerät im nächsten Schritt nicht.</p>
     </div>
+    <div class="weg">
+      <span>3</span>
+      <p><b style="color:var(--schrift)">Messtaste wieder lange halten</b>, bis der Ring um die
+      Taste <b style="color:var(--schrift)">rot blinkt</b>. Sofort loslassen — fertig, das ist
+      der Aktualisierungsmodus.</p>
+    </div>
+    <p class="klein">Es geht auch anders herum: nach dem Ausschalten und den fünf Sekunden
+    Messtaste und Eingabetaste zusammen drücken — die Wippe dafür in der Mitte
+    hineindrücken. Das rote Blinken kommt dann sofort, gleich wieder loslassen.</p>
     <p>Der Bildschirm bleibt dabei dunkel, das gehört so. Jetzt per USB anstecken.</p>
     <button id="btnVerbinden">Gerät suchen</button>
   </div>
@@ -373,7 +381,7 @@ $('#btnVerbinden').onclick = async () => {
     schritt('#s1','fertig'); schritt('#s2','aktiv');
     $('#btnSichern').disabled = false; $('#btnZurueck').disabled = false;
   }catch(e){ sag('Verbinden hat nicht geklappt: ' + e.message, 'no');
-           sag('War das Gerät vorher aus, und hat der Ring rot geblinkt? Ohne das findet der Browser nichts.'); }
+           sag('War das Gerät vorher aus, hast du fünf Sekunden gewartet, und hat der Ring rot geblinkt? Ohne das findet der Browser nichts.'); }
 };
 
 $('#btnSichern').onclick = async () => {
