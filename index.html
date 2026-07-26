@@ -117,6 +117,9 @@ details .inhalt b{color:var(--schrift)}
 .melde.no{background:rgba(232,98,42,.12);border:1px solid var(--warn)}
 .melde.ok{background:rgba(63,191,127,.1);border:1px solid var(--gut)}
 .melde b{color:var(--schrift)}
+ul.legende{list-style:none;padding:0;margin:0 0 16px}
+ul.legende li{display:grid;grid-template-columns:14px 1fr;gap:12px;margin:0 0 12px;align-items:start}
+ul.legende i{width:14px;height:14px;border-radius:3px;margin-top:5px;display:block}
 footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   color:var(--gedaempft);font-size:13.5px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -135,9 +138,17 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   <p class="geraet">3nh CR4501 · Color Reader</p>
   <h1 id="titel"></h1>
   <p id="intro"></p>
-  <div id="leiste"><div></div><div></div><div></div><div></div></div>
+  <div id="leiste"><div></div><div></div><div></div><div></div><div></div></div>
   <p id="leisteText"></p>
 </header>
+
+<section class="seite" id="seite0">
+  <div id="t0"></div>
+  <div class="navi">
+    <span></span>
+    <button id="wStart"></button>
+  </div>
+</section>
 
 <section class="seite" id="seite1">
   <div id="browserWarnung"></div>
@@ -151,7 +162,7 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
 <section class="seite" id="seite2">
   <div id="t2"></div>
   <div class="navi">
-    <button class="leise" data-zurueck="1"></button>
+    <button class="leise" data-zurueck="3"></button>
     <button id="w2"></button>
   </div>
 </section>
@@ -188,7 +199,7 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   <div class="stand" id="standZurueck"></div>
   <div id="t4b"></div>
   <div class="navi">
-    <button class="leise" data-zurueck="3"></button>
+    <button class="leise" data-zurueck="4"></button>
     <span></span>
   </div>
 </section>
@@ -213,8 +224,81 @@ de:{
    Draußen auf der Baustelle, mit Handschuhen, ist das keine gute Idee.
    Dieser Umbau bringt die Antwort dorthin, wo sie hingehört: <b>aufs Display</b>.
    Messen, ablesen, weiter.`,
- schritte:['Aktualisierungsmodus','Treiber','Sichern und einspielen','Testen'],
- schrittText:(n,t)=>'Schritt '+n+' von 4 · '+t,
+ losGehts:'Los geht\'s',
+ s0:`<h2>Was das bringt</h2>
+   <figure class="bild"><img src="bilder/hero-faecher.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Der Fächer bleibt in der
+     Schublade.</figcaption></figure>
+   <h3>Wie es ab Werk ist</h3>
+   <p>Das CR4501 misst sauber und liefert dir L*a*b*, dE und einen Farbraumvergleich.
+   Was es <b>nicht</b> tut: dir sagen, welcher RAL-Ton das ist. Dafür ist die Handy-App
+   gedacht — Bluetooth koppeln, App öffnen, Messung übertragen. Auf der Baustelle, mit
+   Handschuhen und bei Sonnenlicht, ist das umständlich bis unmöglich.</p>
+   <h3>Wie es danach ist</h3>
+   <p>Nach der Messung steht die Antwort <b>direkt auf dem Display</b>: RAL-Nummer, der
+   deutsche Farbname, wie gut es passt, und der zweitbeste Treffer. Kein Handy, kein
+   Koppeln, keine App. Und die Tasten links, rechts und Eingabe, die das Gerät auf den
+   Messansichten sperrt, funktionieren wieder.</p>
+   <h3>Was auf dem Display steht</h3>
+   <figure class="bild"><img src="bilder/anzeige-erklaert.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Fünf Angaben auf einen
+     Blick.</figcaption></figure>
+   <ul class="legende">
+     <li><i style="background:#e03131"></i><b>RAL-Nummer</b> — der am besten passende Ton
+       aus 216 eingemessenen RAL-Classic-Farben. Der Hintergrund zeigt die Farbe.</li>
+     <li><i style="background:#f08c00"></i><b>Übereinstimmung in Prozent</b> — grob
+       gerechnet aus dem Farbabstand. Über 95 % heißt: der Ton ist es mit hoher
+       Sicherheit.</li>
+     <li><i style="background:#4263eb"></i><b>dE</b> — der eigentliche Farbabstand.
+       Unter 1,0 sieht das Auge keinen Unterschied mehr, ab etwa 2 wird es sichtbar,
+       über 5 ist es klar ein anderer Ton.</li>
+     <li><i style="background:#2f9e44"></i><b>Farbname</b> — die deutsche Bezeichnung,
+       also Gruengrau statt nur 7009. Ohne Umlaute, das Gerät kann sie nicht darstellen.</li>
+     <li><i style="background:#fab005"></i><b>Zweitbester Treffer</b> — die nächste
+       Möglichkeit mit ihrer Prozentzahl. Liegen beide dicht beieinander, lohnt der Blick
+       in den Fächer.</li>
+   </ul>
+   <figure class="bild"><img src="bilder/beispiel-6004.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>RAL 6004 Blaugruen, 98 %,
+     dE 0,7 — eindeutig.</figcaption></figure>
+   <figure class="bild"><img src="bilder/beispiel-1011.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>RAL 1011 Braunbeige, 97 %,
+     dE 0,9 — der Zweitplatzierte liegt mit 55 % weit zurück.</figcaption></figure>
+   <h3>Was es nicht kann</h3>
+   <ul>
+     <li><b>Nur RAL Classic.</b> Die 216 Töne von RAL 1000 bis 9023. Kein RAL Design,
+       kein NCS, kein Pantone — dafür ist im Speicher kein Platz.</li>
+     <li><b>Die Werte stammen von einem Fächer und einem Gerät.</b> Fächer vergilben,
+       jedes Messgerät hat seine eigene Kalibrierung. Für „welcher RAL-Ton ist das
+       ungefähr" reicht das gut. Für eine Abnahme oder einen Reklamationsfall nimmst du
+       weiterhin den Fächer in die Hand.</li>
+     <li><b>Glanz und Struktur stören.</b> Bei Hochglanz oder grober Struktur streuen die
+       Messwerte, dann sinkt die Prozentzahl — das Gerät ist ehrlich, nicht kaputt.</li>
+     <li><b>Metallic und Effektlacke</b> funktionieren grundsätzlich nicht, weder mit noch
+       ohne diesen Umbau.</li>
+   </ul>
+   <h3>Und die Risiken</h3>
+   <p>Ehrlich, ohne Schönfärberei:</p>
+   <ul>
+     <li><b>Es ist ein Eingriff in die Gerätefirmware.</b> Deine Garantie interessiert das
+       vermutlich, falls sie noch läuft.</li>
+     <li><b>Die Kalibrierung bleibt unberührt.</b> Das Werkzeug schreibt ausschließlich in
+       den Programmbereich und verweigert jeden Zugriff auf den Speicher ab
+       <code>0x08030000</code>, wo Startbild, Einstellungen und die Werkskalibrierung
+       liegen. Das ist fest im Code, nicht bloß eine Absichtserklärung.</li>
+     <li><b>Vor dem ersten Schreibvorgang wird deine Firmware gesichert</b> und dir als
+       Datei gegeben. Damit kommst du jederzeit zurück.</li>
+     <li><b>Ein abgebrochener Schreibvorgang macht das Gerät nicht kaputt.</b> Der
+       Bootloader liegt in einem eigenen Bereich, den nichts überschreiben kann — du
+       kommst immer wieder in den Aktualisierungsmodus.</li>
+     <li><b>Trotzdem:</b> Das ist ein Bastelprojekt, kein geprüftes Produkt. Wenn dein
+       Gerät im täglichen Einsatz Geld verdient, überleg dir, ob du das jetzt machen
+       willst.</li>
+   </ul>
+   <p>Der ganze Vorgang dauert etwa fünf Minuten und lässt sich vollständig rückgängig
+   machen.</p>`,
+ schritte:['Überblick','Aktualisierungsmodus','Treiber','Sichern und einspielen','Testen'],
+ schrittText:(n,t)=>'Schritt '+n+' von 5 · '+t,
  weiter:'Weiter', zurueck:'Zurück', direktZurueck:'Nur Sicherung einspielen',
  verbinden:'1 · Gerät suchen', sichern:'2 · Auslesen und sichern',
  schreiben:'3 · Erweiterung einspielen',
@@ -227,13 +311,13 @@ de:{
  hilfeFindenTitel:'Es steht nichts in der Geräteliste',
  hilfeFinden:`<ol>
    <li><b>Blinkt der Ring rot?</b> Sonst ist das Gerät nicht im Aktualisierungsmodus —
-     zurück zu Seite 1.</li>
+     zurück zu Seite 2.</li>
    <li><b>Zu spät losgelassen?</b> Beim roten Blinken muss die Taste sofort los, sonst
      startet das Gerät ganz normal.</li>
    <li><b>Ladekabel statt Datenkabel.</b> Viele USB-Kabel führen nur Strom. Nimm eines,
      mit dem schon einmal Daten übertragen wurden.</li>
    <li><b>USB-Verteiler dazwischen.</b> Direkt am Rechner anstecken.</li>
-   <li><b>Treiber</b> — zurück auf Seite 2.</li></ol>`,
+   <li><b>Treiber</b> — zurück auf Seite 3.</li></ol>`,
  s1:`<h2>Gerät in den Aktualisierungsmodus</h2>
    <p>Der einzige Handgriff, der etwas Gefühl braucht. Beim ersten Mal klappt er selten
    auf Anhieb — das ist normal, probier ihn ruhig zwei-, dreimal.</p>
@@ -367,7 +451,7 @@ de:{
  mPasst:n=>'Passt. Alle '+n+' Byte stimmen überein.',
  mAbgebrochen:m=>'Abgebrochen: '+m,
  mNichtsVeraendert:'Am Gerät wurde nichts verändert — der Abbruch kam vor dem ersten Löschbefehl.',
- mSchonGeschrieben:'Es wurde bereits geschrieben. Spiel deine Sicherung zurück (Seite 4).',
+ mSchonGeschrieben:'Es wurde bereits geschrieben. Spiel deine Sicherung zurück (Seite 5).',
  mErholt:'Gerät in den Leerlauf zurückgeholt — ein neuer Versuch ist möglich.',
  mReagiertNicht:'Das Gerät reagiert nicht mehr. USB abziehen und neu in den Modus bringen.',
  mSpiele:n=>'Spiele '+n+' ein …',
@@ -376,7 +460,7 @@ de:{
  mGetrennt:'Gerät wurde getrennt.',
  mTippGetrennt:'Nach einem Neustart des Geräts ist das normal — einfach neu suchen.',
  mTippModus:'Meist ist das Gerät aus dem Aktualisierungsmodus gefallen.',
- mTippModus2:'USB abziehen, zurück auf Seite 1, neu in den Modus bringen, Seite neu laden.',
+ mTippModus2:'USB abziehen, zurück auf Seite 2, neu in den Modus bringen, Seite neu laden.',
  mTippKabel:'Verbindung abgerissen — Kabel prüfen, möglichst direkt am Rechner anstecken.',
  mNeuGeladen:'Seite neu geladen — der Browser sieht jetzt den aktuellen Treiber.',
  mFertigAlert:'Fertig — das Original ist wieder auf dem Gerät.',
@@ -424,8 +508,76 @@ en:{
    <i>which RAL</i> that is — for that you're meant to pull out your phone and open an app.
    On site, with gloves on, that's a poor idea. This modification puts the answer where it
    belongs: <b>on the device's own screen</b>. Measure, read, move on.`,
- schritte:['Update mode','Driver','Back up and flash','Try it out'],
- schrittText:(n,t)=>'Step '+n+' of 4 · '+t,
+ losGehts:'Let\'s go',
+ s0:`<h2>What you get</h2>
+   <figure class="bild"><img src="bilder/hero-faecher.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>The fan deck stays in the
+     drawer.</figcaption></figure>
+   <h3>How it is out of the box</h3>
+   <p>The CR4501 measures cleanly and gives you L*a*b*, dE and a colour space comparison.
+   What it does <b>not</b> do is tell you which RAL tone that is. The phone app is meant
+   for that — pair Bluetooth, open the app, transfer the reading. On site, with gloves on
+   and sunlight on the screen, that ranges from awkward to impossible.</p>
+   <h3>How it is afterwards</h3>
+   <p>After a measurement the answer sits <b>right on the display</b>: RAL number, the
+   colour name, how well it matches, and the runner-up. No phone, no pairing, no app.
+   And the left, right and enter buttons — locked out by the factory firmware on the
+   measurement screens — work again.</p>
+   <h3>What the display shows</h3>
+   <figure class="bild"><img src="bilder/anzeige-erklaert.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>Five things at a
+     glance.</figcaption></figure>
+   <ul class="legende">
+     <li><i style="background:#e03131"></i><b>RAL number</b> — the closest match out of 216
+       measured RAL Classic tones. The background shows the colour.</li>
+     <li><i style="background:#f08c00"></i><b>Match in percent</b> — roughly derived from
+       the colour distance. Above 95 % means it is almost certainly that tone.</li>
+     <li><i style="background:#4263eb"></i><b>dE</b> — the actual colour distance. Below
+       1.0 the eye sees no difference, from about 2 it becomes visible, above 5 it is
+       clearly a different tone.</li>
+     <li><i style="background:#2f9e44"></i><b>Colour name</b> — the German name, so
+       Gruengrau rather than just 7009. Without umlauts, the device cannot render
+       them.</li>
+     <li><i style="background:#fab005"></i><b>Runner-up</b> — the next candidate with its
+       percentage. If both are close together, it is worth checking the fan deck.</li>
+   </ul>
+   <figure class="bild"><img src="bilder/beispiel-6004.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>RAL 6004 Blaugruen, 98 %,
+     dE 0.7 — unambiguous.</figcaption></figure>
+   <figure class="bild"><img src="bilder/beispiel-1011.jpg" alt=""
+     onerror="this.closest('figure').remove()"><figcaption>RAL 1011 Braunbeige, 97 %,
+     dE 0.9 — the runner-up trails far behind at 55 %.</figcaption></figure>
+   <h3>What it cannot do</h3>
+   <ul>
+     <li><b>RAL Classic only.</b> The 216 tones from RAL 1000 to 9023. No RAL Design, no
+       NCS, no Pantone — there is no room in memory for those.</li>
+     <li><b>The values come from one fan deck and one device.</b> Fan decks yellow with
+       age, every instrument has its own calibration. For „roughly which RAL is this" that
+       is plenty. For sign-off or a complaint, reach for the fan deck.</li>
+     <li><b>Gloss and texture interfere.</b> On high gloss or coarse texture the readings
+       scatter and the percentage drops — the device is being honest, not broken.</li>
+     <li><b>Metallic and effect paints</b> don't work at all, with or without this
+       modification.</li>
+   </ul>
+   <h3>And the risks</h3>
+   <p>Honestly, no sugar-coating:</p>
+   <ul>
+     <li><b>This modifies the device firmware.</b> Your warranty will probably care, if
+       you still have one.</li>
+     <li><b>Calibration stays untouched.</b> The tool writes only to the program area and
+       refuses any access to memory above <code>0x08030000</code>, where the splash screen,
+       settings and factory calibration live. That is enforced in code, not just
+       promised.</li>
+     <li><b>Your firmware is backed up before anything is written</b> and handed to you as
+       a file. That is your way back, any time.</li>
+     <li><b>An aborted write does not brick the device.</b> The bootloader lives in its own
+       region that nothing can overwrite — you can always get back into update mode.</li>
+     <li><b>Even so:</b> this is a hobby project, not a certified product. If your device
+       earns money every day, think about whether you want to do this now.</li>
+   </ul>
+   <p>The whole thing takes about five minutes and is fully reversible.</p>`,
+ schritte:['Overview','Update mode','Driver','Back up and flash','Try it out'],
+ schrittText:(n,t)=>'Step '+n+' of 5 · '+t,
  weiter:'Next', zurueck:'Back', direktZurueck:'Only restore a backup',
  verbinden:'1 · Find device', sichern:'2 · Read and back up',
  schreiben:'3 · Flash the extension',
@@ -438,13 +590,13 @@ en:{
  hilfeFindenTitel:'The device list is empty',
  hilfeFinden:`<ol>
    <li><b>Is the ring flashing red?</b> If not, the device isn't in update mode — back to
-     step 1.</li>
+     step 2.</li>
    <li><b>Released too late?</b> The moment it flashes red, let go. Hold longer and the
      device just boots normally.</li>
    <li><b>Charge-only cable.</b> Plenty of USB cables carry power only. Use one you've
      transferred data with before.</li>
    <li><b>USB hub in between.</b> Plug straight into the computer.</li>
-   <li><b>Driver</b> — back to step 2.</li></ol>`,
+   <li><b>Driver</b> — back to step 3.</li></ol>`,
  s1:`<h2>Put the device into update mode</h2>
    <p>The one step that takes a bit of feel. It rarely works first try — that's normal,
    just have another go.</p>
@@ -572,7 +724,7 @@ en:{
  mPasst:n=>'All good. All '+n+' bytes match.',
  mAbgebrochen:m=>'Aborted: '+m,
  mNichtsVeraendert:'Nothing was changed on the device — this aborted before the first erase.',
- mSchonGeschrieben:'Writing had already started. Restore your backup (step 4).',
+ mSchonGeschrieben:'Writing had already started. Restore your backup (step 5).',
  mErholt:'Device returned to idle — you can try again.',
  mReagiertNicht:'The device stopped responding. Unplug USB and enter update mode again.',
  mSpiele:n=>'Flashing '+n+' …',
@@ -581,7 +733,7 @@ en:{
  mGetrennt:'Device disconnected.',
  mTippGetrennt:'That is normal after restarting the device — just search again.',
  mTippModus:'Usually the device dropped out of update mode.',
- mTippModus2:'Unplug USB, back to step 1, enter update mode again, reload the page.',
+ mTippModus2:'Unplug USB, back to step 2, enter update mode again, reload the page.',
  mTippKabel:'Connection lost — check the cable, plug straight into the computer.',
  mNeuGeladen:'Page reloaded — the browser now sees the current driver.',
  mFertigAlert:'Done — the original is back on the device.',
@@ -652,7 +804,7 @@ function zeigeSeite(n){
   document.querySelectorAll('#leiste div').forEach((d,i)=>
     d.className=i+1<n?'erledigt':(i+1===n?'hier':''));
   $('#leisteText').textContent=L.schrittText(n,TITEL()[n-1]);
-  if(n===4){
+  if(n===5){
     const m=$('#melde4');
     if(geraet&&geraet.opened){
       m.textContent=L.verbundenMit(geraet.productName||'DFU',geraet.serialNumber||'?');
@@ -679,6 +831,7 @@ function texteSetzen(){
   $('#titel').innerHTML=L.titel;
   $('#intro').innerHTML=L.intro+' <b>'+ANZAHL+'</b> '+
     (L.lang==='de'?'RAL-Classic-Töne sind eingemessen dabei.':'measured RAL Classic tones are included.');
+  $('#t0').innerHTML=L.s0;
   $('#t1').innerHTML=L.s1;
   $('#t2').innerHTML=SYS.os==='windows'?L.s2win:SYS.os==='linux'?L.s2linux:
                      SYS.os==='macos'?L.s2mac:L.s2andere;
@@ -689,6 +842,7 @@ function texteSetzen(){
   $('#fuss').innerHTML=L.fuss;
   $('#hilfeFindenTitel').textContent=L.hilfeFindenTitel;
   $('#hilfeFindenInhalt').innerHTML=L.hilfeFinden;
+  $('#wStart').textContent=L.losGehts;
   $('#w1').textContent=L.weiter; $('#w2').textContent=L.weiter; $('#w3').textContent=L.weiter;
   document.querySelectorAll('[data-zurueck]').forEach(b=>b.textContent=L.zurueck);
   $('#btnDirektZurueck').textContent=L.direktZurueck;
@@ -701,7 +855,7 @@ function texteSetzen(){
   document.querySelectorAll('.kopieren').forEach(b=>b.textContent=L.kopieren);
   const kn=$('#btnNeuLaden');
   if(kn){ kn.textContent=L.neuLaden;
-    kn.onclick=()=>{ try{sessionStorage.setItem('cr_seite','2');}catch(e){} location.reload(); }; }
+    kn.onclick=()=>{ try{sessionStorage.setItem('cr_seite','3');}catch(e){} location.reload(); }; }
   if(!$('#melde4').textContent||$('#melde4').dataset.leer!=='0') $('#melde4').textContent=L.keinGeraet;
   browserPruefen();
   zeigeSeite(seite);
@@ -860,10 +1014,11 @@ $('#btnVerbinden4').onclick=async()=>{
     $('#btnZurueck').disabled=false; $('#btnVerbinden4').disabled=true;
   }catch(e){ m.textContent=verbindungsfehler(e); }
 };
-$('#btnDirektZurueck').onclick=()=>zeigeSeite(4);
-$('#w1').onclick=()=>zeigeSeite(2);
-$('#w2').onclick=()=>zeigeSeite(3);
-$('#w3').onclick=()=>zeigeSeite(4);
+$('#btnDirektZurueck').onclick=()=>zeigeSeite(5);
+$('#wStart').onclick=()=>zeigeSeite(2);
+$('#w1').onclick=()=>zeigeSeite(3);
+$('#w2').onclick=()=>zeigeSeite(4);
+$('#w3').onclick=()=>zeigeSeite(5);
 document.addEventListener('click',ev=>{
   const z=ev.target.closest('[data-zurueck]'); if(z) zeigeSeite(+z.dataset.zurueck);
   const k=ev.target.closest('.kopieren');
@@ -918,7 +1073,7 @@ $('#btnSchreiben').onclick=async()=>{
     if(ab>=0) throw new Error(L.eAbweichung(hex(APP_START+ab)));
     fort('#fortSchreiben',1); stand('#standSchreiben',L.statGeprueft);
     sag(L.mPasst(APP_LAENGE),'ok');
-    $('#w3').disabled=false; zeigeSeite(4);
+    $('#w3').disabled=false; zeigeSeite(5);
   }catch(e){
     sag(L.mAbgebrochen((e&&e.message)||e),'no');
     tipp(etwasVeraendert?L.mSchonGeschrieben:L.mNichtsVeraendert);
@@ -963,13 +1118,13 @@ $('#spEn').onclick=()=>sprache('en');
 let start=1, sp=null;
 try{
   sp=sessionStorage.getItem('cr_sprache');
-  if(sessionStorage.getItem('cr_seite')==='2'){ start=2; sessionStorage.removeItem('cr_seite'); }
+  if(sessionStorage.getItem('cr_seite')==='3'){ start=3; sessionStorage.removeItem('cr_seite'); }
 }catch(e){}
 if(!sp) sp=(navigator.language||'de').toLowerCase().startsWith('de')?'de':'en';
 seite=start;
 sprache(sp==='en'?'en':'de');
 sag(L.mBereit);
-if(start===2) sag(L.mNeuGeladen,'ok');
+if(start===3) sag(L.mNeuGeladen,'ok');
 </script>
 </body>
 </html>
