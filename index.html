@@ -886,6 +886,7 @@ function zeigeSeite(n){
   document.querySelectorAll('#leiste div').forEach((d,i)=>
     d.className=i+1<n?'erledigt':(i+1===n?'hier':''));
   $('#leisteText').textContent=L.schrittText(n,TITEL()[n-1]);
+  $('#intro').style.display = n===1 ? '' : 'none';   // Einleitung nur auf der Startseite
   if(n===5){
     const m=$('#melde4');
     if(geraet&&geraet.opened){
