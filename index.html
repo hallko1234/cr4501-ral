@@ -120,27 +120,28 @@ details .inhalt b{color:var(--schrift)}
 ul.legende{list-style:none;padding:0;margin:0 0 16px}
 ul.legende li{display:grid;grid-template-columns:14px 1fr;gap:12px;margin:0 0 12px;align-items:start}
 ul.legende i{width:14px;height:14px;border-radius:3px;margin-top:5px;display:block}
-.anno{display:grid;grid-template-columns:1fr minmax(0,270px) 1fr;margin:0 0 20px}
+.anno{display:grid;grid-template-columns:1fr minmax(0,380px) 1fr;margin:0 -46px 22px}
 .anno img{width:100%;display:block;border-radius:4px}
 .anno .sp{position:relative}
-.anno .sp span{position:absolute;transform:translateY(-50%);font-size:13px;line-height:1.35;
+.anno .sp span{position:absolute;transform:translateY(-50%);font-size:13.5px;line-height:1.4;
   color:var(--gedaempft);display:block;width:100%}
 .anno .sp span b{color:var(--schrift);display:block;font-weight:600}
-.anno .li span{right:14px;text-align:right;padding-left:4px}
-.anno .re span{left:14px;text-align:left;padding-right:4px}
+.anno .li span{right:16px;text-align:right;padding-left:2px}
+.anno .re span{left:16px;text-align:left;padding-right:2px}
 .anno .sp span::after{content:'';position:absolute;top:50%;width:8px;height:2px;border-radius:1px;
   background:currentColor}
 .anno .li span::after{right:-11px}
 .anno .re span::after{left:-11px}
 .anno .sp span.o{color:#fe7e27} .anno .sp span.g{color:#f5d90a}
 .anno .sp span.r{color:#df2228} .anno .sp span.b{color:#6a78e0} .anno .sp span.n{color:#20b04e}
+@media(max-width:860px){ .anno{margin:0 0 22px;grid-template-columns:1fr minmax(0,320px) 1fr} }
 @media(max-width:760px){
   .anno{display:block}
   .anno .sp{margin:10px 0 0}
   .anno .sp span{position:static;transform:none;text-align:left!important;width:auto;
     padding:0 0 0 18px;margin:0 0 10px}
   .anno .sp span::after{left:0;top:8px;width:10px}
-  .anno img{max-width:270px;margin:0 auto}
+  .anno img{max-width:340px;margin:0 auto}
 }
 footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   color:var(--gedaempft);font-size:13.5px}
