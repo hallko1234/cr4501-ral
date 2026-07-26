@@ -88,6 +88,12 @@ button:disabled{background:var(--grafit-hell);color:#5a606a;cursor:not-allowed}
 button.leise{background:transparent;color:var(--schrift);border:1px solid var(--linie)}
 button.leise:hover:not(:disabled){border-color:var(--gedaempft);filter:none}
 button:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.stapel{display:flex;flex-direction:column;gap:14px;margin:24px 0 0}
+.stufe{display:flex;flex-direction:column}
+.stufe button{width:100%;text-align:center;font-size:18px;padding:14px 22px}
+.stufe .balken{margin:8px 0 3px}
+.stufe .stand{min-height:1.2em}
+.paar.klein figure.bild img{max-height:290px;object-fit:cover;object-position:center}
 .direkt{display:flex;justify-content:center;margin:0 0 26px}
 .direkt button{font-size:19px;padding:15px 34px;box-shadow:0 0 0 3px rgba(247,209,23,.18)}
 .knopfreihe{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:20px 0 0}
@@ -199,14 +205,23 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
 
 <section class="seite" id="seite3">
   <div id="t3"></div>
-  <div class="knopfreihe"><button id="btnVerbinden"></button></div>
   <div id="t3bild"></div>
-  <div class="knopfreihe"><button id="btnSichern" disabled></button></div>
-  <div class="balken"><i id="fortSichern"></i></div>
-  <div class="stand" id="standSichern"></div>
-  <div class="knopfreihe"><button id="btnSchreiben" disabled></button></div>
-  <div class="balken"><i id="fortSchreiben"></i></div>
-  <div class="stand" id="standSchreiben"></div>
+  <div class="stapel">
+    <div class="stufe">
+      <button id="btnVerbinden"></button>
+      <div class="stand" id="standVerbinden"></div>
+    </div>
+    <div class="stufe">
+      <button id="btnSichern" disabled></button>
+      <div class="balken"><i id="fortSichern"></i></div>
+      <div class="stand" id="standSichern"></div>
+    </div>
+    <div class="stufe">
+      <button id="btnSchreiben" disabled></button>
+      <div class="balken"><i id="fortSchreiben"></i></div>
+      <div class="stand" id="standSchreiben"></div>
+    </div>
+  </div>
   <div id="protokoll"></div>
   <details id="hilfeFinden"><summary id="hilfeFindenTitel"></summary>
     <div class="inhalt" id="hilfeFindenInhalt"></div></details>
@@ -461,13 +476,15 @@ de:{
      Bildschirm bleibt dunkel. Hast du es zwischendurch neu gestartet oder abgesteckt,
      bring es nochmal hinein — zurück auf Schritt 2.</p>
    </div>
-   <figure class="bild"><img src="bilder/dfu-usb.jpg" alt=""
-     onerror="this.closest('figure').remove()"><figcaption>So muss es aussehen, bevor du
-     unten auf Gerät suchen klickst: Ring blinkt rot, Kabel angesteckt.</figcaption></figure>`,
- s3bild:`<figure class="bild"><img src="bilder/browser-auswahl.png" alt=""
-   onerror="this.closest('figure').remove()"><figcaption><b>So muss es aussehen:</b> Die
-   Zeile mit dem Gerät ist angeklickt und blau hinterlegt, dann ist <b>Verbinden</b>
-   aktiv. Ohne Anklicken bleibt der Knopf grau — daran scheitern die meisten.</figcaption></figure>`,
+   <div class="paar klein">
+     <figure class="bild"><img src="bilder/dfu-usb.jpg" alt=""
+       onerror="this.closest('figure').remove()"><figcaption>Ring blinkt rot, Kabel
+       angesteckt — so muss das Gerät dastehen.</figcaption></figure>
+     <figure class="bild"><img src="bilder/browser-auswahl.png" alt=""
+       onerror="this.closest('figure').remove()"><figcaption>Im Auswahlfenster die Zeile
+       erst <b>anklicken</b>, dann wird <b>Verbinden</b> aktiv.</figcaption></figure>
+   </div>`,
+ s3bild:``,
  s4:`<h2>Geschafft — jetzt ausprobieren</h2>
    <div class="melde ok"><b>Die Erweiterung ist eingespielt und zurückgelesen geprüft.</b></div>
    <p><b>Gerät neu starten:</b> USB abziehen, Messtaste kurz drücken. Es startet ganz
@@ -774,13 +791,15 @@ en:{
      screen dark. If you restarted or unplugged it in the meantime, put it back in —
      go to step 2.</p>
    </div>
-   <figure class="bild"><img src="bilder/dfu-usb.jpg" alt=""
-     onerror="this.closest('figure').remove()"><figcaption>This is how it must look before
-     you click Find device below: ring flashing red, cable plugged in.</figcaption></figure>`,
- s3bild:`<figure class="bild"><img src="bilder/browser-auswahl.png" alt=""
-   onerror="this.closest('figure').remove()"><figcaption><b>This is how it should look:</b>
-   the device row is clicked and highlighted, which makes <b>Connect</b> active. Without
-   clicking it the button stays grey — that's what trips most people up.</figcaption></figure>`,
+   <div class="paar klein">
+     <figure class="bild"><img src="bilder/dfu-usb.jpg" alt=""
+       onerror="this.closest('figure').remove()"><figcaption>Ring flashing red, cable
+       plugged in — that is how the device must sit.</figcaption></figure>
+     <figure class="bild"><img src="bilder/browser-auswahl.png" alt=""
+       onerror="this.closest('figure').remove()"><figcaption>In the picker, <b>click</b>
+       the row first — only then does <b>Connect</b> become active.</figcaption></figure>
+   </div>`,
+ s3bild:``,
  s4:`<h2>Done — now try it</h2>
    <div class="melde ok"><b>The extension is flashed and verified by reading it back.</b></div>
    <p><b>Restart the device:</b> unplug USB, tap the measure button. It boots completely
@@ -1110,9 +1129,11 @@ function verbindungsfehler(e){
   sag(t,'no'); fehlerhilfe(e); return t;
 }
 $('#btnVerbinden').onclick=async()=>{
-  try{ await verbinden(); $('#hilfeFinden').open=false;
+  try{
+    stand('#standVerbinden', await verbinden());
+    $('#hilfeFinden').open=false;
     $('#btnVerbinden').disabled=true; $('#btnSichern').disabled=false;
-  }catch(e){ verbindungsfehler(e); }
+  }catch(e){ stand('#standVerbinden', verbindungsfehler(e)); }
 };
 $('#btnVerbinden4').onclick=async()=>{
   const m=$('#melde4'); m.dataset.leer='0';
