@@ -109,8 +109,13 @@ noticing. The tool refuses any write access up there.
 
 ## Where the colours come from
 
-216 RAL Classic tones, measured with a fan deck, each colour three times.
-Repeatability averaged 0.08 ΔE, worst case 0.50.
+216 RAL Classic tones, each colour measured three times. Repeatability
+averaged 0.08 ΔE, worst case 0.50.
+
+Measured with an **original RAL® K7 in semi-matt**. That is not a detail:
+**replica colour cards from the accessories trade often deviate noticeably**,
+sometimes by several ΔE, and they are not consistent among themselves. If your
+reading disagrees with one of those, the card is usually to blame.
 
 Ten bytes per entry: L, a and b as integers times a hundred, plus the RAL
 number and a colour value for the display. The names sit behind that as a
