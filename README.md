@@ -1,4 +1,4 @@
-# Colorimeter CR4501 · RAL Hack
+# Colorimeter 3nh CR4501 RAL Hack
 
 Das **3nh CR4501** misst Farben sehr genau — nur sagt es einem nicht, welcher
 RAL-Ton dabei herauskommt. Dafür braucht es sonst Handy, App und Geduld.
