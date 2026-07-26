@@ -26,15 +26,18 @@ und die Firmware deines Geräts verlässt deinen Rechner nicht.
 
 ## In den Aktualisierungsmodus
 
-Das ist der einzige Handgriff, der etwas Gefühl braucht. **Das Gerät muss
-dafür ausgeschaltet sein.** Danach fünf Sekunden lang keine Taste anfassen —
-das gehört dazu, sonst reagiert es nicht. Erst dann einer der beiden Wege.
+Das ist der einzige Handgriff, der etwas Gefühl braucht. Der zweite Schritt
+ist der, den alle überspringen.
 
-**Weg A** — Messtaste gedrückt halten, bis der Ring um die Taste **rot
-blinkt**. Sofort loslassen.
+1. **Ausschalten** — Messtaste lange drücken, bis das Gerät ausgeht.
+2. **Mindestens fünf Sekunden warten**, nichts anfassen. Ohne diese Pause
+   reagiert das Gerät im nächsten Schritt nicht.
+3. **Messtaste wieder lange halten**, bis der Ring um die Taste **rot blinkt**.
+   Sofort loslassen.
 
-**Weg B** — Messtaste und Eingabetaste zusammen, die Wippe dafür in der Mitte
-hineindrücken. Das rote Blinken kommt sofort, gleich wieder loslassen.
+Es geht auch anders herum: nach dem Ausschalten und den fünf Sekunden
+Messtaste und Eingabetaste zusammen drücken — die Wippe dafür in der Mitte
+hineindrücken. Das rote Blinken kommt dann sofort, gleich wieder loslassen.
 
 Blinkt der Ring rot, ist das Gerät bereit. Der Bildschirm bleibt dabei dunkel,
 das gehört so.
