@@ -88,6 +88,8 @@ button:disabled{background:var(--grafit-hell);color:#5a606a;cursor:not-allowed}
 button.leise{background:transparent;color:var(--schrift);border:1px solid var(--linie)}
 button.leise:hover:not(:disabled){border-color:var(--gedaempft);filter:none}
 button:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.direkt{display:flex;justify-content:center;margin:0 0 26px}
+.direkt button{font-size:19px;padding:15px 34px;box-shadow:0 0 0 3px rgba(247,209,23,.18)}
 .knopfreihe{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:20px 0 0}
 .navi{display:flex;justify-content:space-between;gap:10px;margin:28px 0 0;
   border-top:1px solid var(--linie);padding-top:20px}
@@ -170,6 +172,7 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
 </header>
 
 <section class="seite" id="seite0">
+  <div class="direkt"><button id="wOben"></button></div>
   <div id="t0"></div>
   <div class="navi">
     <span></span>
@@ -252,6 +255,7 @@ de:{
    Dieser Umbau bringt die Antwort dorthin, wo sie hingehört: <b>aufs Display</b>.
    Messen, ablesen, weiter.`,
  losGehts:'Los geht\'s',
+ direktStarten:'▶  Direkt zum Umbau',
  s0:`<h2>Was das bringt</h2>
    <figure class="bild"><img src="bilder/beispiel-7009.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>Direkt nach der Messung:
@@ -572,6 +576,7 @@ en:{
    On site, with gloves on, that's a poor idea. This modification puts the answer where it
    belongs: <b>on the device's own screen</b>. Measure, read, move on.`,
  losGehts:'Let\'s go',
+ direktStarten:'▶  Straight to the install',
  s0:`<h2>What you get</h2>
    <figure class="bild"><img src="bilder/beispiel-7009.jpg" alt=""
      onerror="this.closest('figure').remove()"><figcaption>Straight after a measurement:
@@ -943,6 +948,7 @@ function texteSetzen(){
   $('#hilfeFindenTitel').textContent=L.hilfeFindenTitel;
   $('#hilfeFindenInhalt').innerHTML=L.hilfeFinden;
   $('#wStart').textContent=L.losGehts;
+  $('#wOben').textContent=L.direktStarten;
   $('#w1').textContent=L.weiter; $('#w2').textContent=L.weiter; $('#w3').textContent=L.weiter;
   document.querySelectorAll('[data-zurueck]').forEach(b=>b.textContent=L.zurueck);
   $('#btnDirektZurueck').textContent=L.direktZurueck;
@@ -1116,6 +1122,7 @@ $('#btnVerbinden4').onclick=async()=>{
 };
 $('#btnDirektZurueck').onclick=()=>zeigeSeite(5);
 $('#wStart').onclick=()=>zeigeSeite(2);
+$('#wOben').onclick=()=>zeigeSeite(2);
 $('#w1').onclick=()=>zeigeSeite(3);
 $('#w2').onclick=()=>zeigeSeite(4);
 $('#w3').onclick=()=>zeigeSeite(5);
