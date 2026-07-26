@@ -1,226 +1,179 @@
 # Colorimeter 3nh CR4501 RAL Hack
 
-Das **3nh CR4501** misst Farben sehr genau — nur sagt es einem nicht, welcher
-RAL-Ton dabei herauskommt. Dafür braucht es sonst Handy, App und Geduld.
+*[Deutsche Fassung](README.de.md)*
 
-Diese Erweiterung legt die Antwort direkt aufs Display: Nach jeder Messung
-steht dort die nächstliegende RAL-Classic-Farbe mit Namen und wie gut sie
-passt. Messen, ablesen, weiter.
+The **3nh CR4501** measures colour very accurately — it just won't tell you
+which RAL tone that is. For that you're meant to reach for your phone, open an
+app and pair over Bluetooth.
+
+This modification puts the answer straight onto the device's own display:
+after every measurement it shows the closest RAL Classic tone with its name and
+how well it matches. Measure, read, move on.
 
 <br>
 
 <div align="center">
 
-### [▶  Werkzeug öffnen und loslegen](https://hallko1234.github.io/cr4501-ral/)
+### [▶  Open the tool and get started](https://hallko1234.github.io/cr4501-ral-hack/)
 
-[![Werkzeug öffnen](https://img.shields.io/badge/hallko1234.github.io%2Fcr4501--ral-Werkzeug%20öffnen-f7d117?style=for-the-badge&labelColor=16181c)](https://hallko1234.github.io/cr4501-ral/)
+[![Open the tool](https://img.shields.io/badge/hallko1234.github.io%2Fcr4501--ral--hack-Open%20the%20tool-f7d117?style=for-the-badge&labelColor=16181c)](https://hallko1234.github.io/cr4501-ral-hack/)
 
-**Läuft im Browser · Chrome oder Edge · fünf Minuten · jederzeit rückgängig**
+**Runs in the browser · Chrome or Edge · five minutes · fully reversible**
 
 </div>
 
 <br>
 
-Das Werkzeug führt dich Schritt für Schritt durch: Gerät in den
-Aktualisierungsmodus, Treiber prüfen, **erst sichern**, dann einspielen,
-testen. Es wird nichts hochgeladen, es gibt keinen Server, und die Firmware
-deines Geräts verlässt deinen Rechner nicht.
+The tool walks you through it step by step: put the device into update mode,
+check the driver, **back up first**, then flash, then try it out. Nothing is
+uploaded, there is no server, and your device's firmware never leaves your
+computer.
 
-Nebenbei werden die Tasten freigegeben, die die Werksfirmware auf den
-Messansichten sperrt — links, rechts und die Eingabetaste tun danach das,
-was man von ihnen erwartet.
-
----
-
-## Bevor du anfängst
-
-* **Chrome oder Edge.** Firefox und Safari können kein WebUSB.
-* **Unter Windows** braucht das Gerät einmalig den WinUSB-Treiber, siehe unten.
-* **Zeit:** fünf Minuten, davon vier fürs Warten.
-
-## In den Aktualisierungsmodus
-
-Das ist der einzige Handgriff, der etwas Gefühl braucht. Der zweite Schritt
-ist der, den alle überspringen.
-
-1. **Ausschalten** — Messtaste lange drücken, bis das Gerät ausgeht.
-2. **Mindestens fünf Sekunden warten**, nichts anfassen. Ohne diese Pause
-   reagiert das Gerät im nächsten Schritt nicht.
-3. **Messtaste wieder lange halten**, bis der Ring um die Taste **rot blinkt**.
-   Sofort loslassen.
-
-Es geht auch anders herum: nach dem Ausschalten und den fünf Sekunden
-Messtaste und Eingabetaste zusammen drücken — die Wippe dafür in der Mitte
-hineindrücken. Das rote Blinken kommt dann sofort, gleich wieder loslassen.
-
-Blinkt der Ring rot, ist das Gerät bereit. Der Bildschirm bleibt dabei dunkel,
-das gehört so.
-
-## Dann
-
-1. Per USB anstecken, Werkzeug öffnen, **Gerät suchen**
-2. **Auslesen und sichern** — die Datei aufheben, sie ist der Rückweg
-3. **Einspielen** — das Werkzeug prüft vorher jede Änderungsstelle und bricht
-   bei der kleinsten Abweichung ab
-4. Gerät neu starten, messen, mit der Eingabetaste durch die Ansichten
-
-## Treiber unter Windows
-
-Windows liefert für den Aktualisierungsmodus keinen Treiber mit, den ein
-Browser ansprechen kann. [Zadig](https://zadig.akeo.ie) erledigt das in einer
-Minute:
-
-1. Gerät im Aktualisierungsmodus anstecken
-2. Zadig starten, *Options → List All Devices*
-3. In der Liste **STM32 BOOTLOADER** (0483:DF11) auswählen
-4. Rechts **WinUSB** einstellen, *Replace Driver*
-
-Einmalig. Danach findet der Browser das Gerät jedes Mal.
+As a bonus it unlocks the buttons that the factory firmware disables on the
+measurement screens — left, right and enter start doing what you'd expect.
 
 ---
 
-## Was verändert wird
+## Before you start
 
-| Adresse | Änderung | Größe |
+* **Chrome or Edge.** Firefox and Safari cannot do WebUSB.
+* **On Windows** the device needs the WinUSB driver once, see below.
+* **Time:** five minutes, four of them waiting.
+
+## Getting into update mode
+
+The one step that takes a bit of feel. **The device must be switched off** —
+hold the measure button until it turns off. Then wait **at least five seconds**
+without touching anything; without that pause it won't respond.
+
+**Option A** — hold the measure button again until the ring around it
+**flashes red**. Let go immediately.
+
+**Option B** — press the measure button and the enter button together, pushing
+the rocker in at its centre. The red flash comes right away; let go at once.
+
+When the ring flashes red the device is ready. The screen stays dark, that's
+normal.
+
+## Then
+
+1. Plug in over USB, open the tool, **Find device**
+2. **Read and back up** — keep that file, it is your way back
+3. **Flash** — the tool checks every patch location beforehand and aborts on
+   the slightest mismatch
+4. Restart the device, measure, cycle through the views with the enter button
+
+## Driver on Windows
+
+Windows ships no driver for update mode that a browser is allowed to talk to.
+[Zadig](https://zadig.akeo.ie) sorts that out in a minute:
+
+1. Plug in the device in update mode
+2. Start Zadig, *Options → List All Devices*
+3. Select **STM32 DownLoad Firmware Update** (0483:DF11)
+4. Set **WinUSB** on the right, then *Install Driver*
+
+Once only. **It must be WinUSB** — not libusbK, not libusb-win32. Those work
+with dfu-util but the browser won't see the device. That is the most common
+mistake here.
+
+---
+
+## What gets changed
+
+| Address | Change | Size |
 |---|---|---|
-| `0x08014288` | RAL-Bildschirm einhängen | 4 B |
-| `0x0800A9B4` | Taste rechts freigeben | 4 B |
-| `0x0800A95C` | Taste links freigeben | 4 B |
-| `0x0800A920` | Eingabetaste freigeben (Abfrage) | 4 B |
-| `0x0800A69C` | Eingabetaste freigeben (Auswertung) | 4 B |
-| `0x0802E3D0` | RAL-Bildschirm | 1328 B |
-| `0x0802E900` | Farbtabelle, 216 Töne mit Namen | 3732 B |
+| `0x08014288` | hook the RAL screen in | 4 B |
+| `0x0800A9B4` | unlock right button | 4 B |
+| `0x0800A95C` | unlock left button | 4 B |
+| `0x0800A920` | unlock enter button (read function) | 4 B |
+| `0x0800A69C` | unlock enter button (handler) | 4 B |
+| `0x0802E3D0` | RAL screen | 1328 B |
+| `0x0802E900` | colour table, 216 tones with names | 3732 B |
 
-Sieben Stellen, zusammen gut fünf Kilobyte, alles im Programmbereich
+Seven locations, just over five kilobytes, all inside the application area
 `0x08004000`–`0x0802FFFF`.
 
-**Nicht angefasst wird alles ab `0x08030000`** — Startbild, Einstellungen und
-vor allem die **Werkskalibrierung**. Die ist bei jedem Gerät anders. Eine
-fremde hineinzuschreiben würde das Gerät dauerhaft falsch messen lassen, ohne
-dass es jemand merkt. Das Werkzeug verweigert dort jeden Schreibzugriff.
+**Nothing above `0x08030000` is touched** — splash screen, settings and above
+all the **factory calibration**. That is different on every device. Writing a
+foreign one would make the instrument measure wrong for good, without anyone
+noticing. The tool refuses any write access up there.
 
-## Woher die Farben kommen
+## Where the colours come from
 
-216 RAL-Classic-Töne, mit einem Fächer eingemessen, jede Farbe dreimal.
-Wiederholstreuung im Schnitt 0,08 ΔE, im schlechtesten Fall 0,50.
+216 RAL Classic tones, measured with a fan deck, each colour three times.
+Repeatability averaged 0.08 ΔE, worst case 0.50.
 
-Je Eintrag zehn Byte: L, a und b als Ganzzahl mal hundert, dazu die RAL-Nummer
-und ein Farbwert für die Anzeige. Die Namen liegen als gemeinsamer Textblock
-dahinter, mit Verweisen statt Wiederholungen — anders hätte es nicht in den
-freien Speicher gepasst.
+Ten bytes per entry: L, a and b as integers times a hundred, plus the RAL
+number and a colour value for the display. The names sit behind that as a
+shared block of word fragments with references rather than repetitions —
+otherwise they would not have fit into the free memory.
 
-Ehrlich dazugesagt: Die Werte stammen von *einem* Fächer und *einem* Gerät.
-Fächer altern und vergilben, jedes Messgerät hat seine eigene Kalibrierung.
-Für „welches RAL ist das ungefähr" ist das genau richtig. Für eine Abnahme
-oder einen Reklamationsfall nimmt man weiterhin den Fächer in die Hand.
+Honestly said: these values come from *one* fan deck and *one* device. Fan
+decks age and yellow, every instrument has its own calibration. For „roughly
+which RAL is this" that is exactly right. For sign-off or a complaint, reach
+for the fan deck.
 
-## Zurück zum Original
+## Measuring your own colours
 
-Im Werkzeug Schritt 4, gesicherte Datei auswählen, fertig. Falls die Seite
-gerade nicht erreichbar ist, geht es auch mit
-[dfu-util](https://dfu-util.sourceforge.net):
+The table shipped here comes from one fan deck and one device. If you want your
+own values — a different deck, your own device, or simply as a check — the
+program for that is under [werkzeug/](werkzeug/) (German).
 
-```
-dfu-util -a 0 -s 0x08004000 -D cr4501_original_....bin
-```
-
-Zwei Dinge dabei: **niemals die Option `-t`**, und immer den gesamten
-Programmbereich am Stück schreiben. Der Bootloader löscht beim ersten
-Schreibbefehl den ganzen Bereich und erwartet danach das vollständige Abbild —
-seitenweise zu schreiben zerstört alles andere.
-
-## Farben selbst einlernen
-
-Die mitgelieferte Tabelle stammt von einem Fächer und einem Gerät. Wer eigene
-Werte will — anderer Fächer, eigenes Gerät, oder einfach zur Kontrolle —
-findet unter [werkzeug/](werkzeug/) das Programm dafür.
-
-Es misst die 216 Farben der Reihe nach ein, prüft Streuung und Doppelmessungen,
-und baut am Ende aus deiner eigenen Sicherung die fertige Firmware. Die
-spielst du hier im Werkzeug unter *Sicherung einspielen* wieder auf.
+It measures the 216 colours one after another, checks scatter and duplicate
+readings, and builds the finished firmware from your own backup at the end.
+You then flash that in the tool under *Restore a backup*.
 
 ```
 python ral_einlernen.py COM3 --original cr4501_original_....bin
 ```
 
-## Referenzdateien
+## Reference files
 
-Wer selbst disassemblieren oder weiterbauen will, findet unter
-[referenz/](referenz/) den Bildschirmcode, die Farbtabelle und die
-Originalabbilder aus der Entwicklung.
+For disassembling or building on: the screen code, the colour table and the
+original images from development are under [referenz/](referenz/).
 
-**Nichts davon ist zum blinden Aufspielen gedacht** — insbesondere der Loader
-nicht, der trägt die Werkskalibrierung eines bestimmten Geräts mit sich. Die
-Gründe stehen dort im README.
+**None of it is meant to be flashed blindly** — least of all the loader, which
+carries one specific device's factory calibration. The reasons are in the
+README there.
 
-## Technische Dokumentation
+## Technical documentation
 
-Wer tiefer einsteigen will — Speicherkarte, Tastensystem, Bildschirmverwaltung,
-das Einlernen der Farben, das USB-Protokoll und wie der permanente Speicher
-beschrieben wird:
+Memory map, button system, screen handling, measuring the colours, the USB
+protocol and how to write the permanent memory:
 
-**→ [doku/](doku/)**
+**→ [doku/](doku/)** (German — but the addresses, byte sequences and tables
+speak for themselves)
 
-Alle Adressen dort sind am Gerät oder im Flash-Abzug verifiziert. Es steht
-auch dabei, was schiefgegangen ist und warum — das erspart die teuren Umwege.
+Every address in there is verified on the device or in the flash dump. It also
+records what went wrong and why, which saves the expensive detours.
 
-## Haftung
+## Undoing it
 
-Ein Feierabendprojekt, kein Produkt von 3nh, keine Garantie auf gar nichts.
-Benutzung auf eigene Gefahr — aber mit gesichertem Rückweg, und die
-Kalibrierung deines Geräts bleibt in jedem Fall unberührt.
-
-Wenn das Werkzeug bei dir abbricht, weil es eine Firmware-Version nicht
-kennt: melde dich, dann schaue ich sie mir an.
-
----
-
-## Treiber und Systeme im Überblick
-
-Das Werkzeug prüft beim Öffnen selbst, was auf deinem System fehlt, und blendet
-die passende Anleitung ein. Zur Übersicht:
-
-| System | Was nötig ist |
-|---|---|
-| **Windows** | einmalig WinUSB über [Zadig](https://zadig.akeo.ie) |
-| **macOS** | nichts |
-| **Linux** | eine udev-Regel, damit das Gerät nicht nur root gehört |
-| **Android** | OTG-Adapter, klappt nicht auf jedem Gerät |
-| **iPhone / iPad** | geht nicht — USB ist dort systemweit gesperrt, auch in Chrome |
-
-Beim Browser gibt es keine Wahl: **Chrome oder Edge**, ab Version 89. Firefox
-und Safari unterstützen WebUSB nicht und haben angekündigt, das auch nicht zu
-tun.
-
-### Die häufigste Stolperfalle unter Windows
-
-In Zadig stehen mehrere Treiber zur Auswahl. **Nur WinUSB funktioniert im
-Browser.** libusbK und libusb-win32 arbeiten zwar mit dfu-util, aber Chrome
-sieht das Gerät damit nicht. Wer vorher dfu-util eingerichtet hat, hat
-möglicherweise den falschen erwischt — dann in Zadig einfach nochmal auf
-WinUSB wechseln. dfu-util läuft danach weiterhin.
-
-## Wenn etwas schiefgeht
-
-Der Bootloader des Geräts sitzt in einem eigenen Speicherbereich, den weder
-dieses Werkzeug noch dfu-util beschreiben können. **Du kommst deshalb immer
-wieder in den Aktualisierungsmodus**, auch wenn ein Schreibvorgang mitten
-drin abbricht.
-
-1. USB trennen, wieder anstecken
-2. Gerät neu in den Aktualisierungsmodus bringen
-3. Seite neu laden, verbinden, Schritt 4 mit deiner Sicherung
-
-Ohne Browser geht es genauso:
+In the tool, step 5, pick your backup file. If the page is unreachable, this
+works too:
 
 ```
-dfu-util -a 0 -s 0x08004000 -D deine_sicherung.bin
+dfu-util -a 0 -s 0x08004000 -D your_backup.bin
 ```
+
+Never use the `-t` option, and always write the whole region in one go — the
+bootloader erases everything on the first write command and expects the
+complete image afterwards.
+
+## Liability
+
+A weekend project, not a 3nh product, no warranty on anything. Use at your own
+risk — but with a secured way back, and your device's calibration stays
+untouched in every case.
+
+If the tool aborts on your device because it doesn't recognise a firmware
+version, get in touch and I'll take a look.
 
 ---
 
 <div align="center">
 
-### [▶  Werkzeug öffnen](https://hallko1234.github.io/cr4501-ral/)
+### [▶  Open the tool](https://hallko1234.github.io/cr4501-ral-hack/)
 
 </div>
