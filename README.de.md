@@ -111,8 +111,13 @@ dass es jemand merkt. Das Werkzeug verweigert dort jeden Schreibzugriff.
 
 ## Woher die Farben kommen
 
-216 RAL-Classic-Töne, mit einem Fächer eingemessen, jede Farbe dreimal.
-Wiederholstreuung im Schnitt 0,08 ΔE, im schlechtesten Fall 0,50.
+216 RAL-Classic-Töne, jede Farbe dreimal gemessen. Wiederholstreuung im Schnitt
+0,08 ΔE, im schlechtesten Fall 0,50.
+
+Gemessen wurde mit einem **originalen RAL® K7 in seidenmatt**. Das ist kein
+Detail: **Nachbau-Farbkarten aus dem Zubehörhandel weichen oft spürbar ab**,
+teils um mehrere ΔE, und untereinander sind sie auch nicht einheitlich. Wenn
+deine Messung gegen so eine Karte nicht passt, liegt es meist an der Karte.
 
 Je Eintrag zehn Byte: L, a und b als Ganzzahl mal hundert, dazu die RAL-Nummer
 und ein Farbwert für die Anzeige. Die Namen liegen als gemeinsamer Textblock
