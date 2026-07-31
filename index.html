@@ -162,6 +162,9 @@ ul.legende i{width:14px;height:14px;border-radius:3px;margin-top:5px;display:blo
   .anno .sp span::after{position:absolute;left:0;top:10px;width:17px;height:3px;
     border-radius:2px;margin:0}
 }
+#zaehler{text-align:center;padding:14px 0 0;color:var(--gedaempft);
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em}
+#zaehler b{color:var(--schrift);font-weight:400}
 footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
   color:var(--gedaempft);font-size:13.5px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -257,6 +260,7 @@ footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linie);
 </section>
 
 <footer id="fuss"></footer>
+<div id="zaehler" hidden></div>
 </div>
 
 <script>
@@ -277,6 +281,7 @@ de:{
    Dieser Umbau bringt die Antwort dorthin, wo sie hingehört: <b>aufs Display</b>.
    Messen, ablesen, weiter.`,
  losGehts:'Los geht\'s',
+ besuche:n=>n+' Besuche',
  direktStarten:'▶  Direkt zum Umbau',
  s0:`<h2>Was das bringt</h2>
    <figure class="bild"><img src="bilder/beispiel-7009.jpg" alt=""
@@ -606,6 +611,7 @@ en:{
    On site, with gloves on, that's a poor idea. This modification puts the answer where it
    belongs: <b>on the device's own screen</b>. Measure, read, move on.`,
  losGehts:'Let\'s go',
+ besuche:n=>n+' visits',
  direktStarten:'▶  Straight to the install',
  s0:`<h2>What you get</h2>
    <figure class="bild"><img src="bilder/beispiel-7009.jpg" alt=""
@@ -1003,6 +1009,7 @@ function texteSetzen(){
     kn.onclick=()=>{ try{sessionStorage.setItem('cr_seite','3');}catch(e){} location.reload(); }; }
   if(!$('#melde4').textContent||$('#melde4').dataset.leer!=='0') $('#melde4').textContent=L.keinGeraet;
   browserPruefen();
+  zaehlerAnzeigen();
   zeigeSeite(seite);
 }
 function browserPruefen(){
@@ -1260,6 +1267,43 @@ if('usb' in navigator) navigator.usb.addEventListener('disconnect',ev=>{
   }
 });
 
+/* ================== Besuchszaehler ==================
+   GitHub Pages liefert nur statische Dateien aus, die Seite kann also nicht
+   selbst mitzaehlen. CounterAPI uebernimmt das: kein Konto, ein Aufruf.
+   Antwortet der Dienst nicht, bleibt die Zeile einfach unsichtbar.        */
+const ZAEHLER = {
+  dienst: 'https://api.counterapi.dev/v1',
+  raum:   'cr4501-ral-hack',
+  name:   'besuche'
+};
+let zaehlerStand = null;
+
+function zaehlerAnzeigen(){
+  const e = $('#zaehler');
+  if(zaehlerStand === null){ e.hidden = true; return; }
+  const zahl = zaehlerStand.toLocaleString(L.lang === 'de' ? 'de-AT' : 'en-US');
+  e.innerHTML = '<b>' + zahl + '</b> ' + L.besuche('').trim();
+  e.hidden = false;
+}
+
+async function zaehlen(){
+  // Pro Sitzung nur einmal hochzaehlen, sonst zaehlt jedes Neuladen mit
+  let schonGezaehlt = false;
+  try{ schonGezaehlt = sessionStorage.getItem('cr_gezaehlt') === '1'; }catch(e){}
+  const weg = schonGezaehlt ? '/' : '/up';
+  try{
+    const a = await fetch(ZAEHLER.dienst + '/' + ZAEHLER.raum + '/' + ZAEHLER.name + weg,
+                          {cache:'no-store'});
+    if(!a.ok) return;
+    const d = await a.json();
+    const n = d && (d.count !== undefined ? d.count : d.value);
+    if(typeof n !== 'number') return;
+    zaehlerStand = n;
+    if(!schonGezaehlt){ try{ sessionStorage.setItem('cr_gezaehlt','1'); }catch(e){} }
+    zaehlerAnzeigen();
+  }catch(e){ /* Dienst nicht erreichbar - Zeile bleibt weg */ }
+}
+
 /* ================== Start ================== */
 $('#spDe').onclick=()=>sprache('de');
 $('#spEn').onclick=()=>sprache('en');
@@ -1273,6 +1317,7 @@ seite=start;
 sprache(sp==='en'?'en':'de');
 sag(L.mBereit);
 if(start===3) sag(L.mNeuGeladen,'ok');
+zaehlen();
 </script>
 </body>
 </html>
